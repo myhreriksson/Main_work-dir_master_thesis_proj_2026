@@ -1,0 +1,2402 @@
+[
+  {
+    "en": "O Erdtree, you shall burn.",
+    "de": "O Erdenbaum, Ihr sollt brennen."
+  },
+  {
+    "en": "When the stars align, the festival will be declared.",
+    "de": "Wenn die Sterne richtig stehen, beginnt das Fest."
+  },
+  {
+    "en": "We are bound by this yoke.",
+    "de": "Wir alle haben dieses Joch zu tragen."
+  },
+  {
+    "en": "Glintstone is the amber of the cosmos.",
+    "de": "Schimmerstein ist der Bernstein des Kosmos."
+  },
+  {
+    "en": "I don't normally find myself cornered like a rat.",
+    "de": "Normalerweise werde ich nicht wie eine Ratte in die Enge getrieben."
+  },
+  {
+    "en": "Without Fire, all shall be a frigid and frightful Dark.",
+    "de": "Ohne Feuer bleibt nur frostige, fürchterliche Finsternis."
+  },
+  {
+    "en": "I intend to search for him.",
+    "de": "Ich beabsichtige, ihn zu suchen."
+  },
+  {
+    "en": "I wonder when Uncle Gael intends his return.",
+    "de": "Ich frage mich, wann Onkel Gael wohl zurückkehrt."
+  },
+  {
+    "en": "How do these old bones fascinate thee yet?",
+    "de": "Wie können Euch diese alten Knochen noch faszinieren?"
+  },
+  {
+    "en": "... It won't be long now, before I know everything.",
+    "de": "... Nicht mehr lange, dann weiß ich wieder alles."
+  },
+  {
+    "en": "And with a name like that, You'd hope they kept some fine goods there, eh.",
+    "de": "Und bei so einem Namen... sollten sich dort auch ein paar feine Waren finden lassen, hehe."
+  },
+  {
+    "en": "Well, what have we here?",
+    "de": "Was haben wir denn hier?"
+  },
+  {
+    "en": "See if I can't find the road to Nokron from there... I'm going below through the well in the Mistwood.",
+    "de": "Vielleicht finde ich ja dort einen Hinweis, wie man Nokron erreicht... Ich werde unten herum durch den Brunnen im Nebelwald gehen."
+  },
+  {
+    "en": "Below us is the Crucifixion Woods.",
+    "de": "Hinter uns liegen die Kreuzigungswälder."
+  },
+  {
+    "en": "Hmm, not quite enough.",
+    "de": "Hmm, das reicht leider nicht aus."
+  },
+  {
+    "en": "So, you were a poacher, too.",
+    "de": "Ihr wart also auch ein Wilderer."
+  },
+  {
+    "en": "Sometimes I fight the urge to pack up and go back home.",
+    "de": "Manchmal muss ich den Drang bekämpfen, zusammenzupacken und nach Hause zurückzukehren."
+  },
+  {
+    "en": "When Malenia ascends to godhood, Millicent too shall be reborn.",
+    "de": "Wenn Malenia sich zu den Göttern gesellt, wird auch Millicent wiedergeboren."
+  },
+  {
+    "en": "I'm still in business, if you can believe it.",
+    "de": "Ich bin immer noch im Geschäft. Ist das denn zu fassen?"
+  },
+  {
+    "en": "If it's on the cards, I'd be glad to meet again.",
+    "de": "Wenn das Schicksal es will, sehen wir uns irgendwann wieder. Es würde mich freuen."
+  },
+  {
+    "en": "Your fingers, please, your fingers... Oh, bless you. Oh..ohh!",
+    "de": "Eure Finger, bitte. Eure Finger... Oh, seid gesegnet."
+  },
+  {
+    "en": "Yes, I suppose you think you're special!",
+    "de": "Ihr haltet Euch wohl für was ganz Besonderes!"
+  },
+  {
+    "en": "For our Kind Miquella.",
+    "de": "Für unseren gütigen Miquella."
+  },
+  {
+    "en": "But there's no chance that could happen.",
+    "de": "Aber das würde nie im Leben geschehen. Niemals."
+  },
+  {
+    "en": "Do not be tempted. No matter the victim's stature, every killing has a consequence.",
+    "de": "Egal, welches Opfer Ihr fordert, jeder Mord hat seine Konsequenzen."
+  },
+  {
+    "en": "I must begin my search post-haste.",
+    "de": "Ich muss spornstreichs meine Suche beginnen."
+  },
+  {
+    "en": "But be warned, gallantry entails great risks.",
+    "de": "Doch seid auf der Hut; Edelmut birgt große Risiken."
+  },
+  {
+    "en": "A long rest awaits me.",
+    "de": "Auf mich wartet eine lange Zeit der Ruhe."
+  },
+  {
+    "en": "I will never forgive you.",
+    "de": "Ich werde Euch niemals verzeihen."
+  },
+  {
+    "en": "Oh, and here we are again.",
+    "de": "Oh, so sieht man sich wieder."
+  },
+  {
+    "en": "My purpose was given to me by my mother.",
+    "de": "Einst teilte meine Mutter mir meine Aufgabe zu."
+  },
+  {
+    "en": "The time is ripe to greet him.",
+    "de": "Die Zeit ist reif, ihn zu grüßen."
+  },
+  {
+    "en": "Until the day cometh.",
+    "de": "Bis der Tag kommt."
+  },
+  {
+    "en": "The Night is yours now to wield.",
+    "de": "Die Nacht ist nun die Eure."
+  },
+  {
+    "en": "Fine, it's not my business, anyway.",
+    "de": "Schön, das geht mich eh nichts an."
+  },
+  {
+    "en": "Across the Sea of Fog, to the Lands Between.",
+    "de": "Jenseits der Nebelsee im Zwischenland."
+  },
+  {
+    "en": "Chosen Tarnished, and would-be Lord.",
+    "de": "Auserwählter Befleckter, zukünftiger Fürst."
+  },
+  {
+    "en": "Am I fit to serve a lord such as you, in all my ugliness?",
+    "de": "Bin ich in all meiner Hässlichkeit es überhaupt wert, einem Fürsten wie Euch zu dienen?"
+  },
+  {
+    "en": "Just this once, I will tell you this tale.",
+    "de": "Nur dieses eine Mal werde ich Euch diese Geschichte erzählen."
+  },
+  {
+    "en": "You are unbecoming of a Finger.",
+    "de": "Ihr seid eines Fingers nicht würdig."
+  },
+  {
+    "en": "... Pardon me, my dear, where are my manners!",
+    "de": "... Verzeiht, wo sind nur meine Manieren!?"
+  },
+  {
+    "en": "I am no bringer of bale.",
+    "de": "Ich bin kein Unheilsbringer."
+  },
+  {
+    "en": "I'd give my left arm for a gem like that!",
+    "de": "Für solch ein Juwel würde ich meinen linken Arm geben!"
+  },
+  {
+    "en": "It's funny... I can't seem to remember.",
+    "de": "Das ist lustig... Ich kann mich anscheinend nicht erinnern."
+  },
+  {
+    "en": "They say that no man has ever teased oot the sword's true power.",
+    "de": "Es heißt, niemand habe je die wahre Macht des Schwerts ausgelotet."
+  },
+  {
+    "en": "... I am Ciaran, and that is a keepsake.",
+    "de": "... Ich bin Ciaran, und das ist ein Andenken."
+  },
+  {
+    "en": "The distant light is far and frail.",
+    "de": "Das entfernte Licht schimmert schwach."
+  },
+  {
+    "en": "When the time is ripe, thou mayst make thy salutations.",
+    "de": "Zu rechter Zeit dürft Ihr ihr Eure Aufwartung machen."
+  },
+  {
+    "en": "Seek audience with the Three Fingers, and the flame of frenzy.",
+    "de": "Bittet die Drei Finger um eine Audienz und empfangt die Rasende Flamme."
+  },
+  {
+    "en": "It would not have been possible without you.",
+    "de": "Ohne Euch wäre das nicht möglich gewesen."
+  },
+  {
+    "en": "I'm sure talking to him will be worth your while.",
+    "de": "Mit ihm zu sprechen, wird sich sicherlich lohnen."
+  },
+  {
+    "en": "I was born of my master's madness.",
+    "de": "Ich wurde aus dem Wahnsinn meines Meisters geboren."
+  },
+  {
+    "en": "You poor have-nots are a stubborn lot.",
+    "de": "Ihr Habenichtse seid ein sturer Haufen."
+  },
+  {
+    "en": "Summon me by grace if you should reconsider.",
+    "de": "Ruft mich im Namen der Gnade, solltet Ihr Eure Meinung ändern."
+  },
+  {
+    "en": "Hee hee... The human ego... how many ugly iron castles has it erected?",
+    "de": "He he... Das menschliche Ego... Wie viele hässliche Eisenschlösser hat es bereits errichtet?"
+  },
+  {
+    "en": "I'm rich, I'm rich... Mwa hah hah!",
+    "de": "Ich bin reich, ich bin reich... Muhahaha!"
+  },
+  {
+    "en": "Well, look at you.",
+    "de": "Na, seht Euch nur an."
+  },
+  {
+    "en": "Erdtree, O Golden Circle.",
+    "de": "Erdenbaum, o goldener Kreis."
+  },
+  {
+    "en": "Brave Undead, you've met that dragon?",
+    "de": "Tapferer Untoter, habt Ihr diesen Drachen getroffen?"
+  },
+  {
+    "en": "We Unkindled must put our duties first.",
+    "de": "Für uns Unentfachte kommt die Pflicht zuerst."
+  },
+  {
+    "en": "Well, look at you.",
+    "de": "Na, sieh einer an."
+  },
+  {
+    "en": "Thou needst not indulge them unduly, but they too wish to appraise thy worth.",
+    "de": "Ihr braucht Euch nicht übermäßig lange aufhalten, doch auch sie wünschen ihre Wertschätzung kundzutun."
+  },
+  {
+    "en": "May we discuss Miracles, then?",
+    "de": "Sollen wir dann von Wundern sprechen?"
+  },
+  {
+    "en": "My memories are fading, oldest first.",
+    "de": "Meine Erinnerungen schwinden, die ältesten zuerst."
+  },
+  {
+    "en": "No-one will sing thy praises, but yet thy greatness shall live on.",
+    "de": "Niemand wird Euer Loblied singen, doch Eure Herrlichkeit wird nicht vergehen."
+  },
+  {
+    "en": "This is the tomb of the Great Lord Gwyn.",
+    "de": "Dies ist die Gruft des Großen Fürsten Gwyn."
+  },
+  {
+    "en": "But Millicent's suffering can be ameliorated.",
+    "de": "Doch Millicents Leiden kann gelindert werden."
+  },
+  {
+    "en": "Turning on us from the very start?",
+    "de": "Wendet Ihr Euch gleich zu Beginn gegen uns?"
+  },
+  {
+    "en": "We'll be wonderful friends.",
+    "de": "Unsere Freundschaft wird wunderbar sein."
+  },
+  {
+    "en": "Now comes the age of our eden.",
+    "de": "Das Zeitalter unserer Idylle bricht an."
+  },
+  {
+    "en": "Terrific to see us both in one piece.",
+    "de": "Schön, dass wir beide wohlbehalten sind."
+  },
+  {
+    "en": "The Age of Fire was founded by the old gods, sustained by the linking of the fire.",
+    "de": "Das Zeitalter des Feuers wurde von den alten Göttern begründet und erhalten vom Binden des Feuers."
+  },
+  {
+    "en": "I came from the west, from Volgen.",
+    "de": "Ich komme aus dem Westen, aus Volgen."
+  },
+  {
+    "en": "No one will hold me captive.",
+    "de": "Ich beuge mich niemandem."
+  },
+  {
+    "en": "Hmm, well, there's nothing forlorn about you.",
+    "de": "Hmm, nun, an Euch ist nichts Verlorenes."
+  },
+  {
+    "en": "A true friend, forever.",
+    "de": "Ein Vorbild für uns alle."
+  },
+  {
+    "en": "With the throne so close at hand, the dragon is sure to speak.",
+    "de": "Der Thron ist Euch derart zum Greifen nahe, dass der Drache ohne Zweifel sprechen wird."
+  },
+  {
+    "en": "The tipple you fooled Nepheli into drinking, yes, my little draught.",
+    "de": "Der Trunk, zu dem Ihr Nepheli überredet habt. Ja, mein kleiner Trunk."
+  },
+  {
+    "en": "Let my hand rest upon you, for but a moment.",
+    "de": "Lasst mich meine Hand auf Euer Haupt legen, nur für einen Augenblick."
+  },
+  {
+    "en": "It was blocked by a wall, something built long ago.",
+    "de": "Es war von einer Mauer versperrt, die vor langer Zeit gebaut worden sein muss."
+  },
+  {
+    "en": "I always hated the gibberish about lost grace and the laughable Two Fingers.",
+    "de": "Ich habe diesen Unfug über die verlorene Gnade und die lachhaften Zwei Finger immer gehasst."
+  },
+  {
+    "en": "I travel from land to land to hone my blade.",
+    "de": "Ich bin von Land zu Land gereist, um meine Klinge zu schärfen."
+  },
+  {
+    "en": "My head would spin.",
+    "de": "Mir würde nur schwindlig werden."
+  },
+  {
+    "en": "This vessel... was found lacking... My thanks.",
+    "de": "Dieses Gefäß... war zu schwach... Habt Dank."
+  },
+  {
+    "en": "You'll be Elden Lord, yet.",
+    "de": "Ihr werdet doch der neue Eldenfürst."
+  },
+  {
+    "en": "I have no use for them.",
+    "de": "Ich habe keine Verwendung mehr dafür."
+  },
+  {
+    "en": "Perhaps the same could be said of guidance.",
+    "de": "Vielleicht trifft das auch auf die Führung zu."
+  },
+  {
+    "en": "This must be what it's like to be a god.",
+    "de": "So muss es sich anfühlen, ein Gott zu sein."
+  },
+  {
+    "en": "You've done well to find me.",
+    "de": "Was für ein Glück, dass Ihr mich gefunden habt."
+  },
+  {
+    "en": "I'm certain it will help me see.",
+    "de": "Ich bin sicher, das verleiht meinen Augen die richtige Sicht."
+  },
+  {
+    "en": "Once again, I'm pleased to make your acquaintance.",
+    "de": "Es freut mich einmal mehr, Eure Bekanntschaft zu machen."
+  },
+  {
+    "en": "And the beast himself wishes for someone to take my place.",
+    "de": "Und die Bestie selbst will, dass jemand an meine Stelle tritt."
+  },
+  {
+    "en": "As I said, I am Karla.",
+    "de": "Wie gesagt, ich bin Karla."
+  },
+  {
+    "en": "Fear not, the dark, my friend.",
+    "de": "Fürchtet nicht die Finsternis, mein Freund."
+  },
+  {
+    "en": "I'm sorry he's caused you trouble... He has a knack for that.",
+    "de": "Tut mir leid, dass er Euch Ärger bereitet hat... Das liegt ihm im Blut."
+  },
+  {
+    "en": "What's there is yours.",
+    "de": "Was Ihr dort findet, soll Euer sein."
+  },
+  {
+    "en": "You are an odd one.",
+    "de": "Puh... He he... Ihr seid recht eigen."
+  },
+  {
+    "en": "The three old souls are now yours... Proceed, bearer of the curse.",
+    "de": "Die drei alten Seelen gehören nun Euch... Fahrt fort, Träger des Fluches."
+  },
+  {
+    "en": "The Dark is still nascent within you.",
+    "de": "Das Dunkel in Euch ist noch immer am Keimen."
+  },
+  {
+    "en": "Take whatever course seems most worthy to you.",
+    "de": "Schlagt den Pfad ein, der Euch richtig erscheint."
+  },
+  {
+    "en": "Another moment of this, and no amount of grovelling will spare you.",
+    "de": "Noch ein solcher Moment des Irrsinns, und keine Speichelleckerei der Welt wird Euch retten."
+  },
+  {
+    "en": "Does that appeal to you?",
+    "de": "Sagt Euch das zu?"
+  },
+  {
+    "en": "'Tis the fate of vanguards like you and I.",
+    "de": "So ergeht es Pionieren wie Euch und mir."
+  },
+  {
+    "en": "I would not be controlled by that thing.",
+    "de": "Ich werde mich niemals einem solchen Ding beugen."
+  },
+  {
+    "en": "By the gods you are a man of vision!",
+    "de": "Bei den Göttern, Ihr seid ein Mann mit Weitblick!"
+  },
+  {
+    "en": "And even now, he devises new fiery arts.",
+    "de": "Und sogar jetzt ersinnt sie neue, feurige Künste."
+  },
+  {
+    "en": "A proper flame, that will burn the rot away.",
+    "de": "Eine rechte Flamme, die die Fäulnis verzehren wird."
+  },
+  {
+    "en": "I'm glad to see you safe.",
+    "de": "Freut mich, Euch unversehrt zu sehen."
+  },
+  {
+    "en": "I can strengthen myself there, without fear of cracking this vessel.",
+    "de": "Dort kann ich stärker werden, ohne dass dieses Gefäß Schaden nimmt."
+  },
+  {
+    "en": "Speak with the Fire Keeper.",
+    "de": "Sprecht mit der Feuerhüterin."
+  },
+  {
+    "en": "When the Giants crossed the sea.",
+    "de": "Als die Giganten das Meer überquerten."
+  },
+  {
+    "en": "Then, I suppose I can't just curl up and die, can I.",
+    "de": "Aber dann, dann kann ich doch nicht einfach so aufgeben und verrecken, nicht wahr?"
+  },
+  {
+    "en": "Then I only had to ask.",
+    "de": "Dann musste ich nur noch fragen."
+  },
+  {
+    "en": "I have asked a thing most terrible of thee.",
+    "de": "Ich habe Euch um etwas höchst Grausames gebeten."
+  },
+  {
+    "en": "A transposing kiln should restore their rightful form.",
+    "de": "Ein Wandlungsofen sollte Ihre rechte Form wiederherstellen können."
+  },
+  {
+    "en": "And may the flames guide your way.",
+    "de": "Und mögen die Flammen Euren Weg leiten."
+  },
+  {
+    "en": "If only I could undo these wretched shackles... My apprentice.",
+    "de": "Könnte ich nur diese elenden Ketten abstreifen... Mein Lehrling."
+  },
+  {
+    "en": "A wretched place, indeed, but not without traces of its former glory.",
+    "de": "Ein elender Ort, in der Tat, aber nicht ohne Spuren seiner früheren Pracht."
+  },
+  {
+    "en": "But I certainly can't take it from you.",
+    "de": "Den kann ich Euch aber unmöglich wegnehmen."
+  },
+  {
+    "en": "Hmm, well... I know I can trust you... I saw something, slithering in the pitch black of night.",
+    "de": "Nun... Ich weiß, ich kann Euch vertrauen... Ich habe etwas gesehen, das im Dunkel der Nacht herumschlängelte."
+  },
+  {
+    "en": "I will soon lay with Godwyn.",
+    "de": "Bald werde ich mich zu Godwyn legen."
+  },
+  {
+    "en": "Please take this, as a token of my gratitude.",
+    "de": "Bitte nehmt dies als Zeichen meiner Dankbarkeit."
+  },
+  {
+    "en": "Finally, he turns Hollow, and preys upon others.",
+    "de": "Am Ende wird er zu einer Hülle und jagt andere."
+  },
+  {
+    "en": "It took me long enough, I know, but I've made my decision.",
+    "de": "Es hat etwas gedauert, doch ich habe meine Entscheidung getroffen."
+  },
+  {
+    "en": "Your decision is most welcome.",
+    "de": "Wir danken Euch für Euer Vertrauen."
+  },
+  {
+    "en": "But, I didn't mean it.",
+    "de": "Aber ich habe es nicht böse gemeint."
+  },
+  {
+    "en": "It was but brief, but thou gavest me fine service.",
+    "de": "Es war zwar kurz, aber Ihr habt mir vortreffliche Dienste geleistet."
+  },
+  {
+    "en": "Thou'rt sure to feel thy vigour restored.",
+    "de": "Und neue Kraft durchströmt alsbald Euer Mark und Bein."
+  },
+  {
+    "en": "In fact, I never beat him, not once.",
+    "de": "Ich habe ihn tatsächlich nie besiegt, nicht ein einziges Mal."
+  },
+  {
+    "en": "Yes, very well, as you wish.",
+    "de": "Ja, nun gut, wie Ihr wünscht."
+  },
+  {
+    "en": "Go on, go on ahead... Welcome, bringer of meat.",
+    "de": "Geht, geht ruhig weiter... Willkommen, Fleischesbringer."
+  },
+  {
+    "en": "You have to ask yourself. Does it really matter?",
+    "de": "Ihr müsst dich selbst fragen, ob es wirklich wichtig ist?"
+  },
+  {
+    "en": "It enchants us, to the point of obsession.",
+    "de": "Es verzaubert uns, es ist fast eine Sucht."
+  },
+  {
+    "en": "I could sense it.",
+    "de": "Ich konnte es spüren."
+  },
+  {
+    "en": "I know you can do it.",
+    "de": "Ich weiß, Ihr schafft das."
+  },
+  {
+    "en": "Or are you like me?",
+    "de": "Oder seid Ihr womöglich wie ich?"
+  },
+  {
+    "en": "They were born in New Londo, and that is where they perished; the entire city was sacrificed to contain them.",
+    "de": "Sie wurden in Neu-Londo geboren und gingen dort auch zugrunde. Die ganze Stadt wurde geopfert, um sie im Zaume zu halten."
+  },
+  {
+    "en": "Bring the stones, and I'll do the smithing.",
+    "de": "Bringt mir die Steine, und ich erledige den Rest."
+  },
+  {
+    "en": "... Hah hah... hng... hng... Oh, and this... Now I must bid farewell... I would hate to harm you after death... So, go now... And thank you... Yes, I see... Perhaps I was too hopeful... Hah hah... hng... hng... Please, leave me be... I have not long to live, and I may harm you after death.",
+    "de": "... Haha... Hng... Hng... Oh, und dies noch... Nun muss ich Euch verabschieden... Ich würde Euch nach meinem Tode nur ungerne Leid zufügen... Also geht nun... Und vielen Dank... Verstehe... Vielleicht hatte ich zu viel erhofft... Haha... hng... hng... Bitte lasst mich... Mir bleibt nicht mehr viel Zeit, und nach dem Tode könnte ich Euch Leid zufügen."
+  },
+  {
+    "en": "Rest assured that I... No, the entire academy, will swear allegiance to the new monarch.",
+    "de": "Mein Liebling. Seid versichert, ich... Nein, die gesamte Akademie wird dem neuen Monarchen die Treue schwören."
+  },
+  {
+    "en": "Mother... Marika... A curse... upon thee... ... A-Ah!",
+    "de": "Mutter... Marika... Verflucht... sollt Ihr sein... A-Ah!"
+  },
+  {
+    "en": "It lies at the foot of the Erdtree, in the east of the Altus Plateau.",
+    "de": "Sie liegt am Fuße des Erdenbaums östlich des Altus-Plateaus."
+  },
+  {
+    "en": "I can do very little holed up here.",
+    "de": "Hier kann ich wenig bewirken."
+  },
+  {
+    "en": "My apprentice, thank you for coming.",
+    "de": "Mein Lehrling. Danke, dass Ihr gekommen seid."
+  },
+  {
+    "en": "It's not easy being Potentate, though.",
+    "de": "Aber als Herrscher hat man es nicht leicht."
+  },
+  {
+    "en": "You are very brave yourself.",
+    "de": "Ihr seid ausgesprochen tapfer."
+  },
+  {
+    "en": "This could be my chance to get close to it.",
+    "de": "Das könnte meine Chance sein, ihr endlich auf die Spur zu kommen."
+  },
+  {
+    "en": "Off..er her c-curse... m-mark Fi... a's... fi... a's... T-to... G-god... wyn A... fu-full... circle F-forms... a... r... rune... For me, really?",
+    "de": "Ge... bt ihr F-Fluch... mal Fi... as... Fi..as... Ge... bt es... G-God... wyn Der... K-Kreis... sch-schließt... sich... B-Bildet... ei... ne... R... Rune... Für mich? Wirklich?"
+  },
+  {
+    "en": "Surely you have it in you.",
+    "de": "Es steckt sicher in Euch."
+  },
+  {
+    "en": "To Castle Stormveil, on the cliff.",
+    "de": "Geht nach Schloss Sturmschleier, auf der Klippe."
+  },
+  {
+    "en": "A flame from the Great Swamp.",
+    "de": "Eine Flamme aus dem Großen Sumpf."
+  },
+  {
+    "en": "We at the Volcano Manor, under Lord Rykard, have sworn no rest until it is done.",
+    "de": "Wir hier in Haus Vulkan unter der Führung von Fürst Rykard werden erst ruhen, wenn es vollbracht ist."
+  },
+  {
+    "en": "Mind you, the mantle of lord interests me none.",
+    "de": "Doch reizt mich das Gewand des Fürsten keineswegs."
+  },
+  {
+    "en": "Now, who do you imagine will make the best use of it, hmm?",
+    "de": "So, wer, meint Ihr, könnte den größten Nutzen daraus ziehen, hm?"
+  },
+  {
+    "en": "Loathe me all you like, but I am the true dragon... Ahh, there you are.",
+    "de": "Verachtet mich, wie Ihr wollt, ich bin der wahre Drachen. Ah, da seid Ihr ja."
+  },
+  {
+    "en": "But I can hardly fathom it.",
+    "de": "Aber ich kann es einfach nicht fassen."
+  },
+  {
+    "en": "If you find any Estus Shards, bring 'em 'ere.",
+    "de": "Wenn Ihr Estus-Scherben findet, bringt sie her."
+  },
+  {
+    "en": "Use the key I handed you, and make yourself comfortable.",
+    "de": "Benutzt den Schlüssel, den ich Euch gab, und macht es Euch bequem."
+  },
+  {
+    "en": "I'm but a poor old woman... A malicious sort, thou art.",
+    "de": "Wüstling, ich bin doch bloß eine arme alte Frau... Ihr seid mir ein wahrlich arglistiger Geselle."
+  },
+  {
+    "en": "Thou needst not indulge them unduly, but they too wish to appraise thy worth.",
+    "de": "Ihr braucht Euch nicht übermäßig lange aufhalten, doch auch sie wünschen ihre Wertschätzung kundzutun."
+  },
+  {
+    "en": "In truth I've heard tell from someone else, about the black knifeprints that fascinate dear Rogier so.",
+    "de": "Auch eine weitere Person hat mir davon erzählt, von den Abdrücken der schwarzen Messer, die den lieben Rogier so faszinieren."
+  },
+  {
+    "en": "When I do, I only hope you'll accept my apology.",
+    "de": "Und dann kann ich nur hoffen, dass Ihr meine Entschuldigung annehmt."
+  },
+  {
+    "en": "I believe Miquella's apologies, when he says our delivery will come... But never will I see your kind as worthy.",
+    "de": "Ich vertraue Miquellas Worten, dass der Tag unserer Erlösung naht... Aber Euresgleichen werde ich niemals für würdig erachten."
+  },
+  {
+    "en": "Nothing to do but wait.",
+    "de": "Wir können nur noch abwarten."
+  },
+  {
+    "en": "Your scent is lovelier than it's ever been.",
+    "de": "Euer Geruch ist lieblicher denn je."
+  },
+  {
+    "en": "You are the true lord of men, the Dark Lord.",
+    "de": "Ihr seid der wahre Gebieter der Menschen, der Fürst der Finsternis."
+  },
+  {
+    "en": "Vendrick, the near-true monarch, is here, and not far off.",
+    "de": "Vendrick, der fast wahre Monarch, ist hier und nicht weit weg."
+  },
+  {
+    "en": "Only... Don't forget what Alvina said.",
+    "de": "Aber... vergesst Alvinas Worte nicht."
+  },
+  {
+    "en": "If you need something, ask me first.",
+    "de": "Wenn Ihr etwas wünscht, fragt zunächst mich."
+  },
+  {
+    "en": "Hah hah hah, ooh hoo, ohh... Take these!",
+    "de": "Ha ha ha, ooh hoo, ohh... Nehmt dies!"
+  },
+  {
+    "en": "Are you a cleric or something?",
+    "de": "Seid ihr etwa ein Kleriker oder so?"
+  },
+  {
+    "en": "How glorious it would have been, had we met in battle as sworn enemies.",
+    "de": "Welch glorreiche Schlacht hätte sich ereignet, wären wir uns als Todfeinde begegnet."
+  },
+  {
+    "en": "But shouldst thine heart be changed, speak to me again.",
+    "de": "Doch solltet Ihr Euch umentscheiden, sprecht mich wieder an."
+  },
+  {
+    "en": "Well, there are a few ways to go about it... Collect it bit by bit from corpses, Collect it bit by bit from corpses, or you can butter up a cleric, and get yourself summoned. And the quickest way, although I'd never do it, is to kill a healthy Undead, and pillage its humanity.",
+    "de": "Nun, da gibt es mehrere Methoden... Sammelt sie Stück für Stück von Leichen... oder schmeichelt einem Kleriker und lasst Euch beschwören... Und der schnellste Weg, obwohl ich das selbst nie tun würde, wäre einen gesunden Untoten zu töten und seine Menschlichkeit zu plündern."
+  },
+  {
+    "en": "I'm all that she needs.",
+    "de": "Außer mir braucht sie nichts."
+  },
+  {
+    "en": "Have you ever seen an iron virgin?",
+    "de": "Habt Ihr jemals eine Eiserne Jungfer gesehen?"
+  },
+  {
+    "en": "I'm very well trained.",
+    "de": "Ich bin ziemlich gut in Form."
+  },
+  {
+    "en": "... I abandoned my mother and sisters and fled to this land.",
+    "de": "... Ich verließ meine Mutter und meine Schwestern und flüchtete in dieses Land."
+  },
+  {
+    "en": "So gleeful was I, my faith reneweth.",
+    "de": "So froh war ich, und wiederhergestellt mein Glaube."
+  },
+  {
+    "en": "Heh... Only to have their arms taken. Their legs taken. Even their heads... taken. Taken and stuck to the spider.",
+    "de": "Nur, um ihrer Arme, ihrer Beine und sogar ihrer Köpfe beraubt und Teil der Spinne zu werden."
+  },
+  {
+    "en": "I've an inkling thou might have need of more.",
+    "de": "Auf dass der Skorpion Euch neue Kräfte schenkt."
+  },
+  {
+    "en": "It's all very unfortunate.",
+    "de": "Aber ich entschuldige mich trotzdem für dieses Malheur."
+  },
+  {
+    "en": "A crafting kit allows you to make basic items on your own.",
+    "de": "Mit einem Werkzeugsatz könnt Ihr einfache Gegenstände selbst herstellen."
+  },
+  {
+    "en": "If I were told that by killing you, I would be freed of this curse... Then I would draw my sword without hesitation.",
+    "de": "Wenn man mir sagen würde, ich würde vom Fluch befreit, wenn ich Euch töten würde... Ich würde ohne Zögern mein Schwert ziehen."
+  },
+  {
+    "en": "Oh, hello... Of course I will repay you.",
+    "de": "Oh, hallo... Selbstredend werde ich Euch entlohnen."
+  },
+  {
+    "en": "Ever the bloody busybody.",
+    "de": "Steckt immer noch seine Nase überall hinein."
+  },
+  {
+    "en": "I was merely gauging your loyalty to Lady Ranni.",
+    "de": "Ich habe lediglich Eure Loyalität zu Herrin Ranni auf die Probe gestellt."
+  },
+  {
+    "en": "Ahh, our Lord and rightful Liege.",
+    "de": "Ah, unser Fürst und Herrscher."
+  },
+  {
+    "en": "Carhillion of the Fold.",
+    "de": "Ich bin Carhillion, Carhillion von der Tiefe."
+  },
+  {
+    "en": "Let us see just how much Dark you can endure.",
+    "de": "Lasst uns sehen, wie viel Dunkel Ihr ertragen könnt."
+  },
+  {
+    "en": "But we're fine now.",
+    "de": "Aber jetzt ist alles wieder gut."
+  },
+  {
+    "en": "Oh, did you come to visit me again, coz?",
+    "de": "Oh, wollt Ihr mich schon wieder besuchen, Freundin?"
+  },
+  {
+    "en": "Fractured, by someone, or something.",
+    "de": "Und nun zerschmettert. Von wem? Von was?"
+  },
+  {
+    "en": "That will be quite enough.",
+    "de": "Hört auf mit diesem Unsinn."
+  },
+  {
+    "en": "Gentle Unkindled, I bid you farewell.",
+    "de": "Sanfter Unentfachter, ich sage Euch Lebewohl."
+  },
+  {
+    "en": "The fire fades, and awaits its one last Lord.",
+    "de": "Das Feuer schwindet und erwartet seinen letzten Fürsten."
+  },
+  {
+    "en": "This is Gwyn's prison.",
+    "de": "Dies ist Gwyns Gefängnis."
+  },
+  {
+    "en": "A cleansing by fire.",
+    "de": "Durch die Kraft des Feuers."
+  },
+  {
+    "en": "Have you ever felt the curse, with your whole being?",
+    "de": "Habt Ihr den Fluch jemals mit Eurem ganzen Wesen gespürt?"
+  },
+  {
+    "en": "Master Logan is a great sorcerer, and my teacher.",
+    "de": "Meister Logan ist ein großer Magier und mein Lehrer."
+  },
+  {
+    "en": "With this glintstone key, you should be able to cross the boundary that encloses him.",
+    "de": "Mit diesem Schimmersteinschlüssel solltet Ihr die Schwelle überschreiten können, die ihn vom Rest der Welt isoliert."
+  },
+  {
+    "en": "Oh, I'm truly sorry, really!",
+    "de": "Tut mir aufrichtig leid!"
+  },
+  {
+    "en": "Things will be fine, one day... Oh, hello.",
+    "de": "Alles wird sich zum Besten wenden, eines Tages... Oh, seid gegrüßt."
+  },
+  {
+    "en": "So, you've taken Lady Leda's side.",
+    "de": "So, Ihr stellt Euch also auf die Seite von Herrin Leda."
+  },
+  {
+    "en": "You've gone mad, have you!?",
+    "de": "Habt Ihr denn den Verstand verloren?"
+  },
+  {
+    "en": "Dither not; come out say I!",
+    "de": "Wartet nicht länger; kommt heraus, sage ich!"
+  },
+  {
+    "en": "Let us give all that we can of ourselves.",
+    "de": "Lasst uns alles geben, was wir haben."
+  },
+  {
+    "en": "With the Two Fingers, in the inner chamber.",
+    "de": "Bei den Zwei Fingern in der inneren Kammer."
+  },
+  {
+    "en": "But please, free their poor souls... Mother's ambitions were misguided, no doubt, but surely a thousand years of atonement is enough!",
+    "de": "Doch bitte befreit ihre armen Seelen. Mutters Ambitionen waren fehlgeleitet, ohne Zweifel. Doch tausend Jahre der Buße müssen reichen!"
+  },
+  {
+    "en": "Oh, have you decided to have a go after all? At joining the Roundtable proper?",
+    "de": "Oh, wollt Ihr am Ende doch versuchen, ein vollwertiges Mitglied der Tafelrunde zu werden?"
+  },
+  {
+    "en": "Perhaps you've noticed those bug-eyed lizards?",
+    "de": "Vielleicht sind Euch diese glubschäugigen Eidechsen aufgefallen?"
+  },
+  {
+    "en": "Visit him in the Old Church, in the forest behind the Undead Church.",
+    "de": "Besucht ihn in der Alten Kirche, im Wald hinter der Untoten-Kirche."
+  },
+  {
+    "en": "You be careful of him.",
+    "de": "Seid bei ihm vorsichtig."
+  },
+  {
+    "en": "You sadden me, my apprentice.",
+    "de": "Ihr macht mich traurig, mein Lehrling."
+  },
+  {
+    "en": "Couldn't even become a Fire Keeper.",
+    "de": "Konnte nicht einmal Feuerhüterin werden."
+  },
+  {
+    "en": "Please make certain that little Millicent goes unharmed.",
+    "de": "Bitte sorgt dafür, dass die kleine Millicent nicht zu Schaden kommt."
+  },
+  {
+    "en": "Still, there is ever more work to be done.",
+    "de": "Doch es gibt noch viel mehr zu tun."
+  },
+  {
+    "en": "His enormous frame, cramped in that little place... Bit of a haughty sort.",
+    "de": "Seine riesige Gestalt in so einem winzigen Loch eingepfercht... Etwas hochnäsig."
+  },
+  {
+    "en": "I-I'm not surprised, though.",
+    "de": "I... Im Grunde bin ich nicht überrascht."
+  },
+  {
+    "en": "May we meet again on the battlefield, brave warrior.",
+    "de": "Mögen wir uns auf dem Schlachtfeld wiedersehen, tapferer Krieger."
+  },
+  {
+    "en": "You must have a fabulous teacher.",
+    "de": "Ihr habt bestimmt einen außergewöhnlichen Lehrmeister."
+  },
+  {
+    "en": "The flame heals us.",
+    "de": "Die Flamme heilt uns."
+  },
+  {
+    "en": "May we meet again, one day soon.",
+    "de": "Mögen wir uns eines Tages wiedersehen."
+  },
+  {
+    "en": "Behold my true power.",
+    "de": "Sehet meine wahre Macht."
+  },
+  {
+    "en": "... Hm... Oh, yes, it's you.",
+    "de": "... Hm. Oh, Ihr seid es."
+  },
+  {
+    "en": "So, here I sit, in quite a pickle.",
+    "de": "Also sitze ich hier, in der Klemme."
+  },
+  {
+    "en": "The implications are rather... unnerving.",
+    "de": "Die Auswirkungen sind äußerst... bedenklich."
+  },
+  {
+    "en": "You are no fool.",
+    "de": "Ihr seid kein Narr."
+  },
+  {
+    "en": "Go on. If I'm giving something away, you'd better well take it.",
+    "de": "Nur zu, wenn ich etwas verschenke, nehmt es lieber an."
+  },
+  {
+    "en": "O Heretic, swathed in Dark... An eternal curse upon thee... Halt!",
+    "de": "Oh Ketzer, gehüllt in Finsternis... Ewiglich verflucht seiet Ihr... Halt!"
+  },
+  {
+    "en": "Oh, you've come to be one with the spider?",
+    "de": "Oh, Ihr wollt Euch mit der Spinne vereinen?"
+  },
+  {
+    "en": "O lofty spiral piercing the heavens.",
+    "de": "O erhabene, den Himmel durchbohrende Spirale."
+  },
+  {
+    "en": "The question rings in my mind, but I haven't the focus to answer it.",
+    "de": "Die Frage geistert mir im Kopf herum, aber mir fehlt die Konzentration, sie zu beantworten."
+  },
+  {
+    "en": "And you, I am sure, will bear a baldachin's blessing.",
+    "de": "Und Euch, da bin ich mir sicher, würde ein Segen des Firmaments zuteilwerden."
+  },
+  {
+    "en": "But these are precious, are you certain that it's for me?",
+    "de": "Aber die sind so kostbar. Seid Ihr ganz sicher, dass dieses Exemplar für mich ist?"
+  },
+  {
+    "en": "If left alone, he may one day imperil thy rule.",
+    "de": "Unternehmt Ihr nichts, mag er Eure Herrschaft eines Tages gefährden."
+  },
+  {
+    "en": "Huh huh, My dear friend, take these.",
+    "de": "Ha ha, mein lieber Freund, nehmt dies."
+  },
+  {
+    "en": "Of course I count myself, the great Alexander, among the many.",
+    "de": "Natürlich gehöre ich, der große Alexander, dazu."
+  },
+  {
+    "en": "You've been clean Hollowed, have you?",
+    "de": "Ihr seid eine reine Hülle, habe ich recht?"
+  },
+  {
+    "en": "Have you no discretion, me auld chum?",
+    "de": "Kennt Ihr keine Diskretion, alter Kumpel?"
+  },
+  {
+    "en": "Ah, should I add thee to the list?",
+    "de": "Ah, soll ich Euch auch auf diese Liste setzen?"
+  },
+  {
+    "en": "May the flames guide thy way.",
+    "de": "Mögen die Flammen Euren Weg leiten."
+  },
+  {
+    "en": "Heh heh... Well, how are we?",
+    "de": "He he! Und? Wie geht's uns?"
+  },
+  {
+    "en": "The manor on the peak.",
+    "de": "In dem Anwesen auf dem Gipfel."
+  },
+  {
+    "en": "Someone must extinguish thy flame.",
+    "de": "Eure Flamme gehört ausgelöscht."
+  },
+  {
+    "en": "Then you're fascinated by maps, just like me?!",
+    "de": "Dann seid Ihr von Karten fasziniert, genau wie ich?"
+  },
+  {
+    "en": "Our seed will look back upon us, and recall.",
+    "de": "Wird unsere Saat auf uns zurückblicken und sich erinnern."
+  },
+  {
+    "en": "Another kindred spirit, treading the path of champions.",
+    "de": "Noch eine verwandte Seele auf dem Pfad der Helden."
+  },
+  {
+    "en": "Give me your blessing.",
+    "de": "Gebt mir Euren Segen."
+  },
+  {
+    "en": "I knew it, I knew you were Hollow!",
+    "de": "Ich wusste es, ich wusste, Ihr seid eine Hülle."
+  },
+  {
+    "en": "I, Siegward of the Knights of Catarina, have come to uphold my promise!",
+    "de": "Ich, Siegward von den Rittern Catarina, bin gekommen, mein Versprechen zu halten."
+  },
+  {
+    "en": "Vendrick is certain to guide your way.",
+    "de": "Vendrick wird Euch sicher den Weg geleiten."
+  },
+  {
+    "en": "Go on, show me.",
+    "de": "Los, zeigt sie mir."
+  },
+  {
+    "en": "Oh woe is the Undead who's cursed on top of it all!",
+    "de": "Wehe dem Untoten, der zu alledem auch noch verflucht wird!"
+  },
+  {
+    "en": "Perhaps you will yet traverse the Dark.",
+    "de": "Vielleicht werdet Ihr noch das Dunkel überqueren."
+  },
+  {
+    "en": "Well, whatever the case, she's dead now.",
+    "de": "Nun, wie auch immer... Jetzt ist sie jedenfalls tot."
+  },
+  {
+    "en": "Some were rich, others poor.",
+    "de": "Einige waren reich, andere arm."
+  },
+  {
+    "en": "The King of Giants... How did you slay that behemoth?",
+    "de": "Der König der Giganten... Wie habt Ihr dieses Ungetüm erschlagen?"
+  },
+  {
+    "en": "O, we are the Golden Ones.",
+    "de": "O, wir sind die Goldenen."
+  },
+  {
+    "en": "Oh, my... you again?",
+    "de": "Oh, Ihr schon wieder?"
+  },
+  {
+    "en": "Some awfully fine treasure's just sitting there all alone.",
+    "de": "Dort findet Ihr einen prächtigen Schatz."
+  },
+  {
+    "en": "It pleaseth me to see Torrent hale and hearty... But Tarnished, what business hast thou here?",
+    "de": "Es freut mich, Sturmwind gesund und unversehrt zu sehen... Aber was bringt Euch her, Befleckter?"
+  },
+  {
+    "en": "... Are you offering that drink to me?",
+    "de": "Soll ich das etwa trinken? Oh nein."
+  },
+  {
+    "en": "Tear 'em to shreds!",
+    "de": "Reißt sie in Fetzen!"
+  },
+  {
+    "en": "Give it to Ranni and ensure she drinks it.",
+    "de": "Gebt ihn Ranni und sorgt dafür, dass sie ihn auch trinkt."
+  },
+  {
+    "en": "Such conduct ill befits a warrior.",
+    "de": "Solches Gebaren passt nicht zu einem Krieger."
+  },
+  {
+    "en": "I will make the journey.",
+    "de": "Ich werde mich auf die Reise machen."
+  },
+  {
+    "en": "Have a look, will you?",
+    "de": "Wollt Ihr sie Euch mal ansehen?"
+  },
+  {
+    "en": "Why not meet him for yourself?",
+    "de": "Warum trefft Ihr ihn nicht selbst?"
+  },
+  {
+    "en": "Young Hollow, conqueror of fear.",
+    "de": "Junge Hülle, Bezwinger der Furcht."
+  },
+  {
+    "en": "No one else will take you.",
+    "de": "Niemand sonst wird Euch entführen."
+  },
+  {
+    "en": "So very typical of meek minds, don't you think?",
+    "de": "Das ist so typisch für Kleingeister, meint Ihr nicht auch?"
+  },
+  {
+    "en": "The Dark within you is faded and pale... The Dark... how could you... Young Undead, my work is done... I bequeath these to you.",
+    "de": "Das Dunkel in Euch schwindet und verblasst... Das Dunkel... Wie konntet Ihr... Junger Untoter, meine Arbeit ist getan... Ich hinterlasse Euch dies."
+  },
+  {
+    "en": "The Dark that we must all face.",
+    "de": "Das Dunkel, dem wir alle uns stellen müssen."
+  },
+  {
+    "en": "But, use this, to summon one another as spirits, cross the gaps between the worlds, and engage in jolly co-operation!",
+    "de": "Doch benutzt dies... Um einander als Geist zu beschwören, die Kluft zwischen den Welten zu überwinden, Und eine famose Partnerschaft einzugehen!"
+  },
+  {
+    "en": "Bearer of the curse... Seek those whose names are unutterable, the four endowed with immense souls.",
+    "de": "Träger des Fluches... Findet jene, deren Namen unaussprechlich sind, jene vier, deren Seelen immens sind."
+  },
+  {
+    "en": "... I beg you stop.",
+    "de": "... Ich flehe Euch an, aufzuhören."
+  },
+  {
+    "en": "Pursue your work, Knight of the Blue.",
+    "de": "Geht Eurer Aufgabe nach, Ritter des Blauen."
+  },
+  {
+    "en": "What a fool I was.",
+    "de": "Was für ein Narr ich doch war."
+  },
+  {
+    "en": "I've started to turn a handsome profit now, and I can't bear to give it up.",
+    "de": "Jetzt laufen meine Geschäfte, und ich kann nicht mehr aufgeben."
+  },
+  {
+    "en": "Trapped within your wretched curse.",
+    "de": "Von Eurem niederträchtigen Fluch gebannt."
+  },
+  {
+    "en": "Ohh... Oh, Lord Godwyn... Such cruelty, such humiliation... My poor, sweet lordling should have died a true death.",
+    "de": "Oh, Fürst Godwyn... Solche Grausamkeit, solche Demütigung... Mein armes, süßes Fürstlein hätte einen wahren Tod sterben sollen."
+  },
+  {
+    "en": "If you follow this heroic path, one day the Lord will see you.",
+    "de": "Wenn Ihr weiter diesem heroischen Pfad folgt, wird der Fürst Euch eines Tages aufsuchen."
+  },
+  {
+    "en": "Have you, too, been seduced by the good lady alcohol?",
+    "de": "Vielleicht habt Ihr ja schon vom Traumbräu gehört?"
+  },
+  {
+    "en": "I have slain the body I was born into, and cast it away.",
+    "de": "Ich erschlug den Körper, in dem ich geboren wurde, und habe mich von ihm befreit."
+  },
+  {
+    "en": "My family had little fortune, and no name.",
+    "de": "Meine Familie hatte nur wenig Glück und keinen Namen."
+  },
+  {
+    "en": "My dear lord, a most true king.",
+    "de": "Mein teurer Herr, ein wahrer König."
+  },
+  {
+    "en": "Have a look at my sword, for it's the last thing you'll see!",
+    "de": "Schaut Euch mein Schwert gut an, es wird Euer Ende sein!"
+  },
+  {
+    "en": "Have you ever walked near a white birch, only to be struck by a great arrow?",
+    "de": "Seid Ihr je an einer weißen Birke vorbei gelaufen, nur um von einem Großpfeil getroffen zu werden?"
+  },
+  {
+    "en": "Ah, nice to see you.",
+    "de": "Schön, Euch zu sehen."
+  },
+  {
+    "en": "Don't ever show your face again.",
+    "de": "Lasst Euch hier nie wieder blicken."
+  },
+  {
+    "en": "I do not wish to impose.",
+    "de": "Ich möchte mich niemandem aufdrängen."
+  },
+  {
+    "en": "I humbly place my faith in you.",
+    "de": "Ich setze mein Vertrauen in Euch."
+  },
+  {
+    "en": "This is a difficult one, even for me... Hmm... quite a fix indeed... Perhaps I should aim for their eyes... Mmm... mmm... Mm!",
+    "de": "Es ist aber auch schwer, selbst für mich... Hmm... Eine ganz schöne Klemme... Vielleicht sollte ich auf ihre Augen zielen... Hmm... Hmm... Hm!"
+  },
+  {
+    "en": "But do think of me.",
+    "de": "Doch denkt bitte an mich."
+  },
+  {
+    "en": "How you grapple, without falter, with this dreadfully twisted world.",
+    "de": "Wie Ihr mit dieser entsetzlich verdorbenen Welt ringt, ohne je zu wanken."
+  },
+  {
+    "en": "But remember one thing.",
+    "de": "Doch eines vergesst nicht."
+  },
+  {
+    "en": "I am rarely wrong on such matters... A wise choice.",
+    "de": "In derlei Dingen irre ich mich selten... Eine weise Wahl."
+  },
+  {
+    "en": "I must learn all that can be taken from this place, and sear it into my memory.",
+    "de": "Ich muss alles in Erfahrung bringen, was es hier noch zu lernen gibt, und mir alles ganz genau einprägen."
+  },
+  {
+    "en": "Forgive me, Marika... The Golden Order... cannot be restored.",
+    "de": "Vergebt mir, Marika... Die Goldene Ordnung... lässt sich nicht wiederherstellen."
+  },
+  {
+    "en": "How many of you are there?",
+    "de": "Wie viele seid ihr?"
+  },
+  {
+    "en": "What happened to you?",
+    "de": "Was ist mit Euch geschehen?"
+  },
+  {
+    "en": "Curses... Well, I see you made it out! Yeah, I made it out safely, too.",
+    "de": "Verflucht... Na, Ihr habt es offenbar geschafft... Jawohl, ich habe es auch geschafft."
+  },
+  {
+    "en": "Beyond the flooded woods lies Farron Keep, home of the Undead Legion.",
+    "de": "Jenseits der überfluteten Wälder liegt Farron, Heimat der Legion der Untoten."
+  },
+  {
+    "en": "These, you take, ah For you.",
+    "de": "Ihr nehmen dies, ah. Für Euch."
+  },
+  {
+    "en": "Ah, nice to meet you.",
+    "de": "Ah, freut mich, Euch kennenzulernen."
+  },
+  {
+    "en": "Thank you, thank you dearly.",
+    "de": "Ach, du meine Güte! Danke."
+  },
+  {
+    "en": "What cruelty's this... Who would rob me of my one vital purpose?",
+    "de": "Warum diese Grausamkeit...? Wer würde mich meines einzigen Lebensziels berauben?"
+  },
+  {
+    "en": "Further yet is the Cathedral of the Deep.",
+    "de": "Dahinter die Kathedrale des Abgrunds."
+  },
+  {
+    "en": "I could not have been more mistaken... Miquella the Kind... is a monster.",
+    "de": "Mein Irrtum hätte nicht größer sein können... Miquella der Gütige... ist ein Monster."
+  },
+  {
+    "en": "Oh, hello, anything you'd care to purchase?",
+    "de": "Oh, hallo, möchtet Ihr etwas erwerben?"
+  },
+  {
+    "en": "A recusant through and through.",
+    "de": "Ein echter Rekusant, durch und durch."
+  },
+  {
+    "en": "But I wish we had a potentate big and strong like you.",
+    "de": "Aber ich wünschte, wir hätten einen Herrscher, der so groß und stark ist wie Ihr."
+  },
+  {
+    "en": "A murderer now, are you?",
+    "de": "Ihr seid jetzt ein Mörder, nicht wahr?"
+  },
+  {
+    "en": "All's well that ends well, right?",
+    "de": "Also Ende gut, alles gut, stimmt's?"
+  },
+  {
+    "en": "Haah, didn't think you had it in yer pal.",
+    "de": "Ihr habt den Weg geräumt?"
+  },
+  {
+    "en": "Oh, but how could this be?",
+    "de": "Aber wie kann das nur sein?"
+  },
+  {
+    "en": "Please accept these as a thank-you.",
+    "de": "Bitte nehmt dies als Dank."
+  },
+  {
+    "en": "If you follow this heroic path, one day the Lord will see you.",
+    "de": "Wenn Ihr weiter diesem Pfad der Helden folgt, wird der Fürst Euch eines Tages aufsuchen."
+  },
+  {
+    "en": "I witnessed a sight much the same, in my infancy.",
+    "de": "Etwas Ähnliches konnte ich in meiner Kindheit miterleben."
+  },
+  {
+    "en": "I no longer need it.",
+    "de": "Ich benötige es nicht mehr."
+  },
+  {
+    "en": "Once I've rescued Irina, I will spend my remaining days with her.",
+    "de": "Nachdem ich Irina gerettet habe, werde ich meine verbliebenen Tage mit ihr verbringen."
+  },
+  {
+    "en": "Have you seen my companion, Horace?",
+    "de": "Habt Ihr meinen Gefährten Horace gesehen?"
+  },
+  {
+    "en": "... Ahh, the puppets... The puppets besiege us... Raya Lucaria, hallowed hall dedicated to the study of magic.",
+    "de": "... Ah, die Puppen... Die Puppen belagern uns... Raya Lucaria, heilige Hallen, die dem Studium der Magie gewidmet sind."
+  },
+  {
+    "en": "Some things simply never occur to her.",
+    "de": "Manche Dinge kommen ihr einfach niemals in den Sinn."
+  },
+  {
+    "en": "Eventually, he drove himself mad.",
+    "de": "Am Ende wurde er verrückt."
+  },
+  {
+    "en": "I was absorbed in thought.",
+    "de": "Ich war in Gedanken versunken."
+  },
+  {
+    "en": "Some wise, some dull, but now, they are all just dead.",
+    "de": "Einige waren weise, andere dumm, aber jetzt sind sie nur noch tot."
+  },
+  {
+    "en": "Give me your hand.",
+    "de": "Gebt mir Eure Hand."
+  },
+  {
+    "en": "You might scare her off for good!",
+    "de": "Sonst scheucht Ihr sie womöglich für immer fort!"
+  },
+  {
+    "en": "Wood carving is a nuanced art.",
+    "de": "Die Holzschnitzerei ist eine detailreiche Kunst."
+  },
+  {
+    "en": "He can look after himself, no question.",
+    "de": "Er kann auf sich aufpassen, kein Zweifel."
+  },
+  {
+    "en": "You must be prepared to give some of yourself.",
+    "de": "Ihr müsst Euch darauf einstellen, etwas von Euch zu opfern."
+  },
+  {
+    "en": "The time has come.",
+    "de": "Es ist an der Zeit."
+  },
+  {
+    "en": "I wonder where the Fire Keepers went... Did you notice any letters on the ground on the way here?",
+    "de": "Wohin die Feuerhüterinnen wohl verschwunden sind...? Sind Euch auf dem Weg hierher Buchstaben auf dem Boden aufgefallen?"
+  },
+  {
+    "en": "But forget not, Your fight is for the flame, and for y' fellow kin.",
+    "de": "Vergesst aber nicht. Ihr kämpft für die Flamme und Euresgleichen."
+  },
+  {
+    "en": "Ahh, I heard it from a fleeing old man.",
+    "de": "Ah, ich hörte es von einem alten Flüchtling."
+  },
+  {
+    "en": "Last chance to surrender, mate.",
+    "de": "Ergebt Euch. Letzte Chance."
+  },
+  {
+    "en": "Lay out your arms.",
+    "de": "Zeigt mir Eure Waffen."
+  },
+  {
+    "en": "Now thou'rt the true and deserving Lord of Hollows.",
+    "de": "Nun seid Ihr der wahre und verdiente Fürst der Hüllen."
+  },
+  {
+    "en": "Ahh, dear little Ocelotte.",
+    "de": "Oh, mein geliebter kleiner Ocelotte."
+  },
+  {
+    "en": "Never met someone with a taste for prawn I couldn't trust.",
+    "de": "Hab noch nie jemanden getroffen, der so wild auf Krabben ist und mit dem ich nicht klarkomm'."
+  },
+  {
+    "en": "Ha ha ha... Such as it is, this battle could not be more fitting.",
+    "de": "Hahaha... Dieser Kampf könnte also kaum passender sein."
+  },
+  {
+    "en": "Now, the vow will be honoured, and my Lord brother's soul will return.",
+    "de": "Der Schwur wird nun geehrt und meines Bruders Seele wird wiederkehren."
+  },
+  {
+    "en": "If you require assistance, I will help you.",
+    "de": "Wenn Ihr Unterstützung benötigt, werde ich Euch helfen."
+  },
+  {
+    "en": "When their durability is low, repair becomes a necessity.",
+    "de": "Bei geringer Haltbarkeit ist eine Reparatur vonnöten."
+  },
+  {
+    "en": "I'll be along later.",
+    "de": "Ich komme später nach."
+  },
+  {
+    "en": "The wheel of fate has been set into motion.",
+    "de": "Das Rad des Schicksals dreht sich weiter."
+  },
+  {
+    "en": "It is always an honour to speak with thee.",
+    "de": "Es ist mir stets eine Ehre, mit Euch sprechen zu dürfen."
+  },
+  {
+    "en": "Welcome to Trusty Patches' Trove of Treasures.",
+    "de": "Willkommen in der Fundgrube der Schätze vom Treuen Patches."
+  },
+  {
+    "en": "There are books and light aplenty.",
+    "de": "Ich habe Bücher und genug Licht für alle!"
+  },
+  {
+    "en": "We fight, sword and fang.",
+    "de": "Wir kämpfen, mit Schwert und Zähnen."
+  },
+  {
+    "en": "An honour once bestowed in the time of the Gods, nearly unheard of in this age of waning fire.",
+    "de": "Diese Ehre aus der Ära der Götter ist in der Zeit des schwindenden Feuers fast in Vergessenheit geraten."
+  },
+  {
+    "en": "You wouldn't even register as a threat to father.",
+    "de": "Mein Vater würde Euch gar nicht als Bedrohung wahrnehmen."
+  },
+  {
+    "en": "Takes me back to my academy days.",
+    "de": "Das erinnert mich an meine Zeit an der Akademie."
+  },
+  {
+    "en": "But Princess Dusk is here no longer... snatched away by that horrifying primeval human. And so I must ask... Couldst thou once more play the saviour?",
+    "de": "Doch Prinzessin Dusk ist nicht mehr hier... jener fürchterliche Vorzeitmensch hat sie hinfort gezerrt... Und daher muss ich Euch bitten... Würdet Ihr sie einmal mehr retten?"
+  },
+  {
+    "en": "Oh it's y-you again?",
+    "de": "I... Ihr schon wieder?"
+  },
+  {
+    "en": "Ohh, look at you, you found the treasure.",
+    "de": "Schau mal einer an. Ihr habt den Schatz gefunden."
+  },
+  {
+    "en": "Now comes the age of the mind.",
+    "de": "Nun kommt das Zeitalter des Verstands."
+  },
+  {
+    "en": "Miquella is mine and mine alone.",
+    "de": "Miquella gehört ganz allein mir."
+  },
+  {
+    "en": "Entrust thine flesh to me.",
+    "de": "Vertraut Euch mir an."
+  },
+  {
+    "en": "These shackles take a toll on us all.",
+    "de": "Diese Fesseln fordern uns allen einen hohen Tribut ab."
+  },
+  {
+    "en": "And even a demigod would be slave to its charms... Very good.",
+    "de": "Und selbst ein Halbgott würde ihren Reizen verfallen... Sehr gut."
+  },
+  {
+    "en": "But with a prowess for weeding Deathroot.",
+    "de": "Aber mit einem Talent für das Jäten der Todeswurzel."
+  },
+  {
+    "en": "My knees start knockin'... just thinking about that god-awful cave on the shore... Oh, what are you doing here?",
+    "de": "Meine Knie beginnen zu zittern... Wenn ich bloß an diese grauenhafte Höhle am Ufer denke... Oh, was macht Ihr denn hier?"
+  },
+  {
+    "en": "Ah, oh, you again... A shame you had to see me like this... Ohh, I had a bit of a slip-up, that's all.",
+    "de": "Ach, Ihr schon wieder... Eine Schande, dass Ihr mich so sehen musstet... Ich hatte nur einen kleinen Ausrutscher, mehr nicht."
+  },
+  {
+    "en": "You always were very kind.",
+    "de": "Ihr wart immer sehr gütig."
+  },
+  {
+    "en": "Young Hollow, there are but two paths. Inherit the order of this world, or destroy it.",
+    "de": "Junge Hülle, es gibt nur zwei Wege: Diese Welt zu beherrschen oder sie zu vernichten."
+  },
+  {
+    "en": "No one will despoil her soul.",
+    "de": "Niemand beraubt sie ihrer Seele."
+  },
+  {
+    "en": "They'll be darkened by grit, once I've set out on the path of champions.",
+    "de": "Meine Tapferkeit wird sie schwärzen, wenn ich erst den Weg des Helden eingeschlagen habe."
+  },
+  {
+    "en": "Bearer of the curse, make your way to the castle.",
+    "de": "Träger des Fluches, schreitet voran zum Schloss."
+  },
+  {
+    "en": "She cried for me... And swallowed the great Blightpus, despite Mistress Quelaag's orders to the contrary.",
+    "de": "Geweint hat sie um mich... Und den großen Eiterschand herabgewürgt, trotz gegenteiliger Befehle von Meisterin Quelaag."
+  },
+  {
+    "en": "Rejoice, for the right to serve me is now thine.",
+    "de": "Doch frohlocket, denn die Ehre, mir zu dienen, ist nun Euer."
+  },
+  {
+    "en": "Are you travelling my way?",
+    "de": "Geht Ihr ebenfalls in meine Richtung?"
+  },
+  {
+    "en": "... No mate, these deals, they won't last forever... Fine, then, all the best...",
+    "de": "Nein, Kumpel, diese Angebote gelten nicht ewig... Schön, na dann, alles Gute."
+  },
+  {
+    "en": "You're not willing to reconsider, are you?",
+    "de": "Ihr überlegt es Euch doch nicht anders, oder?"
+  },
+  {
+    "en": "I offer this fight... To Miquella the Kind.",
+    "de": "Ich widme diesen Kampf... Miquella dem Gütigen."
+  },
+  {
+    "en": "This was supposed to be a dead end, I'm sure of it.",
+    "de": "Das hier sollte eine Sackgasse sein."
+  },
+  {
+    "en": "Sweet Tarnished... Dearest companion... Did you not heed my warning?",
+    "de": "Süßer Befleckter... Liebster Begleiter... Habt Ihr Euch nicht an meine Warnung gehalten?"
+  },
+  {
+    "en": "You're so far out of your mind with fear... You've divested yourself of all reason?",
+    "de": "Die Furcht hat Euch so fest im Griff... Dass Ihr Euch jeglicher Vernunft entledigt habt?"
+  },
+  {
+    "en": "The untrained cannot wield a scroll to its proper potential.",
+    "de": "Der Ungeschulte kann einer Schriftrolle nicht ihr volles Potenzial entlocken."
+  },
+  {
+    "en": "I will forge a Rickert masterpiece, just for you!",
+    "de": "Ich werde Euch ein Rickert-Meisterwerk schmieden!"
+  },
+  {
+    "en": "Things appear to have settled.",
+    "de": "Alles scheint bereinigt zu sein."
+  },
+  {
+    "en": "This forest is the territory of a fierce band of thieves.",
+    "de": "Dieser Wald gehört einer grimmigen Diebesbande."
+  },
+  {
+    "en": "That ought to keep you quiet... Oh, you're back, then.",
+    "de": "Das wird Euch zum Schweigen bringen... Oh, Ihr seid zurück."
+  },
+  {
+    "en": "Someone stole a fragment of the Rune of Death from Maliketh, the Black Blade.",
+    "de": "Jemand stahl ein Fragment der Rune des Todes von Maliketh, auch als die Schwarze Klinge bekannt."
+  },
+  {
+    "en": "That is more than most Undead can say.",
+    "de": "Das können nur die wenigsten Untoten von sich behaupten."
+  },
+  {
+    "en": "Although to be honest, I only know a few.",
+    "de": "Offengestanden kenne ich allerdings nur wenige."
+  },
+  {
+    "en": "Diallos' smooth and silky hands feel nice when he pats us...",
+    "de": "Es fühlt sich zwar gut an, wenn Diallos uns mit seinen seidenzarten Händen tätschelt."
+  },
+  {
+    "en": "What is the First Flame?",
+    "de": "Was die Erste Flamme ist?"
+  },
+  {
+    "en": "I will not be far behind.",
+    "de": "Ich werde Euch folgen."
+  },
+  {
+    "en": "On the nature of the Lord of Hollows.",
+    "de": "Zum Wesen des Fürsten der Hüllen."
+  },
+  {
+    "en": "Besides, I should check on some things here.",
+    "de": "Außerdem sollte ich mich hier noch um einiges kümmern."
+  },
+  {
+    "en": "I come from Mirrah, a land of knights.",
+    "de": "Ich komme aus Mirrah, einem Land der Ritter."
+  },
+  {
+    "en": "But don't think ill of him.",
+    "de": "Aber verübelt es ihm nicht."
+  },
+  {
+    "en": "This is a mere token of my thanks.",
+    "de": "Dies ist nur ein kleines Zeichen meiner Dankbarkeit."
+  },
+  {
+    "en": "A little more gently, gently, please.",
+    "de": "Etwas sanfter bitte. Bitte!"
+  },
+  {
+    "en": "Oh thou'rt... Oh, no, 'tisn't anything, Ashen One.",
+    "de": "Oh, Ihr seid... Oh, nein, es ist nichts, Aschener."
+  },
+  {
+    "en": "Perhaps you are ready.",
+    "de": "Vielleicht seid Ihr bereit."
+  },
+  {
+    "en": "I am Rickert of Vinheim.",
+    "de": "Ich bin Rickert von Vinheim."
+  },
+  {
+    "en": "And will not simply lay down and die with them.",
+    "de": "Und ich werde mich nicht so einfach zusammenrollen und mit ihnen sterben."
+  },
+  {
+    "en": "I regret meeting you under such compromising circumstances.",
+    "de": "Wenigstens haben wir es beide unbeschädigt geschafft."
+  },
+  {
+    "en": "Isn't it extraordinary to think they've existed since the very origins of the world?",
+    "de": "Ist es nicht seltsam, zu denken, sie hätten seit den Anfängen der Welt existiert?"
+  },
+  {
+    "en": "The legendary sword of the ancient Undead master Makoto, its blade a swirling vortex.",
+    "de": "Das legendäre Schwert des Untoten-Meisters Makoto, mit einer Klinge aus einem sich drehenden Wirbel."
+  },
+  {
+    "en": "So, hand that ember to me.",
+    "de": "Also gebt mir diese Glut."
+  },
+  {
+    "en": "Like thee, they are in my service.",
+    "de": "Genau wie Ihr stehen auch sie in meinen Diensten."
+  },
+  {
+    "en": "I don't deserve it, but I'll savour every last drop.",
+    "de": "Das habe ich nicht verdient, aber ich werde jeden einzelnen Tropfen genießen."
+  },
+  {
+    "en": "Don't bother holding yourself up for my sake.",
+    "de": "Lasst Euch meinetwillen nicht aufhalten."
+  },
+  {
+    "en": "I trust you will understand.",
+    "de": "Ich hoffe, Ihr werdet das verstehen."
+  },
+  {
+    "en": "I need no external aid.",
+    "de": "Ich brauche keine Hilfe."
+  },
+  {
+    "en": "All his robes and trinkets won't help him now!",
+    "de": "All seine Gewänder und Schätze werden ihm jetzt nicht helfen!"
+  },
+  {
+    "en": "The path of the Lord of Chaos.",
+    "de": "Der Weg für den Fürsten des Chaos."
+  },
+  {
+    "en": "Would you like to learn an incantation?",
+    "de": "Möchtet Ihr also eine Anrufung lernen?"
+  },
+  {
+    "en": "I've something else that might suit you.",
+    "de": "Ich habe noch etwas, das Euch taugen könnte."
+  },
+  {
+    "en": "She is much like thee.",
+    "de": "Ihr seid einander nicht unähnlich."
+  },
+  {
+    "en": "I may have expected too much of her, to begin with.",
+    "de": "Womöglich habe ich von Anfang an auch einfach zu viel von ihr erwartet."
+  },
+  {
+    "en": "Ahh, you ignorant slaves.",
+    "de": "Ah, Ihr unwissenden Büttel."
+  },
+  {
+    "en": "Think no more of it.",
+    "de": "Denkt nicht weiter darüber nach."
+  },
+  {
+    "en": "If thou seeketh to explore this domain, be wary of a black dragon.",
+    "de": "So Ihr dieses Reich erkunden möchtet, hütet Euch vor dem Schwarzen Drachen."
+  },
+  {
+    "en": "Brave warrior, if the fates deign it... No, we shall indeed meet again, at the next glorious tourney.",
+    "de": "Tapferer Krieger, wenn es das Schicksal so will... Nein, wir werden uns beim nächsten glorreichen Turnier auf jeden Fall wiedersehen."
+  },
+  {
+    "en": "Many deal... many thanks!",
+    "de": "Viele Handel und viele Dank."
+  },
+  {
+    "en": "To our home, bathed in rays of gold.",
+    "de": "Zu unserer Heimat, gehüllt in goldene Strahlen."
+  },
+  {
+    "en": "Don't waste my time.",
+    "de": "Verschwendet nicht meine Zeit."
+  },
+  {
+    "en": "Take it back for me.",
+    "de": "Erobert sie für mich zurück."
+  },
+  {
+    "en": "But what is a king?",
+    "de": "Doch was ist ein König?"
+  },
+  {
+    "en": "Heh heh... Visit me again, whenever you please.",
+    "de": "Hi hi hi... Besucht mich wieder, wann immer es Euch gefällt."
+  },
+  {
+    "en": "Honeyed rays of gold, deliver this spirit.",
+    "de": "Süße goldene Strahlen, nehmt Euch dieser Seele an."
+  },
+  {
+    "en": "I was expecting you.",
+    "de": "Ich habe Euch erwartet."
+  },
+  {
+    "en": "That key belongs to you.",
+    "de": "Dieser Schlüssel gehört Euch."
+  },
+  {
+    "en": "Ah, we meet yet again.",
+    "de": "Einmal mehr sehen wir uns wieder."
+  },
+  {
+    "en": "No, no, no... How could I say that?",
+    "de": "Nein, nein, nein... Wie konnte ich das sagen?"
+  },
+  {
+    "en": "But one must choose one's masters wisely.",
+    "de": "Doch seine Meister muss man mit Bedacht wählen."
+  },
+  {
+    "en": "I believe Miquella's apologies, when he says our delivery will come... But never will I see your kind as worthy.",
+    "de": "Ich vertraue Miquellas Worten, dass der Tag unserer Erlösung naht... Aber Euresgleichen werde ich niemals für würdig erachten."
+  },
+  {
+    "en": "A man ought to labour with his feet planted firmly in the earth.",
+    "de": "Ein Mann muss mit den Füßen fest auf dem Boden stehen und arbeiten."
+  },
+  {
+    "en": "But I'm afraid we require more time. As long as it takes a dark droplet to fall, that is all.",
+    "de": "So lange ein finsterer Tropfen braucht, um auf den Boden zu fallen, das ist alles."
+  },
+  {
+    "en": "I expect glad tidings.",
+    "de": "Ich erwarte von Euch frohe Kunde."
+  },
+  {
+    "en": "What is it that drives you?",
+    "de": "Was treibt Euch an?"
+  },
+  {
+    "en": "... And yet... Still I feel that boy hides something.",
+    "de": "... Und doch... Doch spüre ich, dass er etwas verbirgt."
+  },
+  {
+    "en": "Yes, I see, how very kind of you.",
+    "de": "Ja, ich verstehe. Wie nett von Euch."
+  },
+  {
+    "en": "Such is my duty, for allowing you the strength of runes.",
+    "de": "Denn das ist meine Pflicht, da ich Euch die Kraft der Runen gewährt habe."
+  },
+  {
+    "en": "At long last, you are returned.",
+    "de": "Endlich seid Ihr zurückgekehrt."
+  },
+  {
+    "en": "The toothless pedantry peddled by the Carian royal family can rot for all I care.",
+    "de": "Die zahnlose Pedanterie der Königsfamilie von Caria soll von mir aus verrotten."
+  },
+  {
+    "en": "I appreciate your help, but... I don't like travellers one bit.",
+    "de": "Eure Hilfe weiß ich zu schätzen, aber... Reisende kann ich überhaupt nicht leiden."
+  },
+  {
+    "en": "That will certainly do you more good.",
+    "de": "Das wird Euch sicher mehr helfen."
+  },
+  {
+    "en": "Oh... do you speak true?",
+    "de": "Oh... Ihr sagt die Wahrheit?"
+  },
+  {
+    "en": "Don't you ever give up!",
+    "de": "Gebt nur nicht auf!"
+  },
+  {
+    "en": "The conqueror of the stars, General Radahn.",
+    "de": "Der Eroberer der Sterne, General Radahn."
+  },
+  {
+    "en": "It pains me to think of the trouble my failings have caused.",
+    "de": "Es schmerzt mich, wenn ich an die Not denke, die meine Fehler auslösten."
+  },
+  {
+    "en": "I was entrusted this, for thee.",
+    "de": "Mir wurde dies anvertraut, für Euch."
+  },
+  {
+    "en": "And with this, my purpose is exhausted.",
+    "de": "Und somit habe ich meine Aufgabe erfüllt."
+  },
+  {
+    "en": "You too deserve your share of the reward.",
+    "de": "Auch Ihr verdient Euren Anteil an der Belohnung."
+  },
+  {
+    "en": "Of the demigods, only I, Miquella, and Malenia could claim that title.",
+    "de": "Von allen Halbgöttern konnten nur Miquella, Malenia und ich Anspruch auf diesen Titel erheben."
+  },
+  {
+    "en": "What's it like at the bottom of the hole?",
+    "de": "Wie es am Grund des Lochs so ist?"
+  },
+  {
+    "en": "He has been a prisoner, for many ages.",
+    "de": "Er ist seit langer Zeit in Gefangenschaft."
+  },
+  {
+    "en": "But if you happen to recall any details, do be a saint.",
+    "de": "Aber wenn Ihr Euch doch an etwas erinnert, seid so gut."
+  },
+  {
+    "en": "I hath long await'd thee.",
+    "de": "Schon lange erwarte ich Euch."
+  },
+  {
+    "en": "You hunted down Tragoth?",
+    "de": "Seid Ihr Euch da sicher?"
+  },
+  {
+    "en": "If you stay the path, you are certain to face more of them.",
+    "de": "Solltet Ihr dem Pfad noch weiter folgen, erwarten Euch noch viel mehr von ihrer Art."
+  },
+  {
+    "en": "Make the tales true, and burn this world away.",
+    "de": "Lasst die Legenden wahr werden und brennt diese Welt hinfort."
+  },
+  {
+    "en": "Ashen one, if, when thou peerest upon the First Flame... Thou wishest yet, for a world without fire, for an end to the linking of the fire... Then call upon me.",
+    "de": "Aschener, wenn Ihr beim Anblick der Ersten Flamme... doch eine Welt ohne Feuer herbeisehnt, ein Ende des Feuerbindens... So ruft mich."
+  },
+  {
+    "en": "Ariandel will make a fine home for you.",
+    "de": "Ariandel wird Euch ein schönes Zuhause sein."
+  },
+  {
+    "en": "Before the unmoving, unfeeling Grand Lift ahead.",
+    "de": "Vor dem bewegungslosen, gefühlslosen Großen Aufzug vor Euch."
+  },
+  {
+    "en": "Now, we find ourselves pitted against Radahn, once the strongest of the demigods.",
+    "de": "Und nun treten wir gegen Radahn an, einst der Stärkste aller Halbgötter."
+  },
+  {
+    "en": "For the Prince and the Princess, forever, for true?",
+    "de": "Für den Prinzen und die Prinzessin für immer, fürwahr?"
+  },
+  {
+    "en": "Are you the Tarnished?",
+    "de": "Seid Ihr der Befleckte?"
+  },
+  {
+    "en": "The path is yet long, young pupil.",
+    "de": "Der Weg ist noch weit, junger Adept."
+  },
+  {
+    "en": "Use it to gain passage, through the King's Gate... and venture to the far east... and seek the home of the dragon, to the far east... Bearer of the curse, if you are to be the next monarch, Then, one day, you will walk those grounds... without really knowing why.",
+    "de": "Verschafft Euch mit ihm Zugang durch das Königstor... und begebt Euch weit in den Osten... und sucht die Heimat des Drachen tief im Osten auf... Träger des Fluches, wenn Ihr der nächste Monarch sein sollt, Dann werdet Ihr eines Tages dort schreiten... ohne den Grund dafür zu kennen."
+  },
+  {
+    "en": "I'm so excited to see what kind of flowers will blossom... Oh, hallo again, coz.",
+    "de": "Ich bin so gespannt, welche Blumen hier bald blühen... Oh, hallo, Freund."
+  },
+  {
+    "en": "What drives you so, to overcome this supposed curse?",
+    "de": "Was treibt Euch an, dass Ihr versucht, diesen vermeintlichen Fluch zu überwinden?"
+  },
+  {
+    "en": "Those who gave me grapes howled without words.",
+    "de": "Jene, die mir Trauben gaben, heulten wortlos."
+  },
+  {
+    "en": "I suppose he's up to something again.",
+    "de": "Er plant wohl wieder etwas."
+  },
+  {
+    "en": "Your path is wholly different to mine.",
+    "de": "Euer Pfad ist ein gänzlich anderer als der meine."
+  },
+  {
+    "en": "... Oh, enough with you.",
+    "de": "... Ach, genug von Euch."
+  },
+  {
+    "en": "Then tarry no longer and begone.",
+    "de": "Dann verweilt hier nicht länger. Hinfort!"
+  },
+  {
+    "en": "Sadly, I cannot comprehend it, myself.",
+    "de": "Ich verstehe es leider selbst nicht."
+  },
+  {
+    "en": "I've heard survivors of Radahn's army are still in the wilds, staving off the rot with fire.",
+    "de": "Ich habe gehört, dass Überlebende aus Radahns Armee noch in der Wildnis sind und die Fäule mit Feuer zurückdrängen."
+  },
+  {
+    "en": "Gah hah hah hah hah!",
+    "de": "Ga ha ha ha ha!"
+  },
+  {
+    "en": "A frenzied flame to melt away the curses, suffering, and despair.",
+    "de": "Eine rasende Flamme, die all die Flüche, all den Schmerz und all die Verzweiflung versengt."
+  },
+  {
+    "en": "Well, then... Is Dark what you wish for?",
+    "de": "Nun denn... Ist es das Dunkel, das Ihr wünscht?"
+  },
+  {
+    "en": "Justice to the oppressors.",
+    "de": "Gerechtigkeit gegenüber den Unterdrückern."
+  },
+  {
+    "en": "The question rings in my mind, but I haven't the focus to answer it.",
+    "de": "Die Frage geistert mir im Kopf herum, aber mir fehlt die Konzentration, sie zu beantworten."
+  },
+  {
+    "en": "No way I could've known, but still, I apologise.",
+    "de": "Ich konnte das natürlich unmöglich wissen."
+  },
+  {
+    "en": "But, go along, if you wish.",
+    "de": "Doch geht, wenn Ihr wollt."
+  },
+  {
+    "en": "Worry not, I am a true friend to thee.",
+    "de": "Keine Angst, ich bin Euch ein wahrer Freund."
+  },
+  {
+    "en": "But for the moment, we've a toast to make.",
+    "de": "Für den Moment sollten wir aber anstoßen."
+  },
+  {
+    "en": "And true enough they're foul inside and out.",
+    "de": "Und so ist es auch... Abscheulich durch und durch."
+  },
+  {
+    "en": "... It's the same old story, everywhere I go.",
+    "de": "... Egal, wo ich hingehe, es ist immer die gleiche alte Geschichte."
+  },
+  {
+    "en": "He's in his study.",
+    "de": "Er ist in seinem Arbeitszimmer."
+  },
+  {
+    "en": "But while my devotion to Kindly Miquella remains unchanged, by my troth, I am not so sure about the others.",
+    "de": "Doch selbst wenn meine Hingabe für den gütigen Miquella unverändert bleibt, bin ich mir bei den anderen da nicht so sicher."
+  },
+  {
+    "en": "Forgive mine intrusion, Tarnished.",
+    "de": "Vergebt mir die Störung, Befleckter."
+  },
+  {
+    "en": "I'll think of something.",
+    "de": "Mir fällt schon etwas ein."
+  },
+  {
+    "en": "You are no friend.",
+    "de": "Ihr seid kein Freund."
+  },
+  {
+    "en": "Well? Can you assure me of this?",
+    "de": "Nun, könnt Ihr mir das versichern?"
+  },
+  {
+    "en": "I'll see you again, warrior, should the fates deign it.",
+    "de": "Ich sehe Euch wieder, Krieger, sofern das Schicksal es will."
+  },
+  {
+    "en": "It will make me forget, you say?",
+    "de": "Ihr sagt, es wird mir helfen, zu vergessen?"
+  },
+  {
+    "en": "There is one thing you should know.",
+    "de": "Es gibt da etwas, das Ihr wissen solltet."
+  },
+  {
+    "en": "I realize that I may never make it.",
+    "de": "Ich weiß, dass ich es vielleicht nicht schaffe."
+  },
+  {
+    "en": "What use do you have for me, now?",
+    "de": "Was könnte ich dann noch für Euch tun?"
+  },
+  {
+    "en": "Lead him safely unto greater Godhood.",
+    "de": "Führe ihn sicher zu größerer Gottheit."
+  },
+  {
+    "en": "Do you recall what I said?",
+    "de": "Erinnert Ihr Euch daran, was ich Euch sagte?"
+  },
+  {
+    "en": "Is this who you are, coz?",
+    "de": "Ist das Eure wahre Natur, Freundin?"
+  },
+  {
+    "en": "She is merely the recipient of an amber egg, given to her by Radagon, Her beloved, Radagon, left her to become Queen Marika's second husband, taking the title of King Consort.",
+    "de": "Sie erhielt lediglich ein Bernsteinei von Radagon, Ihr Geliebter, Radagon, verließ sie, um Königin Marikas zweiter Gemahl zu werden und den Titel des Königs zu tragen."
+  },
+  {
+    "en": "This is what I meant by unique.",
+    "de": "Das habe ich mit einzigartig gemeint."
+  },
+  {
+    "en": "Mm, yes, who would have it any other way?",
+    "de": "Hm, ja. Wer würde es anders haben wollen?"
+  },
+  {
+    "en": "Then we are done.",
+    "de": "Dann ist alles gesagt."
+  },
+  {
+    "en": "Well, all right, then.",
+    "de": "Nun gut, in Ordnung."
+  },
+  {
+    "en": "As long as you abide by his footfalls, you will be no enemy to me.",
+    "de": "Solange Ihr seinen Pfad beschreitet, habt Ihr von mir nichts zu befürchten."
+  },
+  {
+    "en": "Why, you're one of those leeches after all.",
+    "de": "Ihr seid ja doch einer jener Blutsauger."
+  },
+  {
+    "en": "I'm glad I pointed you in his direction.",
+    "de": "Ich bin froh, dass ich Euch zusammenbringen konnte."
+  },
+  {
+    "en": "Return from whence thou cam'st.",
+    "de": "Kehrt an den Ort zurück, von dem Ihr kamt."
+  },
+  {
+    "en": "To take power and make it his own, The recusant must hunt his own kind.",
+    "de": "Um zu wahrer Macht zu gelangen... muss ein Rekusant seinesgleichen jagen."
+  },
+  {
+    "en": "If this doesn't cause you shame, nothing will.",
+    "de": "Wenn Ihr Euch dafür nicht schämt, schämt Ihr Euch für nichts."
+  },
+  {
+    "en": "A scourge upon the living.",
+    "de": "Die Geißel der Lebenden."
+  },
+  {
+    "en": "If he'd just stay put... Yes, I see.",
+    "de": "Wäre er bloß an Ort und Stelle geblieben. Ja, verstehe."
+  },
+  {
+    "en": "Oh yes, by the way. I'm saying goodbye to the old cave.",
+    "de": "Ach, übrigens... Ich verabschiede mich von der alten Höhle."
+  },
+  {
+    "en": "To my blood, to our coming dynasty.",
+    "de": "Meinem Blut, unserer zukünftigen Dynastie."
+  },
+  {
+    "en": "You know, a holy personage was once abducted from these lands.",
+    "de": "Wisst Ihr, eine heilige Persönlichkeit wurde einst von hier entführt."
+  },
+  {
+    "en": "For we are Tarnished.",
+    "de": "Denn wir sind Befleckt."
+  },
+  {
+    "en": "All is well, provided you understand.",
+    "de": "Alles ist gut, sofern Ihr es nur versteht."
+  },
+  {
+    "en": "And as such, it's said the great statue harbours his secret too.",
+    "de": "Daher erzählt man sich, dass nun auch die große Statue sein Geheimnis hegt."
+  },
+  {
+    "en": "This is a path you must forsake.",
+    "de": "Diesem Pfad dürft Ihr nicht folgen."
+  },
+  {
+    "en": "As I suspected... Victory... was impossible.",
+    "de": "Wie ich vermutet hatte... Ein Sieg... war unmöglich."
+  },
+  {
+    "en": "The stench of crusted blood.",
+    "de": "Den Gestank von verkrustetem Blut."
+  },
+  {
+    "en": "To face your duty alone.",
+    "de": "Euch Eurer Pflicht allein zu stellen."
+  },
+  {
+    "en": "To the South, a grand festival to make the stars turn.",
+    "de": "Im Süden wartet ein großes Fest, das selbst die Sterne in Schwung bringt."
+  },
+  {
+    "en": "Of course, most fools can't even find their way into that fortified deathtrap.",
+    "de": "Die meisten Tölpel schaffen es natürlich nicht mal in diese tödliche Falle von Festung."
+  },
+  {
+    "en": "Finally given up the ghost, eh... Oh, don't worry, I've got big plans for what's left of you... Hah!",
+    "de": "Ist jetzt endlich Schluss mit Euch, hm... Oh, keine Sorge, ich habe große Pläne für Euch. Für das, was noch übrig ist... Hah!"
+  },
+  {
+    "en": "It's scary, you know. Having your arms cut off. Or legs.",
+    "de": "Mir graut vor der Vorstellung, die Arme, die Beine oder den Kopf abgetrennt zu bekommen, wisst Ihr?"
+  },
+  {
+    "en": "He must've recognised something.",
+    "de": "Er muss etwas gewittert haben."
+  },
+  {
+    "en": "Your test is well and truly over.",
+    "de": "Eure Prüfung ist nun endgültig vorbei."
+  },
+  {
+    "en": "Oh, belike it is... a transposing kiln in thy possession.",
+    "de": "Oh, wahrhaftig... ein Wandlungsofen in Eurem Besitz."
+  },
+  {
+    "en": "We need the Abyss, more now than ever.",
+    "de": "Wir brauchen den Abgrund, jetzt mehr als je zuvor."
+  },
+  {
+    "en": "At last, my grandfather will rest in peace, and I can die.",
+    "de": "So kann mein Großvater in Frieden ruhen, und ich kann sterben."
+  },
+  {
+    "en": "Did I defend them?",
+    "de": "Habe ich sie gerettet?"
+  },
+  {
+    "en": "Come to me again, shouldst thou change thy heart.",
+    "de": "Solltet Ihr Eure Meinung ändern, kommt gern zu mir zurück."
+  },
+  {
+    "en": "In the end, I could not bury the memories.",
+    "de": "Letztendlich konnte ich die Erinnerungen nicht einfach begraben."
+  },
+  {
+    "en": "I was heading to Redmane Castle on the southern edge of the scarlet rot-blighted Caelid Wilds.",
+    "de": "Ich wollte zum Schloss Rotmähne am Südrand der scharlachfaulen Wildnis von Caelid."
+  },
+  {
+    "en": "I'm sick of looking after her at any rate.",
+    "de": "Mir langt es sowieso, mich um sie zu kümmern."
+  },
+  {
+    "en": "On my trip here, I met a strange girl once or twice.",
+    "de": "Auf meiner Reise hierher traf ich ein- oder zweimal auf ein seltsames Mädchen."
+  },
+  {
+    "en": "Oh... I see, you're Tarnished.",
+    "de": "Oh... Wie ich sehe, seid Ihr ein Befleckter."
+  },
+  {
+    "en": "Whatever happens, I won't be missed... I thought that might be you.",
+    "de": "Was auch immer passiert, ich werde nicht fernbleiben... Ich dachte mir schon, dass Ihr es sein könntet."
+  },
+  {
+    "en": "The gods demand repentance!",
+    "de": "Die Götter verlangen nach Buße!"
+  },
+  {
+    "en": "I am in your debt.",
+    "de": "Ich stehe in Eurer Schuld."
+  },
+  {
+    "en": "Living only as you would have yourself.",
+    "de": "Und lebe nur so, wie Ihr gelebt hättet."
+  },
+  {
+    "en": "Go on, show me what you've got.",
+    "de": "Na los, zeigt mir, was Ihr habt."
+  },
+  {
+    "en": "The festival affords glory to warriors.",
+    "de": "Das Fest bringt wahren Kriegern Ehre."
+  },
+  {
+    "en": "I guessed you'd hopped the twig for certain.",
+    "de": "Ich nahm an, Ihr hättet Euch davongestohlen."
+  },
+  {
+    "en": "And no one, not even loving Elizabeth, will tell me.",
+    "de": "Und niemand, nicht einmal meine geliebte Elizabeth, verrät sie mir."
+  },
+  {
+    "en": "I need him to restore the primeval current of glintstone sorcery.",
+    "de": "Er muss für mich die Urströmungen der Schimmersteinzauberei wiederherstellen."
+  },
+  {
+    "en": "Ahh, Lady Leda spoke of you.",
+    "de": "Ah, Herrin Leda sprach von Euch."
+  },
+  {
+    "en": "My heart is twice-over filled with fear.",
+    "de": "Mein Herz droht, in Furcht zu ertrinken."
+  },
+  {
+    "en": "It is for thee, take it.",
+    "de": "Das ist für Euch, nehmt es."
+  },
+  {
+    "en": "And men assumed a fleeting form.",
+    "de": "Und die Menschen nahmen eine flüchtige Form an."
+  },
+  {
+    "en": "Though Miquella's spell is newly broken?",
+    "de": "Obwohl Miquellas Zauber brach?"
+  },
+  {
+    "en": "Vince and Nico were fooled by a lout named Patches, and turned into Hollows.",
+    "de": "Vince und Nico ließen sich von einer Laus namens Patches täuschen und wurden zu Hüllen."
+  },
+  {
+    "en": "Pillagers, come seeking vengeance upon the Erdtree.",
+    "de": "Plünderer, getrieben von Rache am Erdenbaum."
+  },
+  {
+    "en": "Would you mind taking a letter to my father, at the castle?",
+    "de": "Könntet Ihr bitte diesen Brief zu meinem Vater ins Schloss bringen?"
+  },
+  {
+    "en": "But my vessel did not approve.",
+    "de": "Aber mein Behältnis befand es nicht für gut."
+  },
+  {
+    "en": "How may I serve you?",
+    "de": "Wie kann ich Euch dienen?"
+  },
+  {
+    "en": "Kind Miquella... In godhood shall you rise... O Bayle, tyrant drake, do your wounds yet ache?",
+    "de": "Gütiger Miquella... Zur Gottheit sollt Ihr aufsteigen... O Bayle, Tyrannendrachling, schmerzen Eure Wunden noch?"
+  },
+  {
+    "en": "The coming of our dynasty!",
+    "de": "Den Beginn unserer Dynastie!"
+  },
+  {
+    "en": "Poor folk like myself had nary a place to sleep.",
+    "de": "Die armen Leute wie ich fanden kaum einen Ort zum Ruhen."
+  },
+  {
+    "en": "Do you find it peculiar?",
+    "de": "Findet Ihr das etwa eigenartig?"
+  },
+  {
+    "en": "... Call upon me when needed.",
+    "de": "Ruft mich, wenn Ihr mich braucht."
+  },
+  {
+    "en": "I had to carve out a piece of the world for myself... with two things. My sword, and my loyalty to my Lord.",
+    "de": "Ich musste mir meinen Teil der Welt selbst erkämpfen... mit zwei Dingen... meinem Schwert und meiner Treue zu meinem Fürsten."
+  },
+  {
+    "en": "Great and gallant Sculpted Keeper!",
+    "de": "Großer, galanter und wohlgeformter Hüter!"
+  },
+  {
+    "en": "I was finally able to pass on my mother's last words.",
+    "de": "Ich konnte endlich die letzten Worte meiner Mutter überbringen."
+  },
+  {
+    "en": "Perhaps you'd like a display?",
+    "de": "Hättet Ihr gern eine Kostprobe?"
+  },
+  {
+    "en": "There's no telling how much longer your world and mine will remain in contact.",
+    "de": "Kaum vorherzusagen, wie lange Eure Welt und die meine noch verbunden sein werden."
+  },
+  {
+    "en": "You will witness true horror.",
+    "de": "Ihr werdet lernen, was wahres Grauen ist."
+  },
+  {
+    "en": "So slay her, with the weapons he smithed.",
+    "de": "Also vernichtet sie mit den Waffen, die er geschmiedet hat."
+  },
+  {
+    "en": "But your progenitor found a fourth, unique soul.",
+    "de": "Euer Ahne jedoch fand eine vierte, einzigartige Seele."
+  },
+  {
+    "en": "Oh, ahh, yes, now, it wasn't me, but you still deserve an apology.",
+    "de": "Oh, ja, ich war es nicht, aber Ihr verdient dennoch eine Entschuldigung."
+  },
+  {
+    "en": "Was I... was it all... for this?",
+    "de": "War ich... ging es immer nur... darum?"
+  },
+  {
+    "en": "But don't blame me if he's just an apparition!",
+    "de": "Doch macht mir keine Vorwürfe, wenn er sich als bloßes Phantom entpuppt!"
+  },
+  {
+    "en": "I suppose I've grown weary these days.",
+    "de": "Ich nehme an, ich bin dieser Tage ermattet."
+  },
+  {
+    "en": "Now go and make yourself useful.",
+    "de": "Und jetzt macht Euch nützlich."
+  },
+  {
+    "en": "Thanks to you, Lady Ranni's fate once again stirs, and the path to Nokron has opened.",
+    "de": "Dank Euch hat das Schicksal von Herrin Ranni wieder seinen Lauf genommen, und der Weg nach Nokron ist frei."
+  },
+  {
+    "en": "Oh, a pleasure to see you, a pleasure indeed.",
+    "de": "Oh, es freut mich sehr, Euch zu sehen – wirklich."
+  },
+  {
+    "en": "But only a true monarch can make such a choice.",
+    "de": "Doch nur ein wahrer Monarch kann diese Wahl treffen."
+  },
+  {
+    "en": "This is a crystal sorcery, created by the pale dragon, thought only to exist in legend... I am ever grateful to you.",
+    "de": "Dies ist Kristallzauberei des bleichen Drachen, den man für eine Sage hielt... Ich werde Euch ewig dankbar sein."
+  },
+  {
+    "en": "Oh, you trot along home.",
+    "de": "Geht doch nach Hause."
+  },
+  {
+    "en": "May it grant you sleep, in your place beyond time.",
+    "de": "Möge er Euch ruhigen Schlaf gewähren in Eurer Zuflucht jenseits der Zeit."
+  },
+  {
+    "en": "You must have your own duty to fulfil.",
+    "de": "Ihr müsst gewiss Eure eigenen Pflichten erfüllen."
+  },
+  {
+    "en": "I cannot thank you enough.",
+    "de": "Ich kann Euch nicht genug danken."
+  },
+  {
+    "en": "The forbidden shadow, plucked from the Golden Order upon its creation... Unleashing the rune now would be unthinkable... The Fingers would never permit it.",
+    "de": "Der verbotene Schatten, der Goldenen Ordnung in der Stunde ihrer Geburt entrissen... Die Rune jetzt zu entfesseln, wäre einfach undenkbar... Die Finger würden es nie gestatten."
+  },
+  {
+    "en": "Oh, fancy meeting you here.",
+    "de": "Oh, schön, Euch hier zu begegnen."
+  },
+  {
+    "en": "Ah, so you're here as well, are you?",
+    "de": "Ah, Ihr seid also auch hier, wie?"
+  },
+  {
+    "en": "I prithee wrest the flame from its mantle.",
+    "de": "Ich bitte Euch, entreißt die Flamme ihrem Behältnis."
+  },
+  {
+    "en": "My fighting days are far behind me.",
+    "de": "Meine Tage als Kämpfer liegen hinter mir."
+  },
+  {
+    "en": "Everybody's gone and run off!",
+    "de": "Alle anderen haben sich aus dem Staub gemacht."
+  },
+  {
+    "en": "... Mohg, you rotten Omen.",
+    "de": "... Mohg, Ihr faulendes Mal."
+  },
+  {
+    "en": "... Sublime, I tell you.",
+    "de": "... Erhaben, ich sage es Euch."
+  },
+  {
+    "en": "And I will fight at your side.",
+    "de": "Dann werde ich an Eurer Seite kämpfen."
+  },
+  {
+    "en": "They say Drangleic brims with powerful souls.",
+    "de": "Man sagt, Drangleic wimmelte vor mächtigen Seelen."
+  },
+  {
+    "en": "Art thou in need of mine assistance?",
+    "de": "Benötigt Ihr meine Hilfe?"
+  },
+  {
+    "en": "Oh, my, what a brilliant ember you have there.",
+    "de": "Oh, welch brillante Glut Ihr da habt."
+  },
+  {
+    "en": "This place is a cesspool of doddering oldfolk and degenerates.",
+    "de": "Dieser Ort ist ein Sammelbecken von Wunderlingen und Unmenschen."
+  },
+  {
+    "en": "I'll be ready to wheel and deal, come next time.",
+    "de": "Für eine kleine Kungelei bin ich aber immer noch zu haben. Bis bald mal wieder."
+  },
+  {
+    "en": "The man-eater must have left for his true home.",
+    "de": "Der Menschenschlinger muss sein Zuhause verlassen haben."
+  }
+]
