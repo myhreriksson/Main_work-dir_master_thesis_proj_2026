@@ -1,3 +1,5 @@
+# "What seeketh thee?" -- Finetuning NMT models using pseudo-archaic data
+___
 ### Venv Setup
 INSTALL (mini/ana)CONDA \
 conda create -n venv \
