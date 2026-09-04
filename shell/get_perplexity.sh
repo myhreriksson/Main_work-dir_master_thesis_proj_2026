@@ -24,6 +24,7 @@ if [[ "$config" == "tuned" ]]; then
             -m "$model" \
             -o "$output_path" \
             -l "$lang"
+    fi
 elif [[ "$config" == "base" ]]; then
     output_path="results/evaluations/perplexity/${config}/"
     mkdir -p "$output_path"
