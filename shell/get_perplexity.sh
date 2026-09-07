@@ -16,15 +16,17 @@ model_path="models/${config}/"
 
 if [[ "$config" == "tuned" ]]; then
     if [[ "$domain" == "bible" ]]; then
-        domain='archaic'
+        style='archaic'
+    elif [[ "$domain" == "prose" ]]; then
+        style="$domain"
+    fi
         output_path="results/evaluations/perplexity/${config}/${domain}/"
         mkdir -p "$output_path"
-        model="${model_path}max/qwen/${domain}/trained_on_${lang}/"
+        model="${model_path}max/qwen/${style}/trained_on_${lang}/"
         python python/compute_ppl.py \
             -m "$model" \
             -o "$output_path" \
             -l "$lang"
-    fi
 elif [[ "$config" == "base" ]]; then
     output_path="results/evaluations/perplexity/${config}/"
     mkdir -p "$output_path"
