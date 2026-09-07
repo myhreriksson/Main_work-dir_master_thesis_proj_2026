@@ -3,3 +3,4 @@ __pycache__/
 miniconda3/
 models/
 results/
+slurm-*

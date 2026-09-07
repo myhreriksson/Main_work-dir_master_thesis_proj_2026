@@ -20,13 +20,13 @@ if [[ "$config" == "tuned" ]]; then
     elif [[ "$domain" == "prose" ]]; then
         style="$domain"
     fi
-        output_path="results/evaluations/perplexity/${config}/${domain}/"
-        mkdir -p "$output_path"
-        model="${model_path}max/qwen/${style}/trained_on_${lang}/"
-        python python/compute_ppl.py \
-            -m "$model" \
-            -o "$output_path" \
-            -l "$lang"
+    output_path="results/evaluations/perplexity/${config}/${domain}/"
+    mkdir -p "$output_path"
+    model="${model_path}max/qwen/${style}/trained_on_${lang}/"
+    python python/compute_ppl.py \
+        -m "$model" \
+        -o "$output_path" \
+        -l "$lang"
 elif [[ "$config" == "base" ]]; then
     output_path="results/evaluations/perplexity/${config}/"
     mkdir -p "$output_path"
