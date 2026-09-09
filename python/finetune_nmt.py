@@ -2,17 +2,22 @@ from transformers import (AutoTokenizer,
                           AutoModelForSeq2SeqLM, 
                           DataCollatorForSeq2Seq, 
                           Seq2SeqTrainingArguments, 
-                          Seq2SeqTrainer)
-from peft import (LoraConfig, # apply Low-Rank Adaptation (LoRA)
+                          Seq2SeqTrainer,
+                          TrainerCallback)
+from peft import (LoraConfig, 
                   get_peft_model, 
                   TaskType)
+from comet import (download_model,
+                   load_from_checkpoint)
 from datasets import load_dataset
+from optuna.storages import RDBStorage
 import torch
 import evaluate
 import numpy as np
 import argparse
 import os
 import json
+import optuna
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--style')
@@ -26,20 +31,28 @@ arg = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
-# part 1: load data
-file_path = os.path.join(arg.path, arg.style)
-data_files = {
-    'train':f'{file_path}_train.json',
-    'test':f'{file_path}_test.json',
-    'dev':f'{file_path}_dev.json'
-}
-dataset = load_dataset('json', data_files=data_files)
+# part 0: load evaluation metrics
+bleu = evaluate.load('sacrebleu')
+ter = evaluate.load('ter')
+comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da'))
 
-# part 2: tokenize data
-tokenizer = AutoTokenizer.from_pretrained(arg.model)
-tokenizer.src_lang = arg.src_lang
-tokenizer.tgt_lang = arg.tgt_lang
+# part 1: define functions
+# 1.1: pruning callback class
+class OptunaPruningCallback(TrainerCallback):
+    def __init__(self, trial):
+        self.trial = trial
 
+    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
+        if metrics is not None and 'eval_bleu' in metrics:
+            self.trial.report(
+                metrics['eval_bleu'],
+                step=int(state.epoch)
+            )
+            if self.trial.should_prune():
+                raise optuna.TrialPruned()
+            return control
+
+# 1.2: tokenization function
 def preprocess(examples):
     inputs = examples['en']
     targets = examples['de']
@@ -51,44 +64,21 @@ def preprocess(examples):
     )
     return model_inputs
 
-tokenized = dataset.map(preprocess, batched=True)
-
-# part 3: finetune model
-model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
-data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
-lora_config = LoraConfig(
-    task_type=TaskType.SEQ_2_SEQ_LM,
-    r=8, # rank: controls adapter capacity
-    lora_alpha=16, # scaling factor
-    lora_dropout=0.1, # regularization
-    target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', # query, key, value, output
-                    'up_proj', 'gate_proj', 'down_proj'], # up/down vectors, gate
-)
-model = get_peft_model(model, lora_config).to(device)
-model.print_trainable_parameters()
-
-# 3.1: load evaluation metric models
-bleu = evaluate.load('sacrebleu')
-ter = evaluate.load('ter')
-
-# original hf code use 'pred' & 'label' variables, but i renamed them to better understand what's going on
+# 1.3.1: evaluation function
 def postprocess(translations, references):
     translations = [translation.strip() for translation in translations]
     references = [[reference.strip()] for reference in references]
     return translations, references
 
-# here i used the original hf variable names; cuz now i get it :^)
+# 1.3.2: evaluation function
 def compute_metrics(eval_preds):
     preds, labels = eval_preds
     if isinstance(preds, tuple):
         preds = preds[0]
-
-    # fixes overflow error: out of range integral conversion attempted
     preds = np.where(preds != -100, preds, tokenizer.pad_token_id)
     labels = np.where(labels != -100, labels, tokenizer.pad_token_id) 
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
-
     decoded_preds, decoded_labels = postprocess(decoded_preds, decoded_labels)
 
     bleu_score = bleu.compute(
@@ -99,36 +89,169 @@ def compute_metrics(eval_preds):
         predictions=decoded_preds,
         references=decoded_labels
     )
+    comet_data = [
+        {'src': src, 'mt':mt, 'ref':ref}
+        for src, mt, ref in zip(dataset['dev']['en'], decoded_preds, decoded_labels)
+    ]
+    comet_score = comet_model.predict(
+        data=comet_data,
+        batch_size=8,
+        gpus=1
+    ).system_score
     result = {
         'ter': ter_score['score'],
         'bleu': bleu_score['score'],
+        'comet': comet_score
     }
-
     prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
     result['gen_len'] = np.mean(prediction_lens)
     result = {k: round(v, 4) for k, v in result.items()}
     return result
 
-# 3.2: define training arguments
+# 1.3.3: optuna evaluation
+def optuna_metric(eval_preds):
+    preds, labels = eval_preds
+    if isinstance(preds, tuple):
+        preds = preds[0]
+    preds = np.where(preds != -100, preds, tokenizer.pad_token_id)
+    labels = np.where(labels != -100, labels, tokenizer.pad_token_id) 
+    decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
+    decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
+    decoded_preds, decoded_labels = postprocess(decoded_preds, decoded_labels)
+
+    bleu_score = bleu.compute(
+        predictions=decoded_preds, 
+        references=decoded_labels
+    )
+    result = {'bleu': bleu_score['score']}
+    prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
+    result['gen_len'] = np.mean(prediction_lens)
+    result = {k: round(v, 4) for k, v in result.items()}
+    return result
+
+# 1.4: hyper-parameter optimization
+def objective(trial):
+    r = trial.suggest_categorical('r', [4, 8, 16, 32])
+    alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
+    dropout = trial.suggest_float('dropout', 0.0, 0.3)
+    learning_rate = trial.suggest_float('learning_rate', 1e-6, 1e-4, log=True)
+    weight_decay = trial.suggest_float('weight_decay', 1e-5, 0.1, log=True)
+    warmup_ratio = trial.suggest_float('warmup_ratio', 0.0, 0.2)
+    scheduler = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
+    num_train_epochs = trial.suggest_int('num_train_epochs', 2, 10)
+    batch_size = trial.suggest_categorical('batch_size', [2, 4, 8])
+    model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
+    data_collator = DataCollatorForSeq2Seq(
+        tokenizer=tokenizer,
+        model=model
+    )
+    lora_config = LoraConfig(
+        task_type=TaskType.SEQ_2_SEQ_LM,
+        r=r,
+        lora_alpha=alpha,
+        lora_dropout=dropout,
+        target_modules=['q_proj','k_proj','v_proj','o_proj',
+                        'up_proj','down_proj','gate_proj']
+    )
+    model = get_peft_model(model, lora_config).to(device)
+    training_args = Seq2SeqTrainingArguments(
+        output_dir=os.path.join(arg.output, f'trial_{trial.number}'),
+        num_train_epochs=num_train_epochs,
+        per_device_train_batch_size=batch_size,
+        per_device_eval_batch_size=batch_size,
+        learning_rate=learning_rate,
+        weight_decay=weight_decay,
+        warmup_ratio=warmup_ratio,
+        lr_scheduler_type=scheduler,
+        eval_strategy='epoch',
+        save_strategy='epoch',
+        load_best_model_at_end=True,
+        metric_for_best_model='bleu',
+        greater_is_better=True,
+        predict_with_generate=True,
+        generation_max_length=512,
+        seed=arg.seed
+    )
+    trainer = Seq2SeqTrainer(
+        model=model,
+        args=training_args,
+        train_dataset=tokenized['train'],
+        eval_dataset=tokenized['dev'],
+        data_collator=data_collator,
+        tokenizer=tokenizer,
+        compute_metrics=optuna_metric,
+        callbacks=[OptunaPruningCallback(trial)]
+    )
+    trainer.train()
+    return trainer.state.best_metric
+
+# part 2: load data
+file_path = os.path.join(arg.path, arg.style)
+data_files = {
+    'train':f'{file_path}_train.json',
+    'test':f'{file_path}_test.json',
+    'dev':f'{file_path}_dev.json'
+}
+dataset = load_dataset('json', data_files=data_files)
+
+# part 3: tokenize data
+tokenizer = AutoTokenizer.from_pretrained(arg.model)
+tokenizer.src_lang = arg.src_lang
+tokenizer.tgt_lang = arg.tgt_lang
+tokenized = dataset.map(preprocess, batched=True)
+
+# part 4: parameter optimization
+storage = RDBStorage("sqlite:///optimized_hyper_params.db") # make sql database
+study = optuna.create_study(
+    study_name="optimizing_tuning_params",
+    direction="maximize",
+    storage=storage,
+    load_if_exists=True,
+    pruner=optuna.pruners.MedianPruner(
+        n_startup_trials=5,
+        n_warmup_steps=1
+    )
+)
+study.optimize(objective, n_trials=50)
+best_hparams = study.best_params
+
+# part 5: finetune model
+model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
+data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
+lora_config = LoraConfig(
+    task_type=TaskType.SEQ_2_SEQ_LM,
+    r=best_hparams['r'],
+    lora_alpha=best_hparams['alpha'],
+    lora_dropout=best_hparams['dropout'],
+    target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', # query, key, value, output
+                    'up_proj', 'down_proj', 'gate_proj'], # up/down vectors, gate
+)
+model = get_peft_model(model, lora_config).to(device)
+model.print_trainable_parameters()
+
+# 5.1: define training arguments
 training_args = Seq2SeqTrainingArguments(
     output_dir=arg.output,
-    num_train_epochs=5, # increased from 3 to 5
-    per_device_train_batch_size=4, # decreased from 8 to 4
-    per_device_eval_batch_size=4, # decreased from 8 to 4
-    learning_rate=5e-5, # started at 5e-5; decreased to 1e-5; increased to 1e-4; decreased to 5e-5 again
-    weight_decay=0.01,
+    num_train_epochs=best_hparams['num_train_epochs'],
+    per_device_train_batch_size=best_hparams['batch_size'],
+    per_device_eval_batch_size=best_hparams['batch_size'],
+    learning_rate=best_hparams['learning_rate'], 
+    weight_decay=best_hparams['weight_decay'],
+    warmup_ratio=best_hparams['warmup_ratio'],
+    lr_scheduler_type=best_hparams['scheduler'],
     eval_strategy='epoch',
-    save_strategy='epoch', # save the best epoch, based on 'metric_for_best_model'
+    save_strategy='epoch',
     load_best_model_at_end=True,
     metric_for_best_model='bleu',
     greater_is_better=True,
     save_total_limit=1,
     predict_with_generate=True,
     generation_max_length=512,
+    run_name='optimizing_tuning_params',
     seed=arg.seed,
 )
 
-# 3.3: load trainer
+# 5.2: load trainer
 trainer = Seq2SeqTrainer(
     model=model,
     args=training_args,
@@ -139,11 +262,11 @@ trainer = Seq2SeqTrainer(
     compute_metrics=compute_metrics
 )
 
-# 3.4: run inference and save best model
+# 5.3: run inference and save best model
 trainer.train()
 model.save_pretrained(arg.output)
 tokenizer.save_pretrained(arg.output)
 
-# for later plotting of training/validation loss decrease
+# part 6: save best epoch
 with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
     json.dump(trainer.state.log_history, f)
