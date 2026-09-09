@@ -1,4 +1,4 @@
-# Translating Dark Souls \& Elden Ring
+# Seq2Seq translation of Dark Souls \& Elden Ring
 ___
 ### Venv Setup
 INSTALL (mini/ana)CONDA \
