@@ -1,4 +1,4 @@
-# "What seeketh thee?" -- Finetuning NMT models using pseudo-archaic data
+# Translating Dark Souls \& Elden Ring
 ___
 ### Venv Setup
 INSTALL (mini/ana)CONDA \
