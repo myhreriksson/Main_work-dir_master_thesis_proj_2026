@@ -1,6 +1,5 @@
-from transformers import (AutoModelForSeq2SeqLM,
-                          AutoModelForCausalLM)
 import sys
+from transformers import (AutoModelForSeq2SeqLM, AutoModelForCausalLM)
 
 if sys.argv[1] == 'qwen':
     AutoModel = AutoModelForCausalLM

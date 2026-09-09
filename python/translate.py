@@ -1,8 +1,7 @@
-from transformers import (AutoTokenizer, 
-                          AutoModelForSeq2SeqLM)
-import torch # remember to move to device!
-import os
 import argparse
+import os
+import torch # remember to move to device!
+from transformers import (AutoTokenizer, AutoModelForSeq2SeqLM)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model', help='Path to the NMT model.')

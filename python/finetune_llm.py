@@ -1,14 +1,12 @@
-from transformers import (AutoTokenizer, 
-                          AutoModelForCausalLM)
-from trl import (SFTConfig, 
-                 SFTTrainer)
-from peft import (LoraConfig, # apply Low-Rank Adaptation (LoRA)
-                  get_peft_model, 
-                  TaskType)
-from datasets import load_dataset
 import argparse
+from datasets import load_dataset
 import json
+import optuna
+from optuna.storages import RDBStorage
 import os
+from peft import (LoraConfig, get_peft_model, TaskType)
+from transformers import (AutoTokenizer, AutoModelForCausalLM)
+from trl import (SFTConfig, SFTTrainer)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model')
@@ -19,8 +17,23 @@ parser.add_argument('-l', '--lang')
 parser.add_argument('--seed', type=int, default=100)
 arg = parser.parse_args()
 
+#-------------------------------------------------------------------------------#
+# part 1: define functions
+def objective(trial):
+    r = trial.suggest_categorical('r', [4, 8, 16, 32])
+    alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
+    dropout = trial.suggest_float('dropout', 0.0, 0.3)
+    learning_rate = trial.suggest_float('learning_rate', 1e-6, 1e-4, log=True)
+    weight_decay = trial.suggest_float('weight_decay', 1e-5, 0.1, log=True)
+    warmup_ratio = trial.suggest_float('warmup_ratio', 0.0, 0.2)
+    scheduler = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
+    num_train_epochs = trial.suggest_int('num_train_epochs', 2, 10)
+    batch_size = trial.suggest_categorical('batch_size', [2, 4, 8])
+    return
+
+#-------------------------------------------------------------------------------#
+# part 2: load data
 file_path = os.path.join(arg.input, f'{arg.lang}_{arg.domain}')
-# part 1: load data
 data_files = {
     'train':f'{file_path}_train.json',
     'test':f'{file_path}_test.json',
@@ -28,19 +41,37 @@ data_files = {
 }
 dataset = load_dataset('json', data_files=data_files)
 
-# part 2: tokenize data
+#-------------------------------------------------------------------------------#
+# part 3: tokenize data
 tokenizer = AutoTokenizer.from_pretrained(arg.model)
 tokenizer.pad_token = tokenizer.eos_token
 
+#-------------------------------------------------------------------------------#
+# part 4: parameter optimization
+storage = RDBStorage("sqlite:///optimized_hyper_params.db") # make sql database
+study = optuna.create_study(
+    study_name="optimizing_tuning_params",
+    direction="maximize",
+    storage=storage,
+    load_if_exists=True,
+    pruner=optuna.pruners.MedianPruner(
+        n_startup_trials=5,
+        n_warmup_steps=1
+    )
+)
+study.optimize(objective, n_trials=20) # might set to 50 if runs smoothly
+best_hparams = study.best_params
+
+#-------------------------------------------------------------------------------#
 # part 3: finetune model
 model = AutoModelForCausalLM.from_pretrained(arg.model)
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
-    r=8, # rank: controls adapter capacity
-    lora_alpha=16, # scaling factor
-    lora_dropout=0.1, # regularization
-    target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', # query, key, value, output
-                    'up_proj', 'gate_proj', 'down_proj'], # up/down vectors, gate
+    r=8, 
+    lora_alpha=16, 
+    lora_dropout=0.1,
+    target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
+                    'up_proj', 'gate_proj', 'down_proj'], 
 )
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
@@ -77,6 +108,7 @@ trainer.train()
 model.save_pretrained(arg.output)
 tokenizer.save_pretrained(arg.output)
 
-# for later plotting of training/validation loss decrease
+#-------------------------------------------------------------------------------#
+# 4: save best epoch
 with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
     json.dump(trainer.state.log_history, f)

@@ -1,7 +1,7 @@
-import re
-import os
 import argparse
+import os
 from pypdf import PdfReader
+import re
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--input')

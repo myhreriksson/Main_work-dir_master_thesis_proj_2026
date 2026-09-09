@@ -1,9 +1,8 @@
-import re
-import os
 import argparse
+from gutenberg_cleaner import (simple_cleaner, super_cleaner)
 from nltk.tokenize.punkt import PunktTokenizer
-from gutenberg_cleaner import (simple_cleaner, 
-                               super_cleaner)
+import os
+import re
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--input')

@@ -1,6 +1,6 @@
+import argparse
 import os
 import re
-import argparse
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-i', '--inp_path')

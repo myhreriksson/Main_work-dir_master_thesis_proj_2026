@@ -1,9 +1,6 @@
-import sys
 import json
 import os
-
-# this script was very haphazardly thrown together to get token and sentence counts
-# it's VERY ugly...
+import sys
 
 path = f'data/_test-n-finetune_/_finetuning/{sys.argv[1]}/'
 min_len = int(sys.argv[3])

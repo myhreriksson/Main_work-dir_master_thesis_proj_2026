@@ -1,23 +1,19 @@
+import argparse
+from comet import (download_model, load_from_checkpoint)
+from datasets import load_dataset
+import evaluate
+import json
+import numpy as np
+import optuna
+from optuna.storages import RDBStorage
+import os
+from peft import (LoraConfig, get_peft_model, TaskType)
+import torch
 from transformers import (AutoTokenizer, 
                           AutoModelForSeq2SeqLM, 
                           DataCollatorForSeq2Seq, 
                           Seq2SeqTrainingArguments, 
-                          Seq2SeqTrainer,
-                          TrainerCallback)
-from peft import (LoraConfig, 
-                  get_peft_model, 
-                  TaskType)
-from comet import (download_model,
-                   load_from_checkpoint)
-from datasets import load_dataset
-from optuna.storages import RDBStorage
-import torch
-import evaluate
-import numpy as np
-import argparse
-import os
-import json
-import optuna
+                          Seq2SeqTrainer)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-s', '--style')
@@ -31,28 +27,14 @@ arg = parser.parse_args()
 
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 
+#-------------------------------------------------------------------------------#
 # part 0: load evaluation metrics
 bleu = evaluate.load('sacrebleu')
 ter = evaluate.load('ter')
 comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da'))
 
+#-------------------------------------------------------------------------------#
 # part 1: define functions
-# 1.1: pruning callback class
-class OptunaPruningCallback(TrainerCallback):
-    def __init__(self, trial):
-        self.trial = trial
-
-    def on_evaluate(self, args, state, control, metrics=None, **kwargs):
-        if metrics is not None and 'eval_bleu' in metrics:
-            self.trial.report(
-                metrics['eval_bleu'],
-                step=int(state.epoch)
-            )
-            if self.trial.should_prune():
-                raise optuna.TrialPruned()
-            return control
-
-# 1.2: tokenization function
 def preprocess(examples):
     inputs = examples['en']
     targets = examples['de']
@@ -64,13 +46,11 @@ def preprocess(examples):
     )
     return model_inputs
 
-# 1.3.1: evaluation function
 def postprocess(translations, references):
     translations = [translation.strip() for translation in translations]
     references = [[reference.strip()] for reference in references]
     return translations, references
 
-# 1.3.2: evaluation function
 def compute_metrics(eval_preds):
     preds, labels = eval_preds
     if isinstance(preds, tuple):
@@ -80,7 +60,6 @@ def compute_metrics(eval_preds):
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
     decoded_preds, decoded_labels = postprocess(decoded_preds, decoded_labels)
-
     bleu_score = bleu.compute(
         predictions=decoded_preds, 
         references=decoded_labels
@@ -108,7 +87,6 @@ def compute_metrics(eval_preds):
     result = {k: round(v, 4) for k, v in result.items()}
     return result
 
-# 1.3.3: optuna evaluation
 def optuna_metric(eval_preds):
     preds, labels = eval_preds
     if isinstance(preds, tuple):
@@ -118,7 +96,6 @@ def optuna_metric(eval_preds):
     decoded_preds = tokenizer.batch_decode(preds, skip_special_tokens=True)
     decoded_labels = tokenizer.batch_decode(labels, skip_special_tokens=True)
     decoded_preds, decoded_labels = postprocess(decoded_preds, decoded_labels)
-
     bleu_score = bleu.compute(
         predictions=decoded_preds, 
         references=decoded_labels
@@ -129,7 +106,6 @@ def optuna_metric(eval_preds):
     result = {k: round(v, 4) for k, v in result.items()}
     return result
 
-# 1.4: hyper-parameter optimization
 def objective(trial):
     r = trial.suggest_categorical('r', [4, 8, 16, 32])
     alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
@@ -140,51 +116,9 @@ def objective(trial):
     scheduler = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
     num_train_epochs = trial.suggest_int('num_train_epochs', 2, 10)
     batch_size = trial.suggest_categorical('batch_size', [2, 4, 8])
-    model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
-    data_collator = DataCollatorForSeq2Seq(
-        tokenizer=tokenizer,
-        model=model
-    )
-    lora_config = LoraConfig(
-        task_type=TaskType.SEQ_2_SEQ_LM,
-        r=r,
-        lora_alpha=alpha,
-        lora_dropout=dropout,
-        target_modules=['q_proj','k_proj','v_proj','o_proj',
-                        'up_proj','down_proj','gate_proj']
-    )
-    model = get_peft_model(model, lora_config).to(device)
-    training_args = Seq2SeqTrainingArguments(
-        output_dir=os.path.join(arg.output, f'trial_{trial.number}'),
-        num_train_epochs=num_train_epochs,
-        per_device_train_batch_size=batch_size,
-        per_device_eval_batch_size=batch_size,
-        learning_rate=learning_rate,
-        weight_decay=weight_decay,
-        warmup_ratio=warmup_ratio,
-        lr_scheduler_type=scheduler,
-        eval_strategy='epoch',
-        save_strategy='epoch',
-        load_best_model_at_end=True,
-        metric_for_best_model='bleu',
-        greater_is_better=True,
-        predict_with_generate=True,
-        generation_max_length=512,
-        seed=arg.seed
-    )
-    trainer = Seq2SeqTrainer(
-        model=model,
-        args=training_args,
-        train_dataset=tokenized['train'],
-        eval_dataset=tokenized['dev'],
-        data_collator=data_collator,
-        tokenizer=tokenizer,
-        compute_metrics=optuna_metric,
-        callbacks=[OptunaPruningCallback(trial)]
-    )
-    trainer.train()
-    return trainer.state.best_metric
+    return
 
+#-------------------------------------------------------------------------------#
 # part 2: load data
 file_path = os.path.join(arg.path, arg.style)
 data_files = {
@@ -194,16 +128,18 @@ data_files = {
 }
 dataset = load_dataset('json', data_files=data_files)
 
+#-------------------------------------------------------------------------------#
 # part 3: tokenize data
 tokenizer = AutoTokenizer.from_pretrained(arg.model)
 tokenizer.src_lang = arg.src_lang
 tokenizer.tgt_lang = arg.tgt_lang
 tokenized = dataset.map(preprocess, batched=True)
 
+#-------------------------------------------------------------------------------#
 # part 4: parameter optimization
 storage = RDBStorage("sqlite:///optimized_hyper_params.db") # make sql database
 study = optuna.create_study(
-    study_name="optimizing_tuning_params",
+    study_name="optimizing_nmt_params",
     direction="maximize",
     storage=storage,
     load_if_exists=True,
@@ -212,9 +148,10 @@ study = optuna.create_study(
         n_warmup_steps=1
     )
 )
-study.optimize(objective, n_trials=50)
+study.optimize(objective, n_trials=20) # might set to 50 if runs smoothly
 best_hparams = study.best_params
 
+#-------------------------------------------------------------------------------#
 # part 5: finetune model
 model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
 data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
@@ -231,6 +168,7 @@ model.print_trainable_parameters()
 
 # 5.1: define training arguments
 training_args = Seq2SeqTrainingArguments(
+    generation_max_length=512,
     output_dir=arg.output,
     num_train_epochs=best_hparams['num_train_epochs'],
     per_device_train_batch_size=best_hparams['batch_size'],
@@ -246,8 +184,7 @@ training_args = Seq2SeqTrainingArguments(
     greater_is_better=True,
     save_total_limit=1,
     predict_with_generate=True,
-    generation_max_length=512,
-    run_name='optimizing_tuning_params',
+    run_name='optimizing_nmt_params',
     seed=arg.seed,
 )
 
@@ -267,6 +204,7 @@ trainer.train()
 model.save_pretrained(arg.output)
 tokenizer.save_pretrained(arg.output)
 
+#-------------------------------------------------------------------------------#
 # part 6: save best epoch
 with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
     json.dump(trainer.state.log_history, f)

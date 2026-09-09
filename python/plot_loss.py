@@ -1,7 +1,7 @@
 import argparse
 import json
-import os
 import matplotlib.pyplot as plt
+import os
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path')

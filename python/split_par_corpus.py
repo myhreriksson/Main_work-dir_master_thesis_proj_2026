@@ -1,7 +1,7 @@
-import json
-import pandas as pd
-import os
 import argparse
+import json
+import os
+import pandas as pd
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-p', '--path')

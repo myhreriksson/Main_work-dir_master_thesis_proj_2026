@@ -1,8 +1,7 @@
-import sys
 import json
+import sys
 
 # NOTE: these functions are purely for aesthetic reasons; nicer to read results!
-
 def get_significance():
     alpha = 0.05
     txt_data = txt_file.read()

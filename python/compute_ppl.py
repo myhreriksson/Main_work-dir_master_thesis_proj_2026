@@ -1,8 +1,8 @@
-from transformers import AutoModelForCausalLM, AutoTokenizer
-from tqdm import tqdm
 import argparse
-import torch
 import os
+import torch
+from tqdm import tqdm
+from transformers import (AutoModelForCausalLM, AutoTokenizer)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model')
