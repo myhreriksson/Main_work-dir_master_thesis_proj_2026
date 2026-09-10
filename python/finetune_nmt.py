@@ -186,10 +186,10 @@ tokenized = dataset.map(preprocess, batched=True)
 
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
-storage = RDBStorage("sqlite:///optimized_nmt_hparams.db")
+storage = RDBStorage('sqlite:///optimized_nmt_hparams.db')
 study = optuna.create_study(
-    study_name="optimizing_hyperparams",
-    direction="maximize",
+    study_name='optimizing_hyperparams',
+    direction='maximize',
     storage=storage,
     load_if_exists=True,
     pruner=optuna.pruners.MedianPruner(

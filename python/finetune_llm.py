@@ -5,7 +5,9 @@ import optuna
 from optuna.storages import RDBStorage
 import os
 from peft import (LoraConfig, get_peft_model, TaskType)
-from transformers import (AutoTokenizer, AutoModelForCausalLM)
+from transformers import (AutoTokenizer, 
+                          AutoModelForCausalLM,
+                          TrainerCallback)
 from trl import (SFTConfig, SFTTrainer)
 
 parser = argparse.ArgumentParser()
@@ -19,6 +21,16 @@ arg = parser.parse_args()
 
 #-------------------------------------------------------------------------------#
 # part 1: define functions
+class PruningCallback(TrainerCallback):
+    def __init__(self, trial):
+        self.trial = trial
+
+    def on_evaluate(self, args, state, control, metrics, **kwargs):
+        if 'eval_loss' in metrics:
+            self.trial.report(metrics['eval_loss'], state.epoch)
+            if self.trial.should_prune():
+                raise optuna.TrialPruned()
+
 def objective(trial):
     r = trial.suggest_categorical('r', [4, 8, 16, 32])
     alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
@@ -29,7 +41,45 @@ def objective(trial):
     scheduler = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
     num_train_epochs = trial.suggest_int('num_train_epochs', 2, 10)
     batch_size = trial.suggest_categorical('batch_size', [2, 4, 8])
-    return # FINISH THIS FUNCTION HERE AND FOR LLM!!!!
+
+    model = AutoModelForCausalLM.from_pretrained(arg.model)
+    lora_config = LoraConfig(
+        task_type=TaskType.CAUSAL_LM,
+        r=r,
+        lora_alpha=alpha,
+        lora_dropout=dropout,
+        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj',
+                        'up_proj', 'down_proj', 'gate_proj']
+    )
+    model = get_peft_model(model, lora_config).to('cuda:0')
+
+    training_args = SFTConfig(
+        output_dir=arg.output,
+        max_length=512,
+        num_train_epochs=num_train_epochs,
+        per_device_train_batch_size=batch_size,
+        per_device_eval_batch_size=batch_size,
+        learning_rate=learning_rate,
+        weight_decay=weight_decay,
+        warmup_ratio=warmup_ratio,
+        lr_scheduler_type=scheduler,
+        eval_strategy='epoch',
+        save_strategy='no',
+        metric_for_best_model='eval_loss',
+        greater_is_better=False,
+        seed=arg.seed
+    )
+    trainer = SFTTrainer(
+        model=model,
+        args=training_args,
+        train_dataset=dataset['train'],
+        eval_dataset=dataset['dev'],
+        processing_class=tokenizer,
+        callbacks=[PruningCallback(trial)]
+    )
+    trainer.train()
+    metrics = trainer.evaluate()
+    return metrics['eval_loss']
 
 #-------------------------------------------------------------------------------#
 # part 2: load data
@@ -48,10 +98,10 @@ tokenizer.pad_token = tokenizer.eos_token
 
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
-storage = RDBStorage("sqlite:///optimized_hyper_params.db") # make sql database
+storage = RDBStorage('sqlite:///optimized_llm_hparams.db')
 study = optuna.create_study(
-    study_name="optimizing_tuning_params",
-    direction="maximize",
+    study_name='optimizing_hyperparams',
+    direction='minimize',
     storage=storage,
     load_if_exists=True,
     pruner=optuna.pruners.MedianPruner(
@@ -63,23 +113,23 @@ study.optimize(objective, n_trials=20) # might set to 50 if runs smoothly
 best_hparams = study.best_params
 
 #-------------------------------------------------------------------------------#
-# part 3: finetune model
+# part 5: finetune model
 model = AutoModelForCausalLM.from_pretrained(arg.model)
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
-    r=8, 
-    lora_alpha=16, 
-    lora_dropout=0.1,
+    r=best_hparams['r'], 
+    lora_alpha=best_hparams['alpha'], 
+    lora_dropout=best_hparams['dropout'],
     target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
                     'up_proj', 'gate_proj', 'down_proj'], 
 )
 model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
-# 3.1: define training arguments
+# 5.1: define training arguments
 training_args = SFTConfig(
-    max_length=512,
     output_dir=arg.output,
+    max_length=512,
     num_train_epochs=best_hparams['num_train_epochs'],
     per_device_train_batch_size=best_hparams['batch_size'], 
     per_device_eval_batch_size=best_hparams['batch_size'], 
@@ -93,11 +143,11 @@ training_args = SFTConfig(
     metric_for_best_model='eval_loss',
     greater_is_better=False,
     save_total_limit=1,
-    run_name='optimizing_llm_params',
+    run_name='optimizing_hyperparams',
     seed=arg.seed
 )
 
-# 3.2: load trainer
+# 5.2: load trainer
 trainer = SFTTrainer(
     model=model,
     args=training_args,
@@ -106,12 +156,12 @@ trainer = SFTTrainer(
     processing_class=tokenizer
 )
 
-# 3.3: run inference and save best model
+# 5.3: run inference and save best model
 trainer.train()
 model.save_pretrained(arg.output)
 tokenizer.save_pretrained(arg.output)
 
 #-------------------------------------------------------------------------------#
-# 4: save best epoch
+# part 6: save best epoch
 with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
     json.dump(trainer.state.log_history, f)
