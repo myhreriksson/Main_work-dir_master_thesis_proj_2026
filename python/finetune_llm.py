@@ -29,7 +29,7 @@ def objective(trial):
     scheduler = trial.suggest_categorical('scheduler', ['linear', 'cosine'])
     num_train_epochs = trial.suggest_int('num_train_epochs', 2, 10)
     batch_size = trial.suggest_categorical('batch_size', [2, 4, 8])
-    return
+    return # FINISH THIS FUNCTION HERE AND FOR LLM!!!!
 
 #-------------------------------------------------------------------------------#
 # part 2: load data
@@ -80,17 +80,20 @@ model.print_trainable_parameters()
 training_args = SFTConfig(
     max_length=512,
     output_dir=arg.output,
-    num_train_epochs=5,
-    per_device_train_batch_size=4, 
-    per_device_eval_batch_size=4, 
-    learning_rate=5e-5, 
-    weight_decay=0.01,
+    num_train_epochs=best_hparams['num_train_epochs'],
+    per_device_train_batch_size=best_hparams['batch_size'], 
+    per_device_eval_batch_size=best_hparams['batch_size'], 
+    learning_rate=best_hparams['learning_rate'], 
+    weight_decay=best_hparams['weight_decay'],
+    warmup_ratio=best_hparams['warmup_ratio'],
+    lr_scheduler_type=best_hparams['scheduler'],
     eval_strategy='epoch',
     save_strategy='epoch',
     load_best_model_at_end=True,
     metric_for_best_model='eval_loss',
     greater_is_better=False,
     save_total_limit=1,
+    run_name='optimizing_llm_params',
     seed=arg.seed
 )
 
