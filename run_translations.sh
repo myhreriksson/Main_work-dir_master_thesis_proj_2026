@@ -24,12 +24,12 @@ tuned_1_b=$(bash shell/test.sh archaic nllb tuned balanced "$post_baseline_b") #
 tuned_2_b=$(bash shell/test.sh archaic bart tuned balanced "$post_baseline_b") # finetuned on bible-data, tested on game-data (mBart-50)
 
 post_finetuned="$tuned_1:$tuned_2:$tuned_3:$tuned_4"
-post_finetuned_b="$tuned_1:$tuned_2"
+post_finetuned_b="$tuned_1_b:$tuned_2_b"
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb _
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart _
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb _
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart _
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart
 
 sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh archaic nllb balanced
 sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh archaic bart balanced

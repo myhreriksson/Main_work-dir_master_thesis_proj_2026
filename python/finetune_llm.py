@@ -17,6 +17,7 @@ parser.add_argument('-o', '--output')
 parser.add_argument('-d', '--domain')
 parser.add_argument('-l', '--lang')
 parser.add_argument('--seed', type=int, default=100)
+parser.add_argument('--database')
 arg = parser.parse_args()
 
 #-------------------------------------------------------------------------------#
@@ -98,7 +99,7 @@ tokenizer.pad_token = tokenizer.eos_token
 
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
-storage = RDBStorage('sqlite:///optimized_llm_hparams.db')
+storage = RDBStorage(f'sqlite:///databases/{arg.database}/optimized_llm_hparams.db')
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
     direction='minimize',

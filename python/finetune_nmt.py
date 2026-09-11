@@ -23,6 +23,7 @@ parser.add_argument('-o', '--output')
 parser.add_argument('--tgt_lang')
 parser.add_argument('--src_lang')
 parser.add_argument('--seed', type=int, default=100)
+parser.add_argument('--database')
 arg = parser.parse_args()
 
 #-------------------------------------------------------------------------------#
@@ -70,7 +71,8 @@ def decode(eval_preds):
     decoded_preds, decoded_labels = postprocess(decoded_preds, decoded_labels)
     return decoded_preds, decoded_labels
 
-def get_sacrebleu(preds, labels):
+def get_sacrebleu(eval_preds):
+    preds, labels = decode(eval_preds)
     bleu_score = bleu.compute(
         predictions=preds, 
         references=labels
@@ -83,12 +85,11 @@ def get_sacrebleu(preds, labels):
         'ter': ter_score['score'],
         'bleu': bleu_score['score'],
     }
-    prediction_lens = [np.count_nonzero(pred != tokenizer.pad_token_id) for pred in preds]
-    result['gen_len'] = np.mean(prediction_lens)
     result = {key: f'{val:.4f}' for key, val in result.items()}
     return result
 
-def get_comet(preds, labels):
+def get_comet(eval_preds):
+    preds, labels = decode(eval_preds)
     comet_data = [
         {'src': src, 'mt':mt, 'ref':ref}
         for src, mt, ref in zip(dataset['dev']['en'], preds, labels)
@@ -108,9 +109,8 @@ def combine_metrics(sacrebleu, comet):
     return result
 
 def compute_metrics(eval_preds):
-    preds, labels = decode(eval_preds)
-    sacrebleu = get_sacrebleu(preds, labels)
-    comet = get_comet(preds, labels)
+    sacrebleu = get_sacrebleu(eval_preds)
+    comet = get_comet(eval_preds)
     return combine_metrics(sacrebleu, comet)
 
 def objective(trial):
@@ -186,7 +186,7 @@ tokenized = dataset.map(preprocess, batched=True)
 
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
-storage = RDBStorage('sqlite:///optimized_nmt_hparams.db')
+storage = RDBStorage(f'sqlite:///databases/{arg.database}/optimized_nmt_hparams.db')
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
     direction='maximize',

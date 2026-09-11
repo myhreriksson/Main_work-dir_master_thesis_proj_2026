@@ -29,12 +29,12 @@ if [[ "$task" == "nmt" ]]; then
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
             if [[ "$model" == "nllb" ]]; then
-                tgt='eng_Latn'
-                src='deu_Latn'
+                src='eng_Latn'
+                tgt='deu_Latn'
                 res_path="models/tuned/${i}k/${model}/${domain}/"
             elif [[ "$model" == "bart" ]]; then
-                tgt='en_XX'
-                src='de_DE'
+                src='en_XX'
+                tgt='de_DE'
                 res_path="models/tuned/${i}k/${model}/${domain}/"
             fi
 
@@ -46,18 +46,19 @@ if [[ "$task" == "nmt" ]]; then
                 -m "$model_path" \
                 --seed 21 \
                 --tgt_lang "$tgt" \
-                --src_lang "$src" 
+                --src_lang "$src" \
+                --database "${i}k/${domain}"
         fi
     done
 
     # part 2: finetune with maximum tuning size
     if [[ "$model" == "nllb" ]]; then
-        tgt='eng_Latn'
-        src='deu_Latn'
+        src='eng_Latn'
+        tgt='deu_Latn'
         res_path="models/tuned/max/${model}/${domain}/"
     elif [[ "$model" == "bart" ]]; then
-        tgt='en_XX'
-        src='de_DE'
+        src='en_XX'
+        tgt='de_DE'
         res_path="models/tuned/max/${model}/${domain}/"
     fi
 
@@ -69,7 +70,8 @@ if [[ "$task" == "nmt" ]]; then
         -m "$model_path" \
         --seed 21 \
         --tgt_lang "$tgt" \
-        --src_lang "$src" 
+        --src_lang "$src" \
+        --database "max/${domain}"
 
 elif [[ "$task" == "llm" ]]; then
     json_path="${data_path}_finetuning/ppl/"
@@ -79,5 +81,6 @@ elif [[ "$task" == "llm" ]]; then
         -o "models/tuned/max/${model}/${domain}/trained_on_${lang}" \
         -d "$domain" \
         -l "$lang" \
-        --seed 21 
+        --seed 21 \
+        --database "llm_${lang}/${domain}"
 fi
