@@ -10,6 +10,7 @@ conda activate thesis-venv
 
 style="${1}"
 model="${2}"
+balance="${3}"
 
 # NOTE: debugging this has stolen years from my life; God is dead, and slurm killed him
 

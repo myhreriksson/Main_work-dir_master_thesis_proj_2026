@@ -11,11 +11,11 @@ conda activate thesis-venv
 style="${1}"
 config="${2}"
 model="${3}"
+balance="${4}"
 
-path="data/_test-n-finetune_/${style}_deu/"
+path="data/_test-n-finetune_/${style}_deu/${balance}/"
 
-# I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this f*cking mess...
-# but since I'm a novice at shellscripting, I'm just gonna say idc and call it a day :)
+# I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this mess
 
 # part 1: evaluate increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then

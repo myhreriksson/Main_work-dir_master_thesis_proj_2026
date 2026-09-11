@@ -15,14 +15,14 @@ bash shell/prepare_data.sh llm prose deu
 #------------------------------------------#
 # Sentence-balanced run
 # makes training splits for NMT task
-bash shell/get_splits.sh nmt pseudo _
-bash shell/get_splits.sh nmt archaic _
+bash shell/get_splits.sh nmt pseudo 
+bash shell/get_splits.sh nmt archaic 
 
 # makes training splits for PPL task
-bash shell/get_splits.sh llm bible eng _
-bash shell/get_splits.sh llm prose eng _
-bash shell/get_splits.sh llm bible deu _
-bash shell/get_splits.sh llm prose deu _
+bash shell/get_splits.sh llm bible eng 
+bash shell/get_splits.sh llm prose eng 
+bash shell/get_splits.sh llm bible deu 
+bash shell/get_splits.sh llm prose deu 
 
 #------------------------------------------#
 # Token-balanced run

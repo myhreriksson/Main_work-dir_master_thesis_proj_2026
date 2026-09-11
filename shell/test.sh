@@ -17,6 +17,6 @@ fi
 
 # evaluate baselines
 job_2=$(sbatch --dependency=afterok:"$job_1" \
-    shell/evaluate.sh "$style" "$config" "$model" | awk '{print $4}')
+    shell/evaluate.sh "$style" "$config" "$model" "$balance" | awk '{print $4}')
 
 echo "$job_2"

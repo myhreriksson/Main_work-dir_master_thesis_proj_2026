@@ -14,7 +14,7 @@ mkdir -p \
     data/game_data \
     data/prose_data \
 
-mv setup.sh shell
+mv init_setup.sh shell
 
 hf download facebook/nllb-200-distilled-600M \
     --local-dir models/base/nllb
