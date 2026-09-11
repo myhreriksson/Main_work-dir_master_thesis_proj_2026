@@ -12,6 +12,13 @@ task="${1}"
 model="${2}"
 domain="${3}"
 lang="${4}"
+balance="${5}"
+
+if [[ "$balance" == "balanced" ]]; then
+    domain="balanced_${3}"
+else
+    domain="${3}"
+fi
 
 data_path='data/_test-n-finetune_/'
 model_path="models/base/${model}"
@@ -39,7 +46,7 @@ if [[ "$task" == "nmt" ]]; then
                 -m "$model_path" \
                 --seed 21 \
                 --tgt_lang "$tgt" \
-                --src_lang "$src"
+                --src_lang "$src" 
         fi
     done
 
@@ -62,7 +69,7 @@ if [[ "$task" == "nmt" ]]; then
         -m "$model_path" \
         --seed 21 \
         --tgt_lang "$tgt" \
-        --src_lang "$src"
+        --src_lang "$src" 
 
 elif [[ "$task" == "llm" ]]; then
     json_path="${data_path}_finetuning/ppl/"

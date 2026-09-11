@@ -11,6 +11,7 @@ conda activate thesis-venv
 model="${1}"
 config="${2}"
 style="${3}"
+balance="${4}"
 
 # this script is very repetetive and cluttered, have fun reading it :^)
 
@@ -45,7 +46,8 @@ if [[ "$config" == "tuned" ]]; then
                 -b 4 \
                 --src_lang "$src" \
                 --tgt_lang "$tgt" \
-                --batch_size 256
+                --batch_size 256 \
+                --balance "$balance"
         fi
     done
 
@@ -72,7 +74,8 @@ if [[ "$config" == "tuned" ]]; then
         -b 4 \
         --src_lang "$src" \
         --tgt_lang "$tgt" \
-        --batch_size 256
+        --batch_size 256 \
+        --balance "$balance"
 
 # part 3: translate baselines
 elif [[ "$config" == "base" ]]; then
@@ -97,5 +100,6 @@ elif [[ "$config" == "base" ]]; then
         -b 4 \
         --src_lang "$src" \
         --tgt_lang "$tgt" \
-        --batch_size 256
+        --batch_size 256 \
+        --balance "$balance"
 fi

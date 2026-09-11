@@ -18,7 +18,7 @@ if [[ "$task" == "nmt" ]]; then
         "$en_path"*.txt \
         "$de_path"*.txt
 
-    for i in $domain_path; do # DON'T make string of it $domain_path, else the wildcard fails!!!
+    for i in $domain_path; do # DON'T make string of $domain_path, else the wildcard fails!!!
         file=$(basename "$i")
         if [[ "$file" == *EN.txt ]]; then 
             cat "$i" >> "${en_path}${domain}_EN.txt"

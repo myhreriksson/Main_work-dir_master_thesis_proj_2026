@@ -12,6 +12,7 @@ parser.add_argument('-b', '--beam_size', type=int, help='How many possible predi
 parser.add_argument('--src_lang', help='The language code for the model\'s source language.')
 parser.add_argument('--tgt_lang', help='The language code for the model\'s target language.')
 parser.add_argument('--batch_size', default=16, type=int, help='How many sentences should be simultaneously processed.')
+parser.add_argument('--balance')
 arg = parser.parse_args()
 
 # part 1: load model & tokenizer
@@ -21,13 +22,19 @@ tokenizer = AutoTokenizer.from_pretrained(arg.model, src_lang=arg.src_lang)
 model = AutoModelForSeq2SeqLM.from_pretrained(arg.model, dtype=torch.float16).to(device)
 forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang)
 
-inp_path = arg.input
-out_path = arg.output
+if arg.balance == 'balanced':
+    inp_path = os.path.join(arg.input, arg.balance)
+    out_path = os.path.join(arg.output, arg.balance)
+else:
+    inp_path = arg.input
+    out_path = arg.output
 os.makedirs(out_path, exist_ok=True)
 
 # part 2: execute translation
 def main():
     for inp_file in os.listdir(inp_path):
+        if os.path.isdir(os.path.join(inp_path, inp_file)):
+            continue
         media_prefix = inp_file.split('_')[0]
         inp_fullpath = os.path.join(inp_path, inp_file)
         out_fullpath = os.path.join(out_path, f'{media_prefix}_Translation_{arg.name}_EN-DE.txt')

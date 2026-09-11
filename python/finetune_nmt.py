@@ -134,7 +134,7 @@ def objective(trial):
         target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
                         'up_proj', 'down_proj', 'gate_proj'], 
     )
-    model = get_peft_model(model, lora_config).to('cuda:0')
+    model = get_peft_model(model, lora_config)
 
     training_args = Seq2SeqTrainingArguments(
         output_dir=arg.output,
@@ -212,7 +212,7 @@ lora_config = LoraConfig(
     target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
                     'up_proj', 'down_proj', 'gate_proj'], 
 )
-model = get_peft_model(model, lora_config).to('cuda:0')
+model = get_peft_model(model, lora_config)
 model.print_trainable_parameters()
 
 # 5.1: define training arguments

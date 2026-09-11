@@ -51,7 +51,7 @@ def objective(trial):
         target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj',
                         'up_proj', 'down_proj', 'gate_proj']
     )
-    model = get_peft_model(model, lora_config).to('cuda:0')
+    model = get_peft_model(model, lora_config) # don't move to device for parallel data training
 
     training_args = SFTConfig(
         output_dir=arg.output,

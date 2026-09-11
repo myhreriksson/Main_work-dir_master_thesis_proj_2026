@@ -4,7 +4,7 @@ ___
 INSTALL (mini/ana)CONDA \
 conda create -n venv python==3.11 \
 conda activate venv \
-pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub matplotlib optuna peft pypdf requests sacrebleu sentencepiece setuptools torch==2.6.0 trl unbabel-comet
+pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub matplotlib optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet
 
 python -<< EOF \
 import nltk \
