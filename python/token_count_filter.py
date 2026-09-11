@@ -1,35 +1,48 @@
 import argparse
+import json
 import os
 
 parser = argparse.ArgumentParser()
+parser.add_argument('-p', '--path')
 parser.add_argument('-c', '--candidate')
 parser.add_argument('-r', '--reference')
 parser.add_argument('-o', '--output')
+parser.add_argument('-s', '--split')
+parser.add_argument('-d', '--domain')
 parser.add_argument('-l', '--lang')
 arg = parser.parse_args()
 
-if arg.lang == 'eng':
-    LANG = 'EN'
-elif arg.lang == 'deu':
-    LANG = 'DE'
+if arg.domain == 'pseudo':
+    key = 'de'
+    cand_name = f'archaic_{arg.split}.json'
+    ref_name = f'{arg.domain}_{arg.split}.json'
+    out_name = f'balanced_archaic_{arg.split}.json'
+elif arg.domain == 'prose':
+    key = 'text'
+    cand_name = f'{arg.lang}_archaic_{arg.split}.json'
+    ref_name = f'{arg.lang}_{arg.domain}_{arg.split}.json'
+    out_name = f'balanced_{arg.lang}_archaic_{arg.split}.json'
 
-# balance bible according to game size, since game and prose are roughly same size
 with (
-    open(os.path.join(arg.candidate, f'bible_{LANG}.txt'), 'r', encoding='utf-8') as cand,
-    open(os.path.join(arg.reference, f'game_{LANG}.txt'), 'r', encoding='utf-8') as ref, 
-    open(os.path.join(arg.output, f'balanced_bible_{LANG}.txt'), 'w', encoding='utf-8') as out
+    open(os.path.join(arg.path, cand_name), 'r', encoding='utf-8') as cand,
+    open(os.path.join(arg.path, ref_name), 'r', encoding='utf-8') as ref, 
+    open(os.path.join(arg.output, out_name), 'w', encoding='utf-8') as out
     ):
-    c_lines = cand.readlines()
-    r_lines = ref.readlines()
-
-    r_count = 0
-    for r_line in r_lines:
-        for tok in r_line.split():
-            r_count += 1
     c_count = 0
-    for c_line in c_lines:
+    r_count = 0
+    selected = []
+
+    r_entries = json.load(ref)
+    for r_entry in r_entries:
+        for r_tok in r_entry[key].split():
+            r_count += 1
+
+    c_entries = json.load(cand)
+    for c_entry in c_entries:
+        selected.append(c_entry)
         if c_count >= r_count:
             break
-        out.write(c_line.strip() + '\n')
-        for tok in c_line.split():
+        for c_tok in c_entry[key].split():
             c_count += 1
+
+    json.dump(selected, out, ensure_ascii=False, indent=2)

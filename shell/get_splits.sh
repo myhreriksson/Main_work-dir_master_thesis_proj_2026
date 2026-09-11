@@ -6,7 +6,6 @@ json_path="${data_path}_finetuning/"
 
 if [[ "$task" == "llm" ]]; then
     lang="${3}"
-    balance="${4}"
     if [[ "$domain" == "bible" ]]; then
         domain='archaic'
     else
@@ -19,11 +18,9 @@ if [[ "$task" == "llm" ]]; then
         -d "$domain" \
         -l "$lang" \
         -s 0.8 0.1 0.1 \
-        --min_len 5 \
-        --balance "$balance"
+        --min_len 5 
 
 elif [[ "$task" == "nmt" ]]; then
-    balance="${3}"
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then 
             mkdir -p "${json_path}${i}k/" 
@@ -35,8 +32,7 @@ elif [[ "$task" == "nmt" ]]; then
                 -n "$domain" \
                 -s 0.8 0.1 0.1 \
                 --data_size "$i" \
-                --min_len 4 \
-                --balance "$balance"
+                --min_len 4 
         fi
     done
     mkdir -p "${json_path}max/" 
@@ -48,6 +44,5 @@ elif [[ "$task" == "nmt" ]]; then
         -n "$domain" \
         -s 0.8 0.1 0.1 \
         --data_size 'max' \
-        --min_len 4 \
-        --balance "$balance"
+        --min_len 4 
 fi

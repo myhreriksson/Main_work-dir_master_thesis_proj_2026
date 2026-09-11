@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Retrieves all data (except GAME data) & performs sentence tokenization
+# Retrieves all (except GAME) data & performs sentence tokenization
 bash shell/process_data.sh bible 
 bash shell/process_data.sh prose 
 
@@ -12,8 +12,6 @@ bash shell/prepare_data.sh nmt bible
 bash shell/prepare_data.sh llm prose eng
 bash shell/prepare_data.sh llm prose deu
 
-#------------------------------------------#
-# Sentence-balanced run
 # makes training splits for NMT task
 bash shell/get_splits.sh nmt pseudo 
 bash shell/get_splits.sh nmt archaic 
@@ -25,12 +23,10 @@ bash shell/get_splits.sh llm bible deu
 bash shell/get_splits.sh llm prose deu 
 
 #------------------------------------------#
-# Token-balanced run
-# makes token-balanced versions of prepared data
-bash shell/balance_token_count.sh eng 
-bash shell/balance_token_count.sh deu 
-
-# makes token-balanced training splits
-bash shell/get_splits.sh nmt archaic balanced
-bash shell/get_splits.sh llm bible eng balanced
-bash shell/get_splits.sh llm bible deu balanced
+# make token-balanced vers of split data for NMT task
+bash shell/balance_token_count.sh train eng 
+bash shell/balance_token_count.sh test eng
+bash shell/balance_token_count.sh dev eng
+bash shell/balance_token_count.sh train deu
+bash shell/balance_token_count.sh test deu
+bash shell/balance_token_count.sh dev deu

@@ -2,6 +2,10 @@ import json
 import os
 import sys
 
+#1 = size
+#2 = domain
+#3 = min(count(sent))
+
 path = f'data/_test-n-finetune_/_finetuning/{sys.argv[1]}/'
 min_len = int(sys.argv[3])
 
@@ -10,7 +14,7 @@ tok_counter = 0
 tok_counter_en = 0
 tok_counter_de = 0
 
-for file in os.listdir(path):
+for file in sorted(os.listdir(path)):
     if file.startswith(sys.argv[2]):
         with open(os.path.join(path,file), 'r', encoding='utf-8') as f:
             entries = json.load(f)

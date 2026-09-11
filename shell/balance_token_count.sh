@@ -1,13 +1,33 @@
-lang="${1}"
+split="${1}"
 
-path='data/_test-n-finetune_/'
-c_path="${path}archaic_${lang}/"
-r_path="${path}pseudo_${lang}/"
-output="${c_path}balanced/"
-mkdir -p "$output"
+path='data/_test-n-finetune_/_finetuning/'
+cand="archaic_${split}"
+ref="pseudo_${split}"
 
-python python/token_count_filter.py \
-    -c "$c_path" \
-    -r "$r_path" \
-    -o "$output" \
-    -l "$lang" 
+for dir in "$path"*/; do
+    if [[ "$dir" != */ppl/ ]]; then
+        domain='pseudo'
+        output="${dir}/"
+        mkdir -p "$output"
+        python python/token_count_filter.py \
+            -p "${dir}/" \
+            -c "$cand" \
+            -r "$ref" \
+            -o "$output" \
+            -s "$split" \
+            -d "$domain"
+    else
+        domain='prose'
+        output="${dir}/"
+        lang="${2}"
+        mkdir -p "$output"
+        python python/token_count_filter.py \
+            -p "${dir}/" \
+            -c "$cand" \
+            -r "$ref" \
+            -o "$output" \
+            -s "$split" \
+            -d "$domain" \
+            -l "$lang"
+    fi
+done

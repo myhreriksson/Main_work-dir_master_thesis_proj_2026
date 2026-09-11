@@ -12,7 +12,6 @@ parser.add_argument('-n', '--name')
 parser.add_argument('-s', '--split', nargs=3, type=float)
 parser.add_argument('--data_size')
 parser.add_argument('--min_len', type=int, default=1)
-parser.add_argument('--balance')
 arg = parser.parse_args()
 
 de_path = os.path.join(arg.path, arg.inp_de)
@@ -22,24 +21,13 @@ eng_corpus = []
 deu_corpus = []
 
 # could defenitely have avoided making two redundant for-loops by writing smarter code, but I couldn't be bothered
-if arg.balance == 'balanced':
-    de_path = os.path.join(de_path, arg.balance)
-    en_path = os.path.join(en_path, arg.balance)
-    arg.name = f'{arg.balance}_{arg.name}'
-else:
-    pass
-
 for file in sorted(os.listdir(en_path)):
-    if os.path.isdir(os.path.join(en_path, file)):
-        continue
     with open(os.path.join(en_path, file), 'r', encoding='utf-8') as en:
         lines = en.readlines()
         for line in lines:
             eng_corpus.append(line.strip())
 
 for file in sorted(os.listdir(de_path)):
-    if os.path.isdir(os.path.join(de_path, file)):
-        continue
     with open(os.path.join(de_path, file), 'r', encoding='utf-8') as de:
         lines = de.readlines()
         for line in lines:
