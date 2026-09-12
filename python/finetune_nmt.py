@@ -82,10 +82,9 @@ def get_sacrebleu(eval_preds):
         references=labels
     )
     result = {
-        'ter': ter_score['score'],
-        'bleu': bleu_score['score'],
+        'ter': float(ter_score['score']),
+        'bleu': float(bleu_score['score']),
     }
-    result = {key: f'{val:.4f}' for key, val in result.items()}
     return result
 
 def get_comet(eval_preds):
