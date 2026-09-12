@@ -46,3 +46,9 @@ ___
 - Use comparison to compute and store perplexity in appropriate text files.
 
 bash run_autoregressive.sh
+___
+### Optional commands
+- Count word tokens:
+python python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
+- Count model parameters:
+python python/count_params.py [model]
