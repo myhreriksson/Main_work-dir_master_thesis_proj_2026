@@ -84,7 +84,7 @@ def objective(trial):
 
 #-------------------------------------------------------------------------------#
 # part 2: load data
-file_path = os.path.join(arg.input, f'{arg.lang}_{arg.domain}')
+file_path = os.path.join(arg.input, f'{arg.domain}_{arg.lang}')
 data_files = {
     'train':f'{file_path}_train.json',
     'test':f'{file_path}_test.json',

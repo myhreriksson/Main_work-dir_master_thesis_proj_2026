@@ -39,6 +39,7 @@ if [[ "$task" == "nmt" ]]; then
             fi
 
             mkdir -p "$res_path"
+            mkdir -p "databases/${i}k/${domain}"
             python python/finetune_nmt.py \
                 -p "${json_path}${i}k" \
                 -o "$res_path" \
@@ -47,7 +48,7 @@ if [[ "$task" == "nmt" ]]; then
                 --seed 21 \
                 --tgt_lang "$tgt" \
                 --src_lang "$src" \
-                --database "${i}k/${domain}"
+                --database "databases/${i}k/${domain}"
         fi
     done
 
@@ -63,6 +64,7 @@ if [[ "$task" == "nmt" ]]; then
     fi
 
     mkdir -p "$res_path"
+    mkdir -p "databases/max/${domain}"
     python python/finetune_nmt.py \
         -p "${json_path}max" \
         -o "$res_path" \
@@ -71,10 +73,11 @@ if [[ "$task" == "nmt" ]]; then
         --seed 21 \
         --tgt_lang "$tgt" \
         --src_lang "$src" \
-        --database "max/${domain}"
+        --database "databases/max/${domain}"
 
 elif [[ "$task" == "llm" ]]; then
     json_path="${data_path}_finetuning/ppl/"
+    mkdir -p "databases/llm_${lang}/${domain}"
     python python/finetune_llm.py \
         -m "$model_path" \
         -i "$json_path" \
@@ -82,5 +85,5 @@ elif [[ "$task" == "llm" ]]; then
         -d "$domain" \
         -l "$lang" \
         --seed 21 \
-        --database "llm_${lang}/${domain}"
+        --database "databases/llm_${lang}/${domain}"
 fi
