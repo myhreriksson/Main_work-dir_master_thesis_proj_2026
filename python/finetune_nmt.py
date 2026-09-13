@@ -90,7 +90,7 @@ def get_sacrebleu(eval_preds):
 def get_comet(eval_preds):
     preds, labels = decode(eval_preds)
     comet_data = [
-        {'src': src, 'mt':mt, 'ref':ref}
+        {'src': src, 'mt':mt, 'ref':ref[0]}
         for src, mt, ref in zip(dataset['dev']['en'], preds, labels)
     ]
     result = comet_model.predict(
