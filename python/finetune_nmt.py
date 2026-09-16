@@ -94,7 +94,7 @@ def get_comet(eval_preds):
         for src, mt, ref in zip(dataset['dev']['en'], preds, labels)
     ]
     result = comet_model.predict(
-        data=comet_data,
+        comet_data,
         batch_size=8
     ).system_score
     return result
@@ -186,11 +186,15 @@ tokenized = dataset.map(preprocess, batched=True)
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
 storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db')
+optuna.delete_study( # functions as overwriting the study every time code is run
+    study_name='optimizing_hyperparams',
+    storage=storage
+)
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
     direction='maximize',
     storage=storage,
-    load_if_exists=True,
+    load_if_exists=False,
     pruner=optuna.pruners.MedianPruner(
         n_startup_trials=5,
         n_warmup_steps=1
