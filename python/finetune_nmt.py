@@ -186,10 +186,13 @@ tokenized = dataset.map(preprocess, batched=True)
 #-------------------------------------------------------------------------------#
 # part 4: parameter optimization
 storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db')
-optuna.delete_study( # functions as overwriting the study every time code is run
-    study_name='optimizing_hyperparams',
-    storage=storage
-)
+try:
+    optuna.delete_study( # functions as overwriting the study every time code is run
+        study_name='optimizing_hyperparams',
+        storage=storage
+    )
+except KeyError:
+    pass
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
     direction='maximize',
