@@ -30,7 +30,7 @@ arg = parser.parse_args()
 # part 0: load evaluation metrics
 bleu = evaluate.load('sacrebleu')
 ter = evaluate.load('ter')
-comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da')).to('cuda:1')
+comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da')).to('cuda')
 
 #-------------------------------------------------------------------------------#
 # part 1: define functions
