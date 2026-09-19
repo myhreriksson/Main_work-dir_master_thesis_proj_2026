@@ -5,7 +5,7 @@ path="models/tuned/"
 output="results/plots/"
 
 mkdir -p "$output"
-python python/plot_loss.py \
+python python/plot_scores.py \
     -p "$path" \
     -m "$model" \
     -s "$style" \

@@ -1,5 +1,5 @@
 #!/bin/bash
-#SBATCH -A uppmax2025-2-505
+#SBATCH -A uppmax2026-1-95
 #SBATCH -M pelle
 #SBATCH -p gpu
 #SBATCH -t 20:00:00

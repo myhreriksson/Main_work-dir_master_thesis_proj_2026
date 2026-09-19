@@ -84,7 +84,13 @@ def objective(trial):
 
 #-------------------------------------------------------------------------------#
 # part 2: load data
-file_path = os.path.join(arg.input, f'{arg.domain}_{arg.lang}')
+if arg.domain.startswith('balanced_'):
+    domain = arg.domain.split('_')[1]
+    prefix = f'{arg.domain.split("_")[0]}_{arg.lang}'
+else:
+    domain = arg.domain
+    prefix = arg.lang
+file_path = os.path.join(arg.input, f'{prefix}_{domain}')
 data_files = {
     'train':f'{file_path}_train.json',
     'test':f'{file_path}_test.json',
