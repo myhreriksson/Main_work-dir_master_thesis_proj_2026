@@ -121,7 +121,7 @@ best_hparams = study.best_params
 
 #-------------------------------------------------------------------------------#
 # part 5: finetune model
-model = AutoModelForCausalLM.from_pretrained(arg.model)
+model = AutoModelForCausalLM.from_pretrained(arg.model).to('cuda')
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
     r=best_hparams['r'], 
