@@ -41,9 +41,9 @@ for size, (eval_steps, eval_metric) in sorted(all_dat.items(),
                                               key=lambda x: get_n(x[0].rstrip('k'))
                                               ):
     plt.plot(eval_steps, eval_metric, label=f'Validation {arg.metric.upper()} for {size}')
-
+plt.grid(visible=True, which='major', axis='both')
 plt.xlabel('Epoch')
 plt.ylabel(f'{arg.metric.upper()}')
-plt.legend()
-plt.savefig(f'{arg.output}loss_{arg.model}_{arg.style}_{arg.metric}.png')
+plt.legend(['Total', 'Cfig. 1', 'Cfig. 2', 'Cfig. 3', 'Cfig. 4', 'Cfig. 5'], loc='lower right')
+plt.savefig(f'{arg.output}{arg.model}_{arg.style}_{arg.metric}.png')
 plt.show()
