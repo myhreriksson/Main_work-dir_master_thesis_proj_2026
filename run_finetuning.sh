@@ -5,8 +5,8 @@ bash shell/arg_for_train.sh nmt nllb archaic
 bash shell/arg_for_train.sh nmt nllb pseudo 
 bash shell/arg_for_train.sh nmt bart archaic
 bash shell/arg_for_train.sh nmt bart pseudo 
-bash shell/arg_for_train.sh nmt nllb archaic balanced # use token-balanced 
-bash shell/arg_for_train.sh nmt bart archaic balanced # use token-balanced 
+bash shell/arg_for_train.sh nmt nllb archaic "" balanced # use token-balanced 
+bash shell/arg_for_train.sh nmt bart archaic "" balanced # use token-balanced 
 
 # fine-tune LLM
 sbatch shell/train.sh llm qwen archaic eng 
