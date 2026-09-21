@@ -2,7 +2,7 @@
 #SBATCH -A uppmax2026-1-95
 #SBATCH -M pelle
 #SBATCH -p gpu
-#SBATCH -t 20:00:00
+#SBATCH -t 30:00:00
 #SBATCH --gres=gpu:1
 
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
