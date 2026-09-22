@@ -1,13 +1,11 @@
-model="${1}"
-style="${2}"
-metric="${3}"
+domain="${1}"
+metric="${2}"
 path="models/tuned/"
 output="results/plots/"
 
 mkdir -p "$output"
 python python/plot_scores.py \
     -p "$path" \
-    -m "$model" \
-    -s "$style" \
+    -s "$domain" \
     -o "$output" \
     --metric "$metric" \
