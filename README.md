@@ -35,6 +35,8 @@ ___
 bash run_finetuning.sh
 ___
 ### Translate and evaluate
+When translating non-fine-tuned baselines, the domain name refers to the *test* domain. \
+In contrast, when translating using fine-tuned models, the domain name refers to the domain used during *training*.
 - Model inference: perform translations from English to German.
 - Compute and store BLEU, TER, COMET scores in appropriate text files.
 - Compute and store sacrebleu's and COMET's pairwise t-test bootstrapping p-values.

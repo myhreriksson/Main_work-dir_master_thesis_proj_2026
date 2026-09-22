@@ -8,6 +8,7 @@ parser.add_argument('-m', '--model', help='Path to the NMT model.')
 parser.add_argument('-n', '--name', help='Model name, which will be added to translated text.')
 parser.add_argument('-i', '--input', help='Path to the source text to be translated.')
 parser.add_argument('-o', '--output', help='Path to where the target translation should be saved.')
+parser.add_argument('-d', '--domain', help='Domain, i.e. style, used during fine-tuning.')
 parser.add_argument('-b', '--beam_size', type=int, help='How many possible predictions the model will consider.')
 parser.add_argument('--src_lang', help='The language code for the model\'s source language.')
 parser.add_argument('--tgt_lang', help='The language code for the model\'s target language.')
@@ -18,25 +19,25 @@ arg = parser.parse_args()
 # part 1: load model & tokenizer
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possible
 
-tokenizer = AutoTokenizer.from_pretrained(arg.model, src_lang=arg.src_lang)
-model = AutoModelForSeq2SeqLM.from_pretrained(arg.model, dtype=torch.float16).to(device)
-forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang)
-
 if arg.balance == 'balanced':
-    inp_path = os.path.join(arg.input, arg.balance)
+    model = os.path.join(arg.model, f'{arg.balance}_{arg.domain}')
     out_path = os.path.join(arg.output, arg.balance)
 else:
-    inp_path = arg.input
+    model = os.path.join(arg.model, arg.domain)
     out_path = arg.output
 os.makedirs(out_path, exist_ok=True)
 
+tokenizer = AutoTokenizer.from_pretrained(model, src_lang=arg.src_lang)
+model = AutoModelForSeq2SeqLM.from_pretrained(arg.model, dtype=torch.float16).to(device)
+forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang)
+
 # part 2: execute translation
 def main():
-    for inp_file in os.listdir(inp_path):
-        if os.path.isdir(os.path.join(inp_path, inp_file)):
+    for inp_file in os.listdir(arg.input):
+        if os.path.isdir(os.path.join(arg.input, inp_file)):
             continue
         media_prefix = inp_file.split('_')[0]
-        inp_fullpath = os.path.join(inp_path, inp_file)
+        inp_fullpath = os.path.join(arg.input, inp_file)
         out_fullpath = os.path.join(out_path, f'{media_prefix}_Translation_{arg.name}_EN-DE.txt')
         with (
             open(inp_fullpath, 'r', encoding='utf-8') as i_f, # input file

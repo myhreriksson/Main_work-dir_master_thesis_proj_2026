@@ -10,22 +10,22 @@ conda activate thesis-venv
 
 model="${1}"
 config="${2}"
-style="${3}"
+domain="${3}"
 balance="${4}"
 
 # this script is very repetetive and cluttered, have fun reading it :^)
 
 # part 1: translate with increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then
-    if [[ "$style" == "archaic" ]]; then
-        style='pseudo'
-    elif [[ "$style" == "pseudo" ]]; then
-        style='archaic'
+    if [[ "$domain" == "archaic" ]]; then
+        inp_domain='pseudo'
+    elif [[ "$domain" == "pseudo" ]]; then
+        inp_domain='archaic'
     fi
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
-            inp_path="data/_test-n-finetune_/${style}_eng/"
-            out_path="results/translations/${config}/${i}k/${style}"
+            inp_path="data/_test-n-finetune_/${inp_domain}_eng/"
+            out_path="results/translations/${config}/${i}k/${domain}"
             model_path="models/${config}/${i}k/${model}/"
 
             if [[ "$model" == "nllb" ]]; then
@@ -35,7 +35,6 @@ if [[ "$config" == "tuned" ]]; then
                 src='en_XX'
                 tgt='de_DE'
             fi
-            model_path="${model_path}${style}"
 
             mkdir -p "$out_path"
             python python/translate.py \
@@ -43,6 +42,7 @@ if [[ "$config" == "tuned" ]]; then
                 -n "$model" \
                 -i "$inp_path" \
                 -o "$out_path" \
+                -d "$domain" \
                 -b 4 \
                 --src_lang "$src" \
                 --tgt_lang "$tgt" \
@@ -52,8 +52,8 @@ if [[ "$config" == "tuned" ]]; then
     done
 
 # part 1: translate with maximum tuning size
-    inp_path="data/_test-n-finetune_/${style}_eng/"
-    out_path="results/translations/${config}/max/${style}"
+    inp_path="data/_test-n-finetune_/${inp_domain}_eng/"
+    out_path="results/translations/${config}/max/${domain}"
     model_path="models/${config}/max/${model}/"
 
     if [[ "$model" == "nllb" ]]; then
@@ -63,7 +63,6 @@ if [[ "$config" == "tuned" ]]; then
         src='en_XX'
         tgt='de_DE'
     fi
-    model_path="${model_path}${style}"
 
     mkdir -p "$out_path"
     python python/translate.py \
@@ -71,6 +70,7 @@ if [[ "$config" == "tuned" ]]; then
         -n "$model" \
         -i "$inp_path" \
         -o "$out_path" \
+        -d "$domain" \
         -b 4 \
         --src_lang "$src" \
         --tgt_lang "$tgt" \
@@ -79,8 +79,8 @@ if [[ "$config" == "tuned" ]]; then
 
 # part 3: translate baselines
 elif [[ "$config" == "base" ]]; then
-    inp_path="data/_test-n-finetune_/${style}_eng/"
-    out_path="results/translations/${config}/${style}"
+    inp_path="data/_test-n-finetune_/${domain}_eng/"
+    out_path="results/translations/${config}/${domain}"
     model_path="models/${config}/${model}/"
 
     if [[ "$model" == "nllb" ]]; then
@@ -97,6 +97,7 @@ elif [[ "$config" == "base" ]]; then
         -n "$model" \
         -i "$inp_path" \
         -o "$out_path" \
+        -d "$domain" \
         -b 4 \
         --src_lang "$src" \
         --tgt_lang "$tgt" \
