@@ -53,4 +53,4 @@ ___
 - Plot evaluation scores:
 python python/count_toks.py [size] [domain] [min_word_count (4 or 5)] \
 python python/count_params.py [model] \
-bash shell/get_plot.sh [model] [size] [metric]
+bash shell/get_plot.sh [model] [style] [metric]
