@@ -6,12 +6,7 @@ base_2=$(bash shell/test.sh pseudo bart base '') # get baselines on game-data (m
 base_3=$(bash shell/test.sh archaic nllb base '') # get baselines on bible-data (nllb-200)
 base_4=$(bash shell/test.sh archaic bart base '') # get baselines on bible-data (mBart-50)
 
-# Token-balanced
-base_1_b=$(bash shell/test.sh archaic nllb base balanced) # get baselines on bible-data (nllb-200)
-base_2_b=$(bash shell/test.sh archaic bart base balanced) # get baselines on bible-data (mBart-50)
-
 post_baseline="$base_1:$base_2:$base_3:$base_4"
-post_baseline_b="$base_1_b:$base_2_b"
 
 # Sentence-balanced
 tuned_1=$(bash shell/test.sh pseudo nllb tuned '' "$post_baseline") # finetuned on game-data, tested on bible-data (nllb-200)
