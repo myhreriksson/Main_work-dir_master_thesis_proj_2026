@@ -4,26 +4,30 @@ import torch # remember to move to device!
 from transformers import (AutoTokenizer, AutoModelForSeq2SeqLM)
 
 parser = argparse.ArgumentParser()
-parser.add_argument('-m', '--model', help='Path to the NMT model.')
-parser.add_argument('-n', '--name', help='Model name, which will be added to translated text.')
-parser.add_argument('-i', '--input', help='Path to the source text to be translated.')
-parser.add_argument('-o', '--output', help='Path to where the target translation should be saved.')
-parser.add_argument('-d', '--domain', help='Domain, i.e. style, used during fine-tuning.')
-parser.add_argument('-b', '--beam_size', type=int, help='How many possible predictions the model will consider.')
-parser.add_argument('--src_lang', help='The language code for the model\'s source language.')
-parser.add_argument('--tgt_lang', help='The language code for the model\'s target language.')
-parser.add_argument('--batch_size', default=16, type=int, help='How many sentences should be simultaneously processed.')
+parser.add_argument('-m', '--model')
+parser.add_argument('-c', '--config')
+parser.add_argument('-n', '--name')
+parser.add_argument('-i', '--input')
+parser.add_argument('-o', '--output')
+parser.add_argument('-d', '--domain')
+parser.add_argument('-b', '--beam_size', type=int)
+parser.add_argument('--src_lang')
+parser.add_argument('--tgt_lang')
+parser.add_argument('--batch_size', default=16, type=int)
 parser.add_argument('--balance')
 arg = parser.parse_args()
 
 # part 1: load model & tokenizer
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possible
 
-if arg.balance == 'balanced':
-    model = os.path.join(arg.model, f'{arg.balance}_{arg.domain}')
+if arg.config == 'tuned':
+    if arg.balance == 'balanced':
+        model = os.path.join(arg.model, f'{arg.balance}_{arg.domain}')
+    else:
+        model = os.path.join(arg.model, arg.domain)
     out_path = os.path.join(arg.output, arg.balance)
 else:
-    model = os.path.join(arg.model, arg.domain)
+    model = arg.model
     out_path = arg.output
 os.makedirs(out_path, exist_ok=True)
 

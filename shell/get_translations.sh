@@ -39,6 +39,7 @@ if [[ "$config" == "tuned" ]]; then
             mkdir -p "$out_path"
             python python/translate.py \
                 -m "$model_path" \
+                -c "$config" \
                 -n "$model" \
                 -i "$inp_path" \
                 -o "$out_path" \
@@ -67,6 +68,7 @@ if [[ "$config" == "tuned" ]]; then
     mkdir -p "$out_path"
     python python/translate.py \
         -m "$model_path" \
+        -c "$config" \
         -n "$model" \
         -i "$inp_path" \
         -o "$out_path" \
@@ -94,6 +96,7 @@ elif [[ "$config" == "base" ]]; then
     mkdir -p "$out_path"
     python python/translate.py \
         -m "$model_path" \
+        -c "$config" \
         -n "$model" \
         -i "$inp_path" \
         -o "$out_path" \
