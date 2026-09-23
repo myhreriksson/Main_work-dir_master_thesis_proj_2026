@@ -23,9 +23,10 @@ device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possi
 if arg.config == 'tuned':
     if arg.balance == 'balanced':
         model = os.path.join(arg.model, f'{arg.balance}_{arg.domain}')
+        out_path = os.path.join(arg.output, arg.balance)
     else:
         model = os.path.join(arg.model, arg.domain)
-    out_path = os.path.join(arg.output, arg.balance)
+        out_path = arg.output
 else:
     model = arg.model
     out_path = arg.output
