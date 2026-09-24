@@ -15,19 +15,22 @@ balance="${4}"
 
 path="data/_test-n-finetune_/${domain}_deu/"
 
+if [[ "$domain" == "archaic" ]]; then
+    if [[ "$balance" == "balanced" ]]; then
+        trans_path="${domain}/${balance}"
+    else
+        trans_path="$domain"
+    fi
+else
+    trans_path="$domain"
+fi
+
 # I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this mess
 
 # part 1: evaluate increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
-            if [[ "$domain" == "archaic" ]]; then
-                if [[ "$balance" == "balanced" ]]; then
-                    trans_path="${domain}/${balance}"
-                else
-                    trans_path="$domain"
-                fi
-            fi
             mkdir -p "results/evaluations/${config}/${i}k/${trans_path}"
             for filename in "$path"*; do
                 file=$(basename "$filename")
@@ -96,27 +99,27 @@ elif [[ "$config" == "base" ]]; then
         file=$(basename "$filename")
         {
             sacrebleu "${path}${file}" \
-                -i "results/translations/${config}/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                -i "results/translations/${config}/${domain}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                 -m bleu ter \
                 -l en-de
-        } > "results/evaluations/${config}/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+        } > "results/evaluations/${config}/${domain}/${file%%_*}_sacrebleu_${model}.json"
         {
             comet-score \
                 -s "data/_test-n-finetune_/${domain}_eng/${file%%_*}_EN.txt" \
-                -t "results/translations/${config}/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                -t "results/translations/${config}/${domain}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                 -r "data/_test-n-finetune_/${domain}_deu/${file%%_*}_DE.txt" \
                 --quiet \
                 --only_system
-        } > "results/evaluations/${config}/${trans_path}/${file%%_*}_comet_${model}.txt"
+        } > "results/evaluations/${config}/${domain}/${file%%_*}_comet_${model}.txt"
 
         python python/write_results.py \
-            "results/evaluations/${config}/${trans_path}/${file%%_*}_sacrebleu_${model}.json" \
-            "results/evaluations/${config}/${trans_path}/${file%%_*}_comet_${model}.txt" \
-            "results/evaluations/${config}/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
+            "results/evaluations/${config}/${domain}/${file%%_*}_sacrebleu_${model}.json" \
+            "results/evaluations/${config}/${domain}/${file%%_*}_comet_${model}.txt" \
+            "results/evaluations/${config}/${domain}/${file%%_*}_Evaluation_${model}.txt" \
             score
 
-        rm "results/evaluations/${config}/${trans_path}/${file%%_*}_comet_${model}.txt" \
-           "results/evaluations/${config}/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+        rm "results/evaluations/${config}/${domain}/${file%%_*}_comet_${model}.txt" \
+           "results/evaluations/${config}/${domain}/${file%%_*}_sacrebleu_${model}.json"
     done
     echo "Base evaluation is completed!"
 fi
