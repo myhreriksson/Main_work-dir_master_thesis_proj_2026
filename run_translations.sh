@@ -11,7 +11,7 @@ post_baseline="$base_1:$base_2:$base_3:$base_4"
 # Sentence-balanced
 tuned_1=$(bash shell/test.sh pseudo nllb tuned '' "$post_baseline") # finetuned on game-data, tested on bible-data (nllb-200)
 tuned_2=$(bash shell/test.sh pseudo bart tuned '' "$post_baseline") # finetuned on game-data, tested on bible-data (mBart-50)
-tuned_3=$(bash shell/test.sh archaic nllb tuned '') #"$post_baseline") # finetuned on bible-data, tested on game-data (nllb-200)
+tuned_3=$(bash shell/test.sh archaic nllb tuned '' "$post_baseline") # finetuned on bible-data, tested on game-data (nllb-200)
 tuned_4=$(bash shell/test.sh archaic bart tuned '' "$post_baseline") # finetuned on bible-data, tested on game-data (mBart-50)
 
 # Token-balanced
