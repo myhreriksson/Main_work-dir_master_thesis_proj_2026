@@ -17,16 +17,17 @@ path="data/_test-n-finetune_/${domain}_deu/"
 
 # I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this mess
 
-if [[ "$balance" == "balanced" ]]; then
-    trans_path="${domain}/${balance}"
-else
-    trans_path="$domain"
-fi
-
 # part 1: evaluate increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
+            if [[ "$domain" == "archaic" ]]; then
+                if [[ "$balance" == "balanced" ]]; then
+                    trans_path="${domain}/${balance}"
+                else
+                    trans_path="$domain"
+                fi
+            fi
             mkdir -p "results/evaluations/${config}/${i}k/${trans_path}"
             for filename in "$path"*; do
                 file=$(basename "$filename")
@@ -51,7 +52,8 @@ if [[ "$config" == "tuned" ]]; then
                     "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
                     score
 
-                rm "results/evaluations/${config}/${i}k/${domain}/${file%%_*}_comet_${model}.txt" "results/evaluations/${config}/${i}k/${domain}/${file%%_*}_sacrebleu_${model}.json"
+                rm "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_comet_${model}.txt" \
+                   "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
             done
             echo "Evaluation for size '${i}' is completed!"
         fi
@@ -82,7 +84,8 @@ if [[ "$config" == "tuned" ]]; then
             "results/evaluations/${config}/max/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
             score
 
-        rm "results/evaluations/${config}/max/${domain}/${file%%_*}_comet_${model}.txt" "results/evaluations/${config}/max/${domain}/${file%%_*}_sacrebleu_${model}.json"
+        rm "results/evaluations/${config}/max/${trans_path}/${file%%_*}_comet_${model}.txt" \
+           "results/evaluations/${config}/max/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
     done
     echo "Evaluation for size 'max' is completed!"
 
@@ -112,7 +115,8 @@ elif [[ "$config" == "base" ]]; then
             "results/evaluations/${config}/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
             score
 
-        rm "results/evaluations/${config}/${domain}/${file%%_*}_comet_${model}.txt" "results/evaluations/${config}/${domain}/${file%%_*}_sacrebleu_${model}.json"
+        rm "results/evaluations/${config}/${trans_path}/${file%%_*}_comet_${model}.txt" \
+           "results/evaluations/${config}/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
     done
     echo "Base evaluation is completed!"
 fi

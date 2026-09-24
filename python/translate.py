@@ -33,7 +33,7 @@ else:
 os.makedirs(out_path, exist_ok=True)
 
 tokenizer = AutoTokenizer.from_pretrained(model, src_lang=arg.src_lang)
-model = AutoModelForSeq2SeqLM.from_pretrained(arg.model, dtype=torch.float16).to(device)
+model = AutoModelForSeq2SeqLM.from_pretrained(model, dtype=torch.float16).to(device)
 forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang)
 
 # part 2: execute translation
