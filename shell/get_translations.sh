@@ -17,16 +17,11 @@ balance="${4}"
 
 # part 1: translate with increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then
-    if [[ "$domain" == "archaic" ]]; then
-        model_domain='pseudo'
-    elif [[ "$domain" == "pseudo" ]]; then
-        model_domain='archaic'
-    fi
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
             inp_path="data/_test-n-finetune_/${domain}_eng/"
             out_path="results/translations/${config}/${i}k/${domain}"
-            model_path="models/${config}/${i}k/${model}/${model_domain}/"
+            model_path="models/${config}/${i}k/${model}/"
 
             if [[ "$model" == "nllb" ]]; then
                 src='eng_Latn'
@@ -54,7 +49,7 @@ if [[ "$config" == "tuned" ]]; then
 # part 1: translate with maximum tuning size
     inp_path="data/_test-n-finetune_/${domain}_eng/"
     out_path="results/translations/${config}/max/${domain}"
-    model_path="models/${config}/max/${model}/${model_domain}/"
+    model_path="models/${config}/max/${model}/"
 
     if [[ "$model" == "nllb" ]]; then
         src='eng_Latn'
