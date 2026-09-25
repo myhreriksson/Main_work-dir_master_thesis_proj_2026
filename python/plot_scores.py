@@ -54,7 +54,7 @@ def get_plot(all_dat, axis, metric):
         )
 
 def get_axis(i, title, metric, xlabel):
-    axes[i].set_title(title.upper(), fontsize=20)
+    axes[i].set_title(title, fontsize=20)
     axes[i].set_xlabel(xlabel, fontsize=19)
     axes[i].set_ylabel(metric.upper(), fontsize=19)
     axes[i].grid(True)
@@ -74,10 +74,10 @@ fig, axes = plt.subplots(3, 2, figsize=(14, 18), sharey='row', sharex=True)
 axes = axes.flatten()
 
 bart_plot_0 = get_plot(all_bart_dat_b, axes[0], b)
-bart_b_plot = get_axis(0, 'bart', b, '')
+bart_b_plot = get_axis(0, 'mBART-50', b, '')
 
 nllb_plot_1 = get_plot(all_nllb_dat_b, axes[1], b)
-nllb_b_plot = get_axis(1, 'nllb', '', '')
+nllb_b_plot = get_axis(1, 'NLLB-200', '', '')
 
 bart_plot_2 = get_plot(all_bart_dat_c, axes[2], c)
 bart_c_plot = get_axis(2, '', c, '')

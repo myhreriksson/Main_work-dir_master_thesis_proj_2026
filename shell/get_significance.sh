@@ -8,32 +8,46 @@
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
 conda activate thesis-venv
 
-style="${1}"
-model="${2}"
+domain="${1}"
+model_A="${2}"
 balance="${3}"
+comparison="${4}"
 
 # NOTE: debugging this has stolen years from my life; God is dead, and slurm killed him
 
+if [[ "$comparison" == "config" ]]; then
+    secondary_path="results/translations/base/${domain}/"
+    out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_within_${model_A}/"
+    model_B="$model_A"
+fi
+
 data_path='data/_test-n-finetune_/'
-src_path="${data_path}${style}_eng/"
-ref_path="${data_path}${style}_deu/"
-base_path="results/translations/base/${style}/"
-out_path="results/evaluations/bootstraps/${style}/${model}/"
+src_path="${data_path}${domain}_eng/"
+ref_path="${data_path}${domain}_deu/"
 mkdir -p "$out_path"
 
 # part 1: bootstrap with increasing tuning sizes
 for i in $(seq 0 3 15); do
     if (( i > 0 )); then
-        tuned_path="results/translations/tuned/${i}k/${style}/"
+        if [[ "$comparison" == "model" ]]; then
+            secondary_path="results/translations/tuned/${i}k/${domain}/${balance}/"
+            out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
+            if [[ "$model_A" == "nllb" ]]; then
+                model_B='bart'
+            elif [[ "$model_A" == "bart" ]]; then
+                model_B='nllb'
+            fi
+        fi
+        main_path="results/translations/tuned/${i}k/${domain}/${balance}/"
         out_file="${out_path}paired_bs-${i}k.txt"
-        for base_file in "${base_path}/"*"_${model}_EN-DE.txt"; do
-            file=$(basename "$base_file")
-            tuned_file="${tuned_path}${file}"
+        for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
+            file=$(basename "$secondary_file")
+            main_file="${main_path}${file%%_*}_Translation_${model_A}_EN-DE.txt"
             src="${src_path}${file%%_*}_EN.txt"
             ref="${ref_path}${file%%_*}_DE.txt"
         {
             sacrebleu $ref \
-                -i "$base_file" "$tuned_file" \
+                -i "$secondary_file" "$main_file" \
                 -m bleu ter \
                 --paired-bs \
                 --paired-bs-n 5000
@@ -41,7 +55,7 @@ for i in $(seq 0 3 15); do
         {
             comet-compare \
                 -s $src \
-                -t "$base_file" "$tuned_file" \
+                -t "$secondary_file" "$main_file" \
                 -r $ref 
         } > "${out_path}${file%%_*}comet_${i}k.txt"
         
@@ -57,17 +71,20 @@ for i in $(seq 0 3 15); do
 done
 
 # part 1: bootstrap with maximum tuning size
-tuned_path="results/translations/tuned/max/${style}/"
+if [[ "$comparison" == "model" ]]; then
+    secondary_path="results/translations/tuned/max/${domain}/${balance}/"
+    out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
+fi
+main_path="results/translations/tuned/max/${domain}/${balance}/"
 out_file="${out_path}paired_bs-max.txt"
-
-for base_file in "${base_path}/"*"_${model}_EN-DE.txt"; do
-    file=$(basename "$base_file")
-    tuned_file="${tuned_path}${file}"
+for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
+    file=$(basename "$secondary_file")
+    main_file="${main_path}${file%%_*}_Translation_${model_A}_EN-DE.txt"
     src="${src_path}${file%%_*}_EN.txt"
     ref="${ref_path}${file%%_*}_DE.txt"
     {
         sacrebleu $ref \
-        -i "$base_file" "$tuned_file" \
+        -i "$secondary_file" "$main_file" \
         -m bleu ter \
         --paired-bs \
         --paired-bs-n 5000 
@@ -75,7 +92,7 @@ for base_file in "${base_path}/"*"_${model}_EN-DE.txt"; do
     {
     comet-compare \
         -s $src \
-        -t "$base_file" "$tuned_file" \
+        -t "$secondary_file" "$main_file" \
         -r $ref 
     } > "${out_path}${file%%_*}comet_max.txt"
     

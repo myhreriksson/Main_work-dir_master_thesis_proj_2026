@@ -24,7 +24,7 @@ def get_significance():
         p_val_comet = ''
     with open(sys.argv[3], 'w', encoding='utf-8') as f:
         f.write(f'''\
-        Statistical significance for pairwise t-test bootstrapping for {sys.argv[1].split('/')[2]}
+        Statistical significance for pairwise t-test bootstrapping.
         
         Metric: BLEU
         p-value: {bleu['p_value']:.4f} {p_val_bleu}

@@ -15,80 +15,70 @@ balance="${4}"
 
 path="data/_test-n-finetune_/${domain}_deu/"
 
-if [[ "$domain" == "pseudo" ]]; then
-    if [[ "$balance" == "balanced" ]]; then
-        trans_path="${domain}/${balance}"
-    else
-        trans_path="$domain"
-    fi
-else
-    trans_path="$domain"
-fi
-
 # I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this mess
 
 # part 1: evaluate increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then
     for i in $(seq 0 3 15); do
         if (( i > 0 )); then
-            mkdir -p "results/evaluations/${config}/${i}k/${trans_path}"
+            mkdir -p "results/evaluations/${config}/${i}k/${domain}/${balance}"
             for filename in "$path"*; do
                 file=$(basename "$filename")
                 {
                     sacrebleu "${path}${file}" \
-                        -i "results/translations/${config}/${i}k/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                        -i "results/translations/${config}/${i}k/${domain}/${balance}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                         -m bleu ter \
                         -l en-de
-                } > "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+                } > "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json"
                 {
                     comet-score \
                         -s "data/_test-n-finetune_/${domain}_eng/${file%%_*}_EN.txt" \
-                        -t "results/translations/${config}/${i}k/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                        -t "results/translations/${config}/${i}k/${domain}/${balance}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                         -r "data/_test-n-finetune_/${domain}_deu/${file%%_*}_DE.txt" \
                         --quiet \
                         --only_system
-                } > "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_comet_${model}.txt"
+                } > "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_comet_${model}.txt"
 
                 python python/write_results.py \
-                    "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_sacrebleu_${model}.json" \
-                    "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_comet_${model}.txt" \
-                    "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
+                    "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json" \
+                    "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_comet_${model}.txt" \
+                    "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_Evaluation_${model}.txt" \
                     score
 
-                rm "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_comet_${model}.txt" \
-                   "results/evaluations/${config}/${i}k/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+                rm "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_comet_${model}.txt" \
+                   "results/evaluations/${config}/${i}k/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json"
             done
             echo "Evaluation for size '${i}' is completed!"
         fi
     done
 
 # part 2: evaluate with maximum tuning size
-    mkdir -p "results/evaluations/${config}/max/${trans_path}"
+    mkdir -p "results/evaluations/${config}/max/${domain}/${balance}"
     for filename in "$path"*; do
         file=$(basename "$filename")
         {
             sacrebleu "${path}${file}" \
-                -i "results/translations/${config}/max/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                -i "results/translations/${config}/max/${domain}/${balance}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                 -m bleu ter \
                 -l en-de
-        } > "results/evaluations/${config}/max/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+        } > "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json"
         {
             comet-score \
                 -s "data/_test-n-finetune_/${domain}_eng/${file%%_*}_EN.txt" \
-                -t "results/translations/${config}/max/${trans_path}/${file%%_*}_Translation_${model}_EN-DE.txt" \
+                -t "results/translations/${config}/max/${domain}/${balance}/${file%%_*}_Translation_${model}_EN-DE.txt" \
                 -r "data/_test-n-finetune_/${domain}_deu/${file%%_*}_DE.txt" \
                 --quiet \
                 --only_system
-        } > "results/evaluations/${config}/max/${trans_path}/${file%%_*}_comet_${model}.txt"
+        } > "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_comet_${model}.txt"
 
         python python/write_results.py \
-            "results/evaluations/${config}/max/${trans_path}/${file%%_*}_sacrebleu_${model}.json" \
-            "results/evaluations/${config}/max/${trans_path}/${file%%_*}_comet_${model}.txt" \
-            "results/evaluations/${config}/max/${trans_path}/${file%%_*}_Evaluation_${model}.txt" \
+            "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json" \
+            "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_comet_${model}.txt" \
+            "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_Evaluation_${model}.txt" \
             score
 
-        rm "results/evaluations/${config}/max/${trans_path}/${file%%_*}_comet_${model}.txt" \
-           "results/evaluations/${config}/max/${trans_path}/${file%%_*}_sacrebleu_${model}.json"
+        rm "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_comet_${model}.txt" \
+           "results/evaluations/${config}/max/${domain}/${balance}/${file%%_*}_sacrebleu_${model}.json"
     done
     echo "Evaluation for size 'max' is completed!"
 
