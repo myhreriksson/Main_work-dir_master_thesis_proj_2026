@@ -26,7 +26,7 @@ elif arg.domain == 'archaic': # when translating bible,
     model_domain = 'pseudo' # use model trained on game data
 
 if arg.config == 'tuned':
-    if model_domain == 'pseudo':
+    if model_domain == 'archaic':
         if arg.balance == 'balanced':
             model = os.path.join(arg.model, f'{arg.balance}_{model_domain}')
             out_path = os.path.join(arg.output, arg.balance)

@@ -15,7 +15,7 @@ balance="${4}"
 
 path="data/_test-n-finetune_/${domain}_deu/"
 
-if [[ "$domain" == "archaic" ]]; then
+if [[ "$domain" == "pseudo" ]]; then
     if [[ "$balance" == "balanced" ]]; then
         trans_path="${domain}/${balance}"
     else
