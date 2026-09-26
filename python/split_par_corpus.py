@@ -20,7 +20,7 @@ en_path = os.path.join(arg.path, arg.inp_en)
 eng_corpus = []
 deu_corpus = []
 
-# could defenitely have avoided making two redundant for-loops by writing smarter code, but I couldn't be bothered
+# could defenitely have avoided making two redundant for-loops by writing smarter code
 for file in sorted(os.listdir(en_path)):
     with open(os.path.join(en_path, file), 'r', encoding='utf-8') as en:
         lines = en.readlines()

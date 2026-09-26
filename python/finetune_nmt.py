@@ -255,11 +255,12 @@ trainer = Seq2SeqTrainer(
 )
 
 # 5.3: run inference and save best model
-trainer.train()
-model.save_pretrained(arg.output)
-tokenizer.save_pretrained(arg.output)
+if __name__=='__main__':
+    trainer.train()
+    model.save_pretrained(arg.output)
+    tokenizer.save_pretrained(arg.output)
 
 #-------------------------------------------------------------------------------#
 # part 6: save best epoch
-with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
-    json.dump(trainer.state.log_history, f)
+    with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
+        json.dump(trainer.state.log_history, f)

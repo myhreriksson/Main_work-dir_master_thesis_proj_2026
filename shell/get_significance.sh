@@ -24,7 +24,6 @@ fi
 data_path='data/_test-n-finetune_/'
 src_path="${data_path}${domain}_eng/"
 ref_path="${data_path}${domain}_deu/"
-mkdir -p "$out_path"
 
 # part 1: bootstrap with increasing tuning sizes
 for i in $(seq 0 3 15); do
@@ -38,6 +37,7 @@ for i in $(seq 0 3 15); do
                 model_B='nllb'
             fi
         fi
+        mkdir -p "$out_path"
         main_path="results/translations/tuned/${i}k/${domain}/${balance}/"
         out_file="${out_path}paired_bs-${i}k.txt"
         for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
@@ -75,6 +75,7 @@ if [[ "$comparison" == "model" ]]; then
     secondary_path="results/translations/tuned/max/${domain}/${balance}/"
     out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
 fi
+mkdir -p "$out_path"
 main_path="results/translations/tuned/max/${domain}/${balance}/"
 out_file="${out_path}paired_bs-max.txt"
 for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do

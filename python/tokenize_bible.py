@@ -10,11 +10,11 @@ parser.add_argument('-n', '--name')
 parser.add_argument('-e', '--extension')
 arg = parser.parse_args()
 
-# some of the numbers are wrong, but alignment is correct, so I'll choose to ignore it for the sake of my mental health
+# some numbers are wrong, but sentence alignment is correct. chose to ignore it for my mental health
 def pdf_vers():
     with open(out_path, 'w', encoding='utf-8') as f:
         reader = PdfReader(inp_path)
-        # patterns 1-3 and this entire function are great reasons why I hate working with pdfs :)
+        # patterns 1--3 and this entire function are why I hate working with pdfs
         pattern_1 = r'(?=^\d+\n)'
         pattern_2 = r'anonymousgerman\sbible\s\d+'
         pattern_3 = r'chapter\s(\d+)'

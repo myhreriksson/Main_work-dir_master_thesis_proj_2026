@@ -74,11 +74,12 @@ def get_scores():
         Score: {comet}
         ''')
 
-with (
-    open(sys.argv[1]) as json_file,
-    open(sys.argv[2], 'r', encoding='utf-8') as txt_file
-    ):
-    if sys.argv[4] == 'score':
-        get_scores()
-    elif sys.argv[4] == 'bootstrap':
-        get_significance()
+if __name__=='__main__':
+    with (
+        open(sys.argv[1]) as json_file,
+        open(sys.argv[2], 'r', encoding='utf-8') as txt_file
+        ):
+        if sys.argv[4] == 'score':
+            get_scores()
+        elif sys.argv[4] == 'bootstrap':
+            get_significance()

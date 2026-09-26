@@ -18,8 +18,7 @@ elif arg.lang == 'deu':
 
 for file in os.listdir(arg.inp_path):
     if arg.domain == 'prose':
-        # this is a TERRIBLE solution; absolute fucking trash,
-        # but I realized WAAY too late I have to adapt to different file sizes (I should be banned from writing code again)
+        # not a great solution
         if re.search(r'.*Kliphausen.*', file):
             limit = 59000
         elif re.search(r'.*Grimmelshausen.*', file):
