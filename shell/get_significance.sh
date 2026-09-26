@@ -12,20 +12,23 @@ domain="${1}"
 model_A="${2}"
 balance="${3}"
 comparison="${4}"
+b_max="${5}"
 
-# NOTE: debugging this has stolen years from my life; God is dead, and slurm killed him
+# debugging this has stolen years from my life; God is dead, and slurm killed him
 
 if [[ "$comparison" == "config" ]]; then
     secondary_path="results/translations/base/${domain}/"
     out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_within_${model_A}/"
     model_B="$model_A"
+    config='tuned'
+    b_max='max'
 fi
 
 data_path='data/_test-n-finetune_/'
 src_path="${data_path}${domain}_eng/"
 ref_path="${data_path}${domain}_deu/"
 
-# part 1: bootstrap with increasing tuning sizes
+# part 1: paired significance testing with increasing tuning sizes
 for i in $(seq 0 3 15); do
     if (( i > 0 )); then
         if [[ "$comparison" == "model" ]]; then
@@ -70,14 +73,20 @@ for i in $(seq 0 3 15); do
     fi
 done
 
-# part 1: bootstrap with maximum tuning size
+# part 2: paired significance testing for base and/or maximum tuning size
 if [[ "$comparison" == "model" ]]; then
-    secondary_path="results/translations/tuned/max/${domain}/${balance}/"
     out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
+    if [[ "$b_max" == "max" ]]; then
+        config="tuned/${b_max}"
+    elif [[ "$b_max" == "base" ]]; then
+        config='base'
+    fi
+    secondary_path="results/translations/${config}/${domain}/${balance}/"
 fi
+
 mkdir -p "$out_path"
-main_path="results/translations/tuned/max/${domain}/${balance}/"
-out_file="${out_path}paired_bs-max.txt"
+main_path="results/translations/${config}/${domain}/${balance}/"
+out_file="${out_path}paired_bs-${b_max}.txt"
 for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
     file=$(basename "$secondary_file")
     main_file="${main_path}${file%%_*}_Translation_${model_A}_EN-DE.txt"
@@ -89,19 +98,19 @@ for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
         -m bleu ter \
         --paired-bs \
         --paired-bs-n 5000 
-    } > "${out_path}${file%%_*}bleu_max.json"
+    } > "${out_path}${file%%_*}bleu_${b_max}.json"
     {
     comet-compare \
         -s $src \
         -t "$secondary_file" "$main_file" \
         -r $ref 
-    } > "${out_path}${file%%_*}comet_max.txt"
+    } > "${out_path}${file%%_*}comet_${b_max}.txt"
     
     python python/write_results.py \
-        "${out_path}${file%%_*}bleu_max.json" \
-        "${out_path}${file%%_*}comet_max.txt" \
+        "${out_path}${file%%_*}bleu_${b_max}.json" \
+        "${out_path}${file%%_*}comet_${b_max}.txt" \
         "$out_file" \
         bootstrap
 
-    rm "${out_path}${file%%_*}bleu_max.json" "${out_path}${file%%_*}comet_max.txt"
+    rm "${out_path}${file%%_*}bleu_${b_max}.json" "${out_path}${file%%_*}comet_${b_max}.txt"
 done

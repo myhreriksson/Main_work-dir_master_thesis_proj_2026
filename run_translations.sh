@@ -21,18 +21,26 @@ tuned_2_b=$(bash shell/test.sh pseudo bart tuned balanced "$post_baseline") # fi
 post_finetuned="$tuned_1:$tuned_2:$tuned_3:$tuned_4"
 post_finetuned_b="$tuned_1_b:$tuned_2_b"
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' config
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' config
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' config
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' config
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' config max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' config max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' config max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' config max
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' model
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' model
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' model
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' model
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' model max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' model max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' model max
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' model max
 
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced config
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced config
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' model base
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' model base
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' model base
+sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' model base
 
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced model
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced model
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced config max
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced config max
+
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced model max
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced model max
+
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced model base
+sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced model base
