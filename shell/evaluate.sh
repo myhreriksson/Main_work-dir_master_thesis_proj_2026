@@ -15,7 +15,8 @@ balance="${4}"
 
 path="data/_test-n-finetune_/${domain}_deu/"
 
-# I realize in hindsight that I defenitely could have written this using more intuitive variables instead of this mess
+# I realize in hindsight that I could have made this less cluttered and more intuitive.
+# however, looking at this gives me a headache, so I chose to ignore tidying it up.
 
 # part 1: evaluate increasing tuning sizes
 if [[ "$config" == "tuned" ]]; then

@@ -59,19 +59,6 @@ if [[ "$config" == "tuned" ]]; then
         tgt='de_DE'
     fi
 
-    python python/translate.py \
-        -m "$model_path" \
-        -c "$config" \
-        -n "$model" \
-        -i "$inp_path" \
-        -o "$out_path" \
-        -d "$domain" \
-        -b 4 \
-        --src_lang "$src" \
-        --tgt_lang "$tgt" \
-        --batch_size 256 \
-        --balance "$balance"
-
 # part 3: translate baselines
 elif [[ "$config" == "base" ]]; then
     inp_path="data/_test-n-finetune_/${domain}_eng/"
@@ -85,17 +72,17 @@ elif [[ "$config" == "base" ]]; then
         src='en_XX'
         tgt='de_DE'
     fi
-
-    python python/translate.py \
-        -m "$model_path" \
-        -c "$config" \
-        -n "$model" \
-        -i "$inp_path" \
-        -o "$out_path" \
-        -d "$domain" \
-        -b 4 \
-        --src_lang "$src" \
-        --tgt_lang "$tgt" \
-        --batch_size 256 \
-        --balance "$balance"
 fi
+
+python python/translate.py \
+    -m "$model_path" \
+    -c "$config" \
+    -n "$model" \
+    -i "$inp_path" \
+    -o "$out_path" \
+    -d "$domain" \
+    -b 4 \
+    --src_lang "$src" \
+    --tgt_lang "$tgt" \
+    --batch_size 256 \
+    --balance "$balance"
