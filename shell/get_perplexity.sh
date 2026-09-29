@@ -18,13 +18,13 @@ model_path="models/${config}/"
 # fine-tuned
 if [[ "$config" == "tuned" ]]; then
     if [[ "$domain" == "bible" ]]; then
-        model_domain="${balance}archaic"
+        domain="${balance}archaic"
     elif [[ "$domain" == "prose" ]]; then
-        model_domain="$domain"
+        domain="$domain"
     fi
     output_path="results/evaluations/perplexity/${config}/${domain}/"
     mkdir -p "$output_path"
-    model="${model_path}max/qwen/${model_domain}/trained_on_${lang}/"
+    model="${model_path}max/qwen/${domain}/trained_on_${lang}/"
 
 # baselines
 elif [[ "$config" == "base" ]]; then
