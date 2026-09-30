@@ -37,13 +37,13 @@ def get_evals(dataset):
         all_dat[domain] = train_steps, train_loss, eval_steps, eval_loss
     return all_dat
 
-colors = { 
-    't_archaic': "#FF0000",
-    'v_archaic': "#AD4323",
-    't_balanced_archaic': "#006EFF",
-    'v_balanced_archaic': "#366BB0",
-    't_prose': "#07BF20",
-    'v_prose': "#379F61",
+colors = { # the RGB GUI is a pretty neat feature in VSCode
+    't_archaic': "#EE4848",
+    'v_archaic': "#F91900",
+    't_balanced_archaic': "#0060DD",
+    'v_balanced_archaic': "#0367E9",
+    't_prose': "#00B418",
+    'v_prose': "#05DA5A",
 }
 
 def get_plot(all_dat, axis):
@@ -56,7 +56,7 @@ def get_plot(all_dat, axis):
             train_loss,
             color=colors[f't_{domain}'],
             label=f'Train LOSS for {domain}',
-            linewidth=1
+            linewidth=.5
         )
         axis.plot(
             eval_steps,
