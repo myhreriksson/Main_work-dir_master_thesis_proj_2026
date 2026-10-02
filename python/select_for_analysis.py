@@ -10,6 +10,7 @@ parser.add_argument('-s', '--size')
 parser.add_argument('-d', '--domain')
 parser.add_argument('-l', '--line')
 parser.add_argument('--limit')
+parser.add_argument('--balance')
 arg = parser.parse_args()
 
 # determiner mainly archaic pronouns in English
@@ -54,7 +55,7 @@ if arg.config == 'base':
     config = arg.config
 elif arg.config == 'tuned':
     config = f'{arg.config}/{arg.size}'
-path = fr'results/translations/{config}/{arg.domain}'
+path = f'results/translations/{config}/{arg.domain}/{arg.balance}'
 for file in sorted(os.listdir(path)):
     if not os.path.isdir(os.path.join(path, file)):
         fullpath = os.path.join(path, file)
@@ -63,6 +64,6 @@ for file in sorted(os.listdir(path)):
             ):
             lines = f.readlines()
             print(dedent(f'''\
-            {file}:
+            {cyan}{file}{reset}:
             {lines[int(arg.line)]}\
             '''))

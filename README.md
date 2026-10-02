@@ -56,3 +56,4 @@ ___
 python python/count_toks.py [size] [domain] [min_word_count (4 or 5)] \
 python python/count_params.py [model] \
 bash shell/get_plot.sh [nmt] [domain] OR [llm]
+bash shell/get_qualitative.sh [limit] [domain] + [config] [line] + [size] + [balance]

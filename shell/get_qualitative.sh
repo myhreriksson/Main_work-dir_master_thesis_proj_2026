@@ -3,6 +3,7 @@ domain="${2}"
 config="${3}"
 line="${4}"
 size="${5}"
+balance="${6}"
 path="data/_test-n-finetune_/${domain}"
 
 python python/select_for_analysis.py \
@@ -11,4 +12,5 @@ python python/select_for_analysis.py \
     -s "$size" \
     -d "$domain" \
     -l "$line" \
-    --limit "$limit"
+    --limit "$limit" \
+    --balance "$balance"
