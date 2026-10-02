@@ -11,4 +11,4 @@ python python/select_for_analysis.py \
     -s "$size" \
     -d "$domain" \
     -l "$line" \
-    --limit
+    --limit "$limit"

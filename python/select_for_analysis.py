@@ -37,7 +37,7 @@ if not arg.config:
             for word in line.split():
                 if word in archaisms:
                     matches += 1
-            if matches == arg.limit and len(line.split()) <= 20:
+            if matches == int(arg.limit) and len(line.split()) <= 20:
                 candidates.append((e_lines[idx], d_lines[idx], idx))
         remain = len(candidates)
         for pair in candidates:
