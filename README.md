@@ -7,11 +7,9 @@ conda create -n venv python==3.11
 conda activate venv 
 pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub matplotlib optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet
 ```
-```sh
-python -<< EOF \
-import nltk \
-nltk.download('punkt_tab') \
-EOF
+```py
+import nltk
+nltk.download('punkt_tab')
 ```
 ___
 ### Model Setup
@@ -61,11 +59,9 @@ ___
 - Count word tokens:
 - Count model parameters:
 - Plot evaluation scores:
-```py
+```sh
 python python/count_toks.py [size] [domain] [min_word_count (4 or 5)] \
 python python/count_params.py [model]
-```
-```sh
 bash shell/get_plot.sh [nmt] [domain] OR [llm]
 bash shell/get_qualitative.sh [limit] [domain] + [config] [line] + [size] + [balance]
 ```
