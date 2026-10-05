@@ -11,7 +11,7 @@ conda activate thesis-venv
 model="${1}"
 
 inp_path='data/flores_data/flores_eng/'
-out_path='results/translations/base/flores_200/'
+out_path='results/translations/base/flores/'
 model_path="models/base/${model}/"
 
 mkdir -p "$out_path"
