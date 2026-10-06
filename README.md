@@ -46,7 +46,6 @@ In contrast, when translating using fine-tuned models, the domain name refers to
 - Compute and store sacrebleu's and COMET's pairwise t-test bootstrapping p-values.
 ```sh
 bash run_translations.sh
-bash run_flores.sh
 ```
 ___
 ### Compute perplexity
@@ -64,5 +63,5 @@ ___
 python python/count_toks.py [size] [domain] [min_word_count (4 or 5)] \
 python python/count_params.py [model]
 bash shell/get_plot.sh [nmt] [domain] OR [llm]
-bash shell/get_qualitative.sh [limit] [domain] + [config] [line] + [size] + [balance]
+bash shell/get_archaic_sents.sh [limit] [domain] + [config] [line] + [size] + [balance]
 ```

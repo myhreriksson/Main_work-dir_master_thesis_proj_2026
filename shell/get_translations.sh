@@ -22,10 +22,10 @@ elif [[ "$model" == "bart" ]]; then
 fi
 
 translate() {
-    local config="${1}"
+    local size_config="${1}"
     local inp_path="data/_test-n-finetune_/${domain}_eng/"
-    local out_path="results/translations/${config}/${domain}/"
-    local model_path="models/${config}/${model}/"
+    local out_path="results/translations/${size_config}/${domain}/"
+    local model_path="models/${size_config}/${model}/"
     mkdir -p "$out_path"
 
     python python/translate.py \

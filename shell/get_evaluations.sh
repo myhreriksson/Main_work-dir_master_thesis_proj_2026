@@ -15,22 +15,22 @@ balance="${4}"
 
 evaluate() {
     local config="${1}"
-    local source="data/_test-n-finetune_/${domain}_eng/${domain}_EN.txt"
-    local target="results/translations/${config}/${domain}/${domain}_Translation_${model}_EN-DE.txt"
-    local reference="data/${domain}_data/${domain}_deu/${domain}_DE.txt"
+    local src="data/_test-n-finetune_/${domain}_eng/${domain}_EN.txt"
+    local tgt="results/translations/${config}/${domain}/${domain}_Translation_${model}_EN-DE.txt"
+    local ref="data/_test-n-finetune_/${domain}_deu/${domain}_DE.txt"
     local out_path="results/evaluations/${config}/${domain}/${balance}"
     mkdir -p "$out_path"
 
-    { sacrebleu "$source" \
-        -i "$target" \
+    { sacrebleu "$src" \
+        -i "$tgt" \
         -m bleu ter \
         -l en-de
     } > "${out_path}/${domain}_sacrebleu_${model}.json"
 
     { comet-score \
-        -s "$source" \
-        -t "$target" \
-        -r "$reference" \
+        -s "$src" \
+        -t "$tgt" \
+        -r "$ref" \
         --quiet \
         --only_system
     } > "${out_path}/${domain}_comet_${model}.txt"
