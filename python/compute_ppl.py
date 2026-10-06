@@ -8,6 +8,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model')
 parser.add_argument('-o', '--output')
 parser.add_argument('-l', '--lang')
+parser.add_argument('-d', '--domain')
 arg = parser.parse_args()
 
 # part 1: load model & tokenizer
@@ -24,7 +25,7 @@ if arg.lang == 'eng':
     LANG = 'EN'
 elif arg.lang == 'deu':
     LANG = 'DE'
-test_file = os.path.join(f'data/_test-n-finetune_/pseudo_{arg.lang}/game_{LANG}.txt')
+test_file = os.path.join(f'data/_test-n-finetune_/{arg.domain}_{arg.lang}/{arg.domain}_{LANG}.txt')
 
 with open(test_file, 'r', encoding='utf-8') as f:
     txt = f.read()

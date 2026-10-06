@@ -9,7 +9,7 @@ parser.add_argument('-p', '--path')
 parser.add_argument('-o', '--output')
 arg = parser.parse_args()
 
-domains = 'archaic', 'balanced_archaic', 'prose'
+domains = 'bible', 'balanced_bible', 'prose'
 
 def get_dataset(model, lang):
     dataset = {}
@@ -38,10 +38,10 @@ def get_evals(dataset):
     return all_dat
 
 colors = { # the RGB GUI is a pretty neat feature in VSCode
-    't_archaic': "#EE4848",
-    'v_archaic': "#F91900",
-    't_balanced_archaic': "#0060DD",
-    'v_balanced_archaic': "#0367E9",
+    't_bible': "#EE4848",
+    'v_bible': "#F91900",
+    't_balanced_bible': "#0060DD",
+    'v_balanced_bible': "#0367E9",
     't_prose': "#00B418",
     'v_prose': "#05DA5A",
 }

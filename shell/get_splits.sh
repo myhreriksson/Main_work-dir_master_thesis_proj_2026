@@ -1,48 +1,41 @@
 task="${1}"
 domain="${2}"
+lang="${3}"
 
 data_path='data/_test-n-finetune_/'
 json_path="${data_path}_finetuning/"
 
-if [[ "$task" == "llm" ]]; then
-    lang="${3}"
-    if [[ "$domain" == "bible" ]]; then
-        domain='archaic'
-    else
-        domain="${2}"
-    fi
-    mkdir -p "${json_path}ppl/"
-    python python/split_txt_corpus.py \
-        -i "$data_path" \
-        -o "${json_path}ppl/" \
-        -d "$domain" \
-        -l "$lang" \
-        -s 0.8 0.1 0.1 \
-        --min_len 5 
-
-elif [[ "$task" == "nmt" ]]; then
-    for i in $(seq 0 3 15); do
-        if (( i > 0 )); then 
-            mkdir -p "${json_path}${i}k/" 
-            python python/split_par_corpus.py \
-                -p "$data_path" \
-                -o "${json_path}${i}k/" \
-                -d "${domain}_deu/" \
-                -e "${domain}_eng/" \
-                -n "$domain" \
-                -s 0.8 0.1 0.1 \
-                --data_size "$i" \
-                --min_len 4 
-        fi
-    done
-    mkdir -p "${json_path}max/" 
+par_corpus_split() {
+    local json_path="${json_path}/${1}/"
+    mkdir -p "$json_path"
     python python/split_par_corpus.py \
         -p "$data_path" \
-        -o "${json_path}max/" \
+        -o "$json_path" \
         -d "${domain}_deu/" \
         -e "${domain}_eng/" \
         -n "$domain" \
         -s 0.8 0.1 0.1 \
-        --data_size 'max' \
+        --data_size "${1}" \
         --min_len 4 
+}
+
+txt_corpus_split() {
+    local json_path="${json_path}/${1}/"
+    mkdir -p "$json_path"
+    python python/split_txt_corpus.py \
+        -i "$data_path" \
+        -o "$json_path" \
+        -d "$domain" \
+        -l "$lang" \
+        -s 0.8 0.1 0.1 \
+        --min_len 5 
+}
+
+if [[ "$task" == "llm" ]]; then
+    txt_corpus_split "ppl"
+elif [[ "$task" == "nmt" ]]; then
+    for i in $(seq 3 3 15); do
+        par_corpus_split "${i}k"
+    done
+    par_corpus_split "max"
 fi

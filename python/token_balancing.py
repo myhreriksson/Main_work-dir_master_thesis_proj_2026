@@ -12,16 +12,16 @@ parser.add_argument('-d', '--domain')
 parser.add_argument('-l', '--lang')
 arg = parser.parse_args()
 
-if arg.domain == 'pseudo':
+if arg.domain == 'game':
     key = 'de'
-    cand_name = f'archaic_{arg.split}.json'
+    cand_name = f'bible_{arg.split}.json'
     ref_name = f'{arg.domain}_{arg.split}.json'
-    out_name = f'balanced_archaic_{arg.split}.json'
+    out_name = f'balanced_bible_{arg.split}.json'
 elif arg.domain == 'prose':
     key = 'text'
-    cand_name = f'{arg.lang}_archaic_{arg.split}.json'
+    cand_name = f'{arg.lang}_bible_{arg.split}.json'
     ref_name = f'{arg.lang}_{arg.domain}_{arg.split}.json'
-    out_name = f'balanced_{arg.lang}_archaic_{arg.split}.json'
+    out_name = f'balanced_{arg.lang}_bible_{arg.split}.json'
 
 with (
     open(os.path.join(arg.path, cand_name), 'r', encoding='utf-8') as cand,

@@ -13,76 +13,40 @@ config="${2}"
 domain="${3}"
 balance="${4}"
 
-# this script is very repetetive and cluttered, have fun reading it :^)
-
-# part 1: translate with increasing tuning sizes
-if [[ "$config" == "tuned" ]]; then
-    for i in $(seq 0 3 15); do
-        if (( i > 0 )); then
-            inp_path="data/_test-n-finetune_/${domain}_eng/"
-            out_path="results/translations/${config}/${i}k/${domain}"
-            model_path="models/${config}/${i}k/${model}/"
-
-            if [[ "$model" == "nllb" ]]; then
-                src='eng_Latn'
-                tgt='deu_Latn'
-            elif [[ "$model" == "bart" ]]; then
-                src='en_XX'
-                tgt='de_DE'
-            fi
-
-            python python/translate.py \
-                -m "$model_path" \
-                -c "$config" \
-                -n "$model" \
-                -i "$inp_path" \
-                -o "$out_path" \
-                -d "$domain" \
-                -b 4 \
-                --src_lang "$src" \
-                --tgt_lang "$tgt" \
-                --batch_size 256 \
-                --balance "$balance"
-        fi
-    done
-
-# part 1: translate with maximum tuning size
-    inp_path="data/_test-n-finetune_/${domain}_eng/"
-    out_path="results/translations/${config}/max/${domain}"
-    model_path="models/${config}/max/${model}/"
-
-    if [[ "$model" == "nllb" ]]; then
-        src='eng_Latn'
-        tgt='deu_Latn'
-    elif [[ "$model" == "bart" ]]; then
-        src='en_XX'
-        tgt='de_DE'
-    fi
-
-# part 3: translate baselines
-elif [[ "$config" == "base" ]]; then
-    inp_path="data/_test-n-finetune_/${domain}_eng/"
-    out_path="results/translations/${config}/${domain}"
-    model_path="models/${config}/${model}/"
-
-    if [[ "$model" == "nllb" ]]; then
-        src='eng_Latn'
-        tgt='deu_Latn'
-    elif [[ "$model" == "bart" ]]; then
-        src='en_XX'
-        tgt='de_DE'
-    fi
+if [[ "$model" == "nllb" ]]; then
+    src='eng_Latn'
+    tgt='deu_Latn'
+elif [[ "$model" == "bart" ]]; then
+    src='en_XX'
+    tgt='de_DE'
 fi
 
-python python/translate.py \
-    -m "$model_path" \
-    -c "$config" \
-    -n "$model" \
-    -i "$inp_path" \
-    -o "$out_path" \
-    -d "$domain" \
-    -b 4 \
-    --src_lang "$src" \
-    --tgt_lang "$tgt" \
-    --batch_size 256 \
-    --balance "$balance"
+translate() {
+    local config="${1}"
+    local inp_path="data/_test-n-finetune_/${domain}_eng/"
+    local out_path="results/translations/${config}/${domain}/"
+    local model_path="models/${config}/${model}/"
+    mkdir -p "$out_path"
+
+    python python/translate.py \
+        -m "$model_path" \
+        -c "$config" \
+        -n "$model" \
+        -i "$inp_path" \
+        -o "$out_path" \
+        -d "$domain" \
+        -b 4 \
+        --src_lang "$src" \
+        --tgt_lang "$tgt" \
+        --batch_size 256 \
+        --balance "$balance"
+}
+
+if [[ "$config" == "base" ]]; then
+    translate "base"
+elif [[ "$config" == "tuned" ]]; then
+    for i in $(seq 3 3 15); do
+        translate "tuned/${i}k"
+    done
+    translate "tuned/max"
+fi

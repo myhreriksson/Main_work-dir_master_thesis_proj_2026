@@ -9,22 +9,18 @@ source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/cond
 conda activate thesis-venv
 
 config="${1}"
-domain="${2}"
+model_domain="${2}"
 lang="${3}"
 balance="${4}"
+test_domain="${5}"
 
 model_path="models/${config}/"
 
 # fine-tuned
 if [[ "$config" == "tuned" ]]; then
-    if [[ "$domain" == "bible" ]]; then
-        domain="${balance}archaic"
-    elif [[ "$domain" == "prose" ]]; then
-        domain="$domain"
-    fi
-    output_path="results/evaluations/perplexity/${config}/${domain}/"
+    output_path="results/evaluations/perplexity/${config}/${model_domain}/"
     mkdir -p "$output_path"
-    model="${model_path}max/qwen/${domain}/trained_on_${lang}/"
+    model="${model_path}max/qwen/${model_domain}/trained_on_${lang}/"
 
 # baselines
 elif [[ "$config" == "base" ]]; then
@@ -36,4 +32,5 @@ fi
 python python/compute_ppl.py \
     -m "$model" \
     -o "$output_path" \
-    -l "$lang" 
+    -l "$lang" \
+    -d "$test_domain"

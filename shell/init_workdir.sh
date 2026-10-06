@@ -6,10 +6,10 @@ mkdir -p \
     shell \
     results/evaluations \
     results/translations \
-    data/_test-n-finetune_/archaic_deu \
-    data/_test-n-finetune_/archaic_eng \
-    data/_test-n-finetune_/pseudo_deu \
-    data/_test-n-finetune_/pseudo_eng \
+    data/_test-n-finetune_/bible_deu \
+    data/_test-n-finetune_/bible_eng \
+    data/_test-n-finetune_/game_deu \
+    data/_test-n-finetune_/game_eng \
     data/bible_data \
     data/game_data \
     data/prose_data \

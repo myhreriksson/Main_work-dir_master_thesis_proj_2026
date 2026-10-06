@@ -20,13 +20,13 @@ arg = parser.parse_args()
 # part 1: load model & tokenizer
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possible
 
-if arg.domain == 'pseudo': # when translating game,
-    model_domain = 'archaic' # use model trained on bible data
-elif arg.domain == 'archaic': # when translating bible,
-    model_domain = 'pseudo' # use model trained on game data
+if arg.domain == 'game': # when translating game,
+    model_domain = 'bible' # use model trained on bible data
+elif arg.domain == 'bible': # when translating bible,
+    model_domain = 'game' # use model trained on game data
 
 if arg.config == 'tuned':
-    if model_domain == 'archaic':
+    if model_domain == 'bible':
         if arg.balance == 'balanced':
             model = os.path.join(arg.model, f'{arg.balance}_{model_domain}')
             out_path = os.path.join(arg.output, arg.balance)

@@ -21,7 +21,7 @@ def get_pdf():
 
 response = requests.get(arg.source)
 if response:
-    print('Data retrieved.\n...')
+    print('\nData retrieved.\n...')
 else:
     print('Data could not be retrieved.')
 

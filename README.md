@@ -19,11 +19,11 @@ ___
 bash shell/init_setup.sh
 ```
 ___
-### Preprocessing archaic data
-- Retrieve archaic bible data and process it.
-- Moves game_data to pseudo_deu and pseudo_eng.
-- Moves bible_data to archaic_deu and archaic_eng.
-- Retrieve archaic prose and poetry data, as well as process it.
+### Preprocessing bible data
+- Retrieve bible bible data and process it.
+- Moves game_data to game_deu and game_eng.
+- Moves bible_data to bible_deu and bible_eng.
+- Retrieve bible prose and poetry data, as well as process it.
 - Manually process the prose data (use regex to remove footnotes, empty newlines, indentations, cursive markers).
 - Regex for manual tokenization 1: (?<![.!?])\r?\n _replace with_ \s
 - Regex for manual tokenization 2: ([.!?])\s+ _replace with_ $1\n
@@ -33,7 +33,7 @@ bash run_preprocessing.sh
 ```
 ___
 ### Finetune NMT models
-- Finetune model on specified data; *archaic* for tuning on bible data & *pseudo* for tuning on game data.
+- Finetune model on specified data; *bible* for tuning on bible data & *game* for tuning on game data.
 ```sh
 bash run_finetuning.sh
 ```

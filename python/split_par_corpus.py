@@ -43,7 +43,7 @@ with (
         if len(en_line.split()) >= arg.min_len and len(de_line.split()) >= arg.min_len:
             pairs.append({'en': en_line, 'de': de_line})
     if arg.data_size != 'max':
-        size = int(arg.data_size) * 1000
+        size = int(arg.data_size[:-1]) * 1000
         size = min(size, len(pairs))
         df = pd.DataFrame(pairs).sample(n=size, random_state=21)
     else:

@@ -15,12 +15,7 @@ lang="${4}"
 balance="${5}"
 size="${6}"
 
-if [[ "$balance" == "balanced" ]]; then
-    domain="balanced_${3}"
-else
-    domain="${3}"
-fi
-
+domain="${balance}${domain}"
 data_path='data/_test-n-finetune_/'
 model_path="models/base/${model}"
 

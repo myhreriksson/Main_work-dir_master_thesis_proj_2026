@@ -12,105 +12,82 @@ domain="${1}"
 model_A="${2}"
 balance="${3}"
 comparison="${4}"
-b_max="${5}"
 
-# debugging this has stolen years from my life; God is dead, and slurm killed him
-
-if [[ "$comparison" == "config" ]]; then
-    secondary_path="results/translations/base/${domain}/"
-    out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_within_${model_A}/"
-    model_B="$model_A"
-    config='tuned'
-    b_max='max'
-fi
-
+out_path="results/evaluations/significance/${domain}/${balance}/"
 data_path='data/_test-n-finetune_/'
+tgt_path='results/translations/'
 src_path="${data_path}${domain}_eng/"
 ref_path="${data_path}${domain}_deu/"
 
-# part 1: paired significance testing with increasing tuning sizes
-for i in $(seq 0 3 15); do
-    if (( i > 0 )); then
-        if [[ "$comparison" == "model" ]]; then
-            secondary_path="results/translations/tuned/${i}k/${domain}/${balance}/"
-            out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
-            if [[ "$model_A" == "nllb" ]]; then
-                model_B='bart'
-            elif [[ "$model_A" == "bart" ]]; then
-                model_B='nllb'
-            fi
-        fi
-        mkdir -p "$out_path"
-        main_path="results/translations/tuned/${i}k/${domain}/${balance}/"
-        out_file="${out_path}paired_bs-${i}k.txt"
-        for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
-            file=$(basename "$secondary_file")
-            main_file="${main_path}${file%%_*}_Translation_${model_A}_EN-DE.txt"
-            src="${src_path}${file%%_*}_EN.txt"
-            ref="${ref_path}${file%%_*}_DE.txt"
-        {
-            sacrebleu $ref \
-                -i "$secondary_file" "$main_file" \
-                -m bleu ter \
-                --paired-bs \
-                --paired-bs-n 5000
-        } > "${out_path}${file%%_*}bleu_${i}k.json"
-        {
-            comet-compare \
-                -s $src \
-                -t "$secondary_file" "$main_file" \
-                -r $ref 
-        } > "${out_path}${file%%_*}comet_${i}k.txt"
-        
-        python python/write_results.py \
-            "${out_path}${file%%_*}bleu_${i}k.json" \
-            "${out_path}${file%%_*}comet_${i}k.txt" \
-            "$out_file" \
-            bootstrap
-        
-        rm "${out_path}${file%%_*}bleu_${i}k.json" "${out_path}${file%%_*}comet_${i}k.txt"
-        done
-    fi
-done
+compare() {
+    local model_B="${1}"
+    local config_A="${2}"
+    local config_B="${3}"
+    local comp_type="${4}"
+    local size="${config_B#*/}"
+    local out_dir="${out_path}/${comp_type}"
+    mkdir -p "$out_dir"
+    local out_file="${out_dir}/paired_bs-${size}.txt"
+    local tgt_A="${tgt_path}/${config_A}/${domain}/${balance}/${domain}_Translation_${model_A}_EN-DE.txt"
+    local tgt_B="${tgt_path}/${config_B}/${domain}/${balance}/${domain}_Translation_${model_B}_EN-DE.txt"
+    local src="${src_path}/${domain}_EN.txt"
+    local ref="${ref_path}/${domain}_DE.txt"
 
-# part 2: paired significance testing for base and/or maximum tuning size
-if [[ "$comparison" == "model" ]]; then
-    out_path="results/evaluations/bootstraps/${domain}/${balance}/comps_across_models/"
-    if [[ "$b_max" == "max" ]]; then
-        config="tuned/${b_max}"
-    elif [[ "$b_max" == "base" ]]; then
-        config='base'
-    fi
-    secondary_path="results/translations/${config}/${domain}/${balance}/"
-fi
-
-mkdir -p "$out_path"
-main_path="results/translations/${config}/${domain}/${balance}/"
-out_file="${out_path}paired_bs-${b_max}.txt"
-for secondary_file in "${secondary_path}/"*"_${model_B}_EN-DE.txt"; do
-    file=$(basename "$secondary_file")
-    main_file="${main_path}${file%%_*}_Translation_${model_A}_EN-DE.txt"
-    src="${src_path}${file%%_*}_EN.txt"
-    ref="${ref_path}${file%%_*}_DE.txt"
-    {
-        sacrebleu $ref \
-        -i "$secondary_file" "$main_file" \
+    { sacrebleu $ref \
+        -i "$tgt_A" "$tgt_B" \
         -m bleu ter \
         --paired-bs \
-        --paired-bs-n 5000 
-    } > "${out_path}${file%%_*}bleu_${b_max}.json"
-    {
-    comet-compare \
+        --paired-bs-n 5000
+    } > "${out_dir}/${domain}_bleu_${size}.json"
+
+    { comet-compare \
         -s $src \
-        -t "$secondary_file" "$main_file" \
+        -t "$tgt_A" "$tgt_B" \
         -r $ref 
-    } > "${out_path}${file%%_*}comet_${b_max}.txt"
-    
+    } > "${out_dir}/${domain}_comet_${size}.txt"
+        
     python python/write_results.py \
-        "${out_path}${file%%_*}bleu_${b_max}.json" \
-        "${out_path}${file%%_*}comet_${b_max}.txt" \
+        "${out_dir}/${domain}_bleu_${size}.json" \
+        "${out_dir}/${domain}_comet_${size}.txt" \
         "$out_file" \
         bootstrap
+    rm \
+        "${out_dir}/${domain}_bleu_${size}.json" \
+        "${out_dir}/${domain}_comet_${size}.txt"
+}
 
-    rm "${out_path}${file%%_*}bleu_${b_max}.json" "${out_path}${file%%_*}comet_${b_max}.txt"
-done
+# significance testing within same model, comparing all configs with baseline
+if [[ "$comparison" == "config" ]]; then
+    model_B="$model_A" 
+    for i in $(seq 3 3 15); do
+        compare \
+            "$model_B" \
+            "base" \
+            "tuned/${i}k" \
+            "comps_within_${model_B}" 
+    done
+    compare \
+        "$model_B" \
+        "base" \
+        "tuned/max" \
+        "comps_within_${model_B}" 
+elif [[ "$comparison" == "model" ]]; then
+    model_B='nllb'
+    for i in $(seq 3 3 15); do
+        compare \
+            "$model_B" \
+            "tuned/${i}k" \
+            "tuned/${i}k" \
+            "comps_across_models"
+    done
+    compare \
+        "$model_B" \
+        "tuned/max" \
+        "tuned/max" \
+        "comps_across_models"
+    compare \
+        "$model_B" \
+        "base" \
+        "base" \
+        "comps_across_models"
+fi

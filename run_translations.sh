@@ -1,46 +1,42 @@
 #!/bin/bash
 
-# Sentence-balanced
-base_1=$(bash shell/test.sh pseudo nllb base '') # get baselines on game-data (nllb-200)
-base_2=$(bash shell/test.sh pseudo bart base '') # get baselines on game-data (mBart-50)
-base_3=$(bash shell/test.sh archaic nllb base '') # get baselines on bible-data (nllb-200)
-base_4=$(bash shell/test.sh archaic bart base '') # get baselines on bible-data (mBart-50)
+#----------Sentence-balanced BASELINES
+base_1=$(bash shell/test.sh game nllb base '') # get baselines on game-data (NLLB-200)
+base_2=$(bash shell/test.sh game bart base '') # get baselines on game-data (mBART-50)
 
-post_baseline="$base_1:$base_2:$base_3:$base_4"
+base_3=$(bash shell/test.sh bible nllb base '') # get baselines on bible-data (NLLB-200)
+base_4=$(bash shell/test.sh bible bart base '') # get baselines on bible-data (mBART-50)
 
-# Sentence-balanced
-tuned_1=$(bash shell/test.sh pseudo nllb tuned '' "$post_baseline") # finetuned on bible-data, tested on game-data (nllb-200)
-tuned_2=$(bash shell/test.sh pseudo bart tuned '' "$post_baseline") # finetuned on bible-data, tested on game-data (mBart-50)
-tuned_3=$(bash shell/test.sh archaic nllb tuned '' "$post_baseline") # finetuned on game-data, tested on bible-data (nllb-200)
-tuned_4=$(bash shell/test.sh archaic bart tuned '' "$post_baseline") # finetuned on game-data, tested on bible-data (mBart-50)
+base_5=$(bash shell/test.sh flores nllb base '') # get benchmark on flores_200 (NLLB-200)
+base_6=$(bash shell/test.sh flores bart base '') # get benchmark on flores_200 (mBART-50)
 
-# Token-balanced
-tuned_1_b=$(bash shell/test.sh pseudo nllb tuned balanced "$post_baseline") # finetuned on bible-data, tested on game-data (nllb-200)
-tuned_2_b=$(bash shell/test.sh pseudo bart tuned balanced "$post_baseline") # finetuned on bible-data, tested on game-data (mBart-50)
+post_baseline="$base_1:$base_2:$base_3:$base_4:$base_5:$base_6" # collective conditional
 
-post_finetuned="$tuned_1:$tuned_2:$tuned_3:$tuned_4"
-post_finetuned_b="$tuned_1_b:$tuned_2_b"
+#----------Sentence-balanced FINETUNED
+tuned_1U=$(bash shell/test.sh bible nllb tuned '' "$post_baseline") # tuned on game, tested on bible (NLLB-200)
+tuned_2U=$(bash shell/test.sh bible bart tuned '' "$post_baseline") # tuned on game, tested on bible (mBART-50)
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' config max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' config max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' config max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' config max
+tuned_3U=$(bash shell/test.sh game nllb tuned '' "$post_baseline") # tuned on unb_bible, tested on game (NLLB-200)
+tuned_4U=$(bash shell/test.sh game bart tuned '' "$post_baseline") # tuned on unb_bible, tested on game (mBART-50)
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' model max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' model max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' model max
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' model max
+post_finetuned_U="$tuned_1U:$tuned_2U:$tuned_3U:$tuned_4U" # collective conditional unbalanced
 
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo nllb '' model base
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh pseudo bart '' model base
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic nllb '' model base
-sbatch --dependency=afterok:$post_finetuned shell/get_significance.sh archaic bart '' model base
+#----------Token-balanced FINETUNED
+tuned_1B=$(bash shell/test.sh game nllb tuned balanced "$post_baseline") # tuned on bal_bible, tested on game (NLLB-200)
+tuned_2B=$(bash shell/test.sh game bart tuned balanced "$post_baseline") # tuned on bal_bible, tested on game (mBART-50)
 
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced config max
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced config max
+post_finetuned_B="$tuned_1B:$tuned_2B" # collective conditional balanced
 
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced model max
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced model max
+#----------Significance testing WITHIN models (compares change from baseline per model)
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game nllb unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game bart unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible nllb unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible bart unbalanced config
+sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game nllb balanced config 
+sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game bart balanced config 
 
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo nllb balanced model base
-sbatch --dependency=afterok:$post_finetuned_b shell/get_significance.sh pseudo bart balanced model base
+#----------Significance testing ACROSS models (compares change between models per config) 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game bart unbalanced model 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible bart unbalanced model 
+sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game bart balanced model 
+# OBS! since comparison between models is the same regardless of model input, bart was arbitrarily selected

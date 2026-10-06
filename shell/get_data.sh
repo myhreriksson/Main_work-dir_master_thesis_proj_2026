@@ -37,9 +37,6 @@ python python/retrieve_data.py \
     -n "${domain}_${author}_raw" \
     -e ".${extension}"
 
-# above is data retrieval, whereas below is preprocessing of aforementioned data
-# there's alot of jumping inbetween shellscripts at this stage, which probably could have been avoided, but idc anymore :')
-
 if [[ "$domain" == "bible" ]]; then
     python python/tokenize_bible.py \
         -i "${path}/raw" \
