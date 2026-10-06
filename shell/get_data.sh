@@ -14,6 +14,14 @@ de_prose_1=https://www.gutenberg.org/ebooks/55171.txt.utf-8 # simplicius by grim
 de_prose_2=https://www.gutenberg.org/ebooks/22355.txt.utf-8 # schelmuffsky by reuter
 de_prose_3=https://textgridlab.org/1.0/aggregator/text/textgrid:xdgw.0 # asiatische benise by kliphausen
 
+# flores data:
+wget -O eng_Latn.devtest \
+  https://huggingface.co/datasets/DGME/FLORES-200/resolve/main/devtest/eng_Latn.devtest
+wget -O deu_Latn.devtest \
+  https://huggingface.co/datasets/DGME/FLORES-200/resolve/main/devtest/deu_Latn.devtest
+mv eng_Latn.devtest data/_test-n-finetune_/flores_eng/flores_EN.txt
+mv deu_Latn.devtest data/_test-n-finetune_/flores_deu/flores_DE.txt
+
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
 conda activate thesis-venv
 
