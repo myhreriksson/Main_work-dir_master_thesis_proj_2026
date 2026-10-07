@@ -29,13 +29,13 @@ ___
 - Regex for manual tokenization 2: ([.!?])\s+ _replace with_ $1\n
 - The aforementioned does not produce a perfect tokenization, but adequate for the task.
 ```sh
-bash run_preprocessing.sh
+bash run_preprocessing_pipeline.sh
 ```
 ___
 ### Finetune NMT models
 - Finetune model on specified data; *bible* for tuning on bible data & *game* for tuning on game data.
 ```sh
-bash run_finetuning.sh
+bash run_finetuning_pipeline.sh
 ```
 ___
 ### Translate and evaluate
@@ -45,14 +45,14 @@ In contrast, when translating using fine-tuned models, the domain name refers to
 - Compute and store BLEU, TER, COMET scores in appropriate text files.
 - Compute and store sacrebleu's and COMET's pairwise t-test bootstrapping p-values.
 ```sh
-bash run_translations.sh
+bash run_translation_pipeline.sh
 ```
 ___
 ### Compute perplexity
 - Compare the evaluation scores between baselines and tuned model translations.
 - Use comparison to compute and store perplexity in appropriate text files.
 ```sh
-bash run_perplexity.sh
+bash run_significance_pipeline.sh
 ```
 ___
 ### Optional commands
