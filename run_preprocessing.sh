@@ -27,9 +27,9 @@ bash shell/get_splits.sh llm prose deu
 
 #------------------------------------------#
 # make token-balanced vers of split data for NMT task
-bash shell/get_balanced.sh train eng 
-bash shell/get_balanced.sh test eng
-bash shell/get_balanced.sh dev eng
-bash shell/get_balanced.sh train deu
-bash shell/get_balanced.sh test deu
-bash shell/get_balanced.sh dev deu
+bash shell/get_balanced_sents.sh train eng 
+bash shell/get_balanced_sents.sh test eng
+bash shell/get_balanced_sents.sh dev eng
+bash shell/get_balanced_sents.sh train deu
+bash shell/get_balanced_sents.sh test deu
+bash shell/get_balanced_sents.sh dev deu

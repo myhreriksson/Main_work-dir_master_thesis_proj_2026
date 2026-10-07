@@ -6,7 +6,7 @@ ref="game_${split}"
 
 tok_count() {
     local lang="${1}"
-    python python/token_balancing.py \
+    python python/create_balanced_ver.py \
         -p "${dir}/" \
         -c "$cand" \
         -r "$ref" \

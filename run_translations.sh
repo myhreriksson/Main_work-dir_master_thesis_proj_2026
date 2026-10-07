@@ -12,12 +12,12 @@ base_6=$(bash shell/test.sh flores bart base '') # get benchmark on flores_200 (
 
 post_baseline="$base_1:$base_2:$base_3:$base_4:$base_5:$base_6" # collective conditional
 
-#----------Sentence-balanced FINETUNED
-tuned_1U=$(bash shell/test.sh bible nllb tuned '' "$post_baseline") # tuned on game, tested on bible (NLLB-200)
-tuned_2U=$(bash shell/test.sh bible bart tuned '' "$post_baseline") # tuned on game, tested on bible (mBART-50)
+#----------Sentence-balanced (aka unbalanced) FINETUNED
+tuned_1U=$(bash shell/test.sh bible nllb tuned unbalanced "$post_baseline") # tuned on game, tested on bible (NLLB-200)
+tuned_2U=$(bash shell/test.sh bible bart tuned unbalanced "$post_baseline") # tuned on game, tested on bible (mBART-50)
 
-tuned_3U=$(bash shell/test.sh game nllb tuned '' "$post_baseline") # tuned on unb_bible, tested on game (NLLB-200)
-tuned_4U=$(bash shell/test.sh game bart tuned '' "$post_baseline") # tuned on unb_bible, tested on game (mBART-50)
+tuned_3U=$(bash shell/test.sh game nllb tuned unbalanced "$post_baseline") # tuned on unb_bible, tested on game (NLLB-200)
+tuned_4U=$(bash shell/test.sh game bart tuned unbalanced "$post_baseline") # tuned on unb_bible, tested on game (mBART-50)
 
 post_finetuned_U="$tuned_1U:$tuned_2U:$tuned_3U:$tuned_4U" # collective conditional unbalanced
 
@@ -28,15 +28,15 @@ tuned_2B=$(bash shell/test.sh game bart tuned balanced "$post_baseline") # tuned
 post_finetuned_B="$tuned_1B:$tuned_2B" # collective conditional balanced
 
 #----------Significance testing WITHIN models (compares change from baseline per model)
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game nllb unbalanced config 
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game bart unbalanced config 
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible nllb unbalanced config 
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible bart unbalanced config
-sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game nllb balanced config 
-sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game bart balanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh game nllb unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh game bart unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh bible nllb unbalanced config 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh bible bart unbalanced config
+sbatch --dependency=afterok:$post_finetuned_B shell/get_pvals.sh game nllb balanced config 
+sbatch --dependency=afterok:$post_finetuned_B shell/get_pvals.sh game bart balanced config 
 
 #----------Significance testing ACROSS models (compares change between models per config) 
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh game bart unbalanced model 
-sbatch --dependency=afterok:$post_finetuned_U shell/get_significance.sh bible bart unbalanced model 
-sbatch --dependency=afterok:$post_finetuned_B shell/get_significance.sh game bart balanced model 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh game bart unbalanced model 
+sbatch --dependency=afterok:$post_finetuned_U shell/get_pvals.sh bible bart unbalanced model 
+sbatch --dependency=afterok:$post_finetuned_B shell/get_pvals.sh game bart balanced model 
 # OBS! since comparison between models is the same regardless of model input, bart was arbitrarily selected

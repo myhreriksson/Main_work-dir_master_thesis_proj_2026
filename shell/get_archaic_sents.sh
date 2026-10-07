@@ -6,7 +6,7 @@ size="${5}"
 balance="${6}"
 path="data/_test-n-finetune_/${domain}"
 
-python python/select_for_analysis.py \
+python python/archaic_sent_selector.py \
     -p $path \
     -c "$config" \
     -s "$size" \

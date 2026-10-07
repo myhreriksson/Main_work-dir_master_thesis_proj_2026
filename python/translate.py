@@ -29,10 +29,9 @@ if arg.config == 'tuned':
     if model_domain == 'bible':
         if arg.balance == 'balanced':
             model = os.path.join(arg.model, f'{arg.balance}_{model_domain}')
-            out_path = os.path.join(arg.output, arg.balance)
         else:
             model = os.path.join(arg.model, model_domain)
-            out_path = arg.output
+        out_path = os.path.join(arg.output, arg.balance)
     else:
         model = os.path.join(arg.model, model_domain)
         out_path = arg.output

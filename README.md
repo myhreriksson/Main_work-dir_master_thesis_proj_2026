@@ -16,7 +16,7 @@ ___
 - Initial workspace setup; create directories.
 - Retrieve models.
 ```sh
-bash shell/init_setup.sh
+bash shell/init_workdir.sh
 ```
 ___
 ### Preprocessing bible data
@@ -52,7 +52,7 @@ ___
 - Compare the evaluation scores between baselines and tuned model translations.
 - Use comparison to compute and store perplexity in appropriate text files.
 ```sh
-bash run_autoregressive.sh
+bash run_perplexity.sh
 ```
 ___
 ### Optional commands
@@ -60,8 +60,7 @@ ___
 - Count model parameters:
 - Plot evaluation scores:
 ```sh
-python python/count_toks.py [size] [domain] [min_word_count (4 or 5)] \
-python python/count_params.py [model]
+python python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
 bash shell/get_plot.sh [nmt] [domain] OR [llm]
 bash shell/get_archaic_sents.sh [limit] [domain] + [config] [line] + [size] + [balance]
 ```
