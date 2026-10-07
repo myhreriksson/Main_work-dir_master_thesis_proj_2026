@@ -1,23 +1,31 @@
 # Seq2Seq translation of Dark Souls \& Elden Ring
+In order for the following instructions to work, it is assumed that the instructions for the *Preprocessing_game-data_master_thesis_proj_2026* have been thoroughly followed.
+___
+### Initial Work directory setup
+- Initial workspace setup; create directories.
+- Retrieve models.
+- Downloads and installs miniconda3.
+```sh
+bash shell/init_workdir.sh
+```
+Once the installation of miniconda3 is complete, retrieve the game data as follows:
+```sh
+mkdir tmp
+git clone https://github.com/myhreriksson/Preprocessing_game-data_master_thesis_proj_2026 tmp/
+mv tmp/game_data data
+rm -fr tmp
+```
 ___
 ### Venv Setup
-INSTALL (mini/ana)CONDA
 ```sh
 conda create -n venv python==3.11 
 conda activate venv 
 pip install --upgrade pip 
-pip install accelerate chardet cmake datasets evaluate gutenberg_cleaner huggingface_hub matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
+pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
 ```
 ```py
 import nltk
 nltk.download('punkt_tab')
-```
-___
-### Model Setup
-- Initial workspace setup; create directories.
-- Retrieve models.
-```sh
-bash shell/init_workdir.sh
 ```
 ___
 ### Preprocessing bible data
