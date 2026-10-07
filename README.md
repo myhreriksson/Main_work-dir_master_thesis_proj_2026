@@ -28,9 +28,9 @@ import nltk
 nltk.download('punkt_tab')
 ```
 ___
-### Preprocessing bible data
-- Retrieve bible data and process it.
-- Retrieve flores_200 data.
+### Preprocessing bible data + Retrieving FLORES 200
+- Retrieves flores_200 data.
+- Retrieves bible data and processes it.
 - Moves game_data to game_deu and game_eng.
 - Moves bible_data to bible_deu and bible_eng.
 - Retrieve prose data, as well as process it.
