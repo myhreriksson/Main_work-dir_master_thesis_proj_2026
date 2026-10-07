@@ -5,7 +5,8 @@ INSTALL (mini/ana)CONDA
 ```sh
 conda create -n venv python==3.11 
 conda activate venv 
-pip install accelerate chardet cmake datasets evaluate gutenberg_cleaner huggingface_hub matplotlib optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet
+pip install --upgrade pip 
+pip install accelerate chardet cmake datasets evaluate gutenberg_cleaner huggingface_hub matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
 ```
 ```py
 import nltk
@@ -20,10 +21,11 @@ bash shell/init_workdir.sh
 ```
 ___
 ### Preprocessing bible data
-- Retrieve bible bible data and process it.
+- Retrieve bible data and process it.
+- Retrieve flores_200 data.
 - Moves game_data to game_deu and game_eng.
 - Moves bible_data to bible_deu and bible_eng.
-- Retrieve bible prose and poetry data, as well as process it.
+- Retrieve prose data, as well as process it.
 - Manually process the prose data (use regex to remove footnotes, empty newlines, indentations, cursive markers).
 - Regex for manual tokenization 1: (?<![.!?])\r?\n _replace with_ \s
 - Regex for manual tokenization 2: ([.!?])\s+ _replace with_ $1\n

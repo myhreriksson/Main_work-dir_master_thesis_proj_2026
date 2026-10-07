@@ -13,8 +13,13 @@ mkdir -p \
     data/bible_data \
     data/game_data \
     data/prose_data \
+    game_prep_repo \
 
-mv init_setup.sh shell
+mv init_workdir.sh shell
+
+wget https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
+bash Miniconda3-latest-Linux-x86_64.sh
+rm Miniconda3-latest-Linux-x86_64.sh
 
 hf download facebook/nllb-200-distilled-600M \
     --local-dir models/base/nllb
