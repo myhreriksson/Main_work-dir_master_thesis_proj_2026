@@ -8,7 +8,7 @@ ___
 ```sh
 bash shell/init_workdir.sh
 ```
-Once the installation of miniconda3 is complete, retrieve the game data as follows:
+Once the installation of miniconda3 is complete, retrieve the game data from the preprocessing_game-data repo:
 ```sh
 mkdir tmp
 git clone https://github.com/myhreriksson/Preprocessing_game-data_master_thesis_proj_2026 tmp/
