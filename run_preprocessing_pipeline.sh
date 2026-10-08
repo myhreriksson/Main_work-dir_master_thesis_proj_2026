@@ -1,7 +1,7 @@
 #!/bin/bash
 
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
-conda activate thesis-venv
+conda activate thesis_venv
 
 # Retrieves all (except GAME) data & performs sentence tokenization
 bash shell/process_data.sh bible 

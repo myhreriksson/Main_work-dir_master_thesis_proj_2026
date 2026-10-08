@@ -6,7 +6,7 @@
 #SBATCH --gres=gpu:1
 
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
-conda activate thesis-venv
+conda activate thesis_venv
 
 task="${1}"
 model="${2}"

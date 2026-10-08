@@ -23,7 +23,7 @@ mv eng_Latn.devtest data/_test-n-finetune_/flores_eng/flores_EN.txt
 mv deu_Latn.devtest data/_test-n-finetune_/flores_deu/flores_DE.txt
 
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
-conda activate thesis-venv
+conda activate thesis_venv
 
 domain="${1}"
 lang="${2}"
