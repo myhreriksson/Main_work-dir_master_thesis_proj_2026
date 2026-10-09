@@ -1,6 +1,7 @@
 __pycache__/
 .vscode/
 miniconda3/
+R/
 models/
 results/
 slurm*

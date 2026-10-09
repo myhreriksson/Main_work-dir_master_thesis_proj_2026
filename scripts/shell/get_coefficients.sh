@@ -7,14 +7,17 @@
 
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
 conda activate thesis_venv
-r_path="${PWD}/R/lib"
+
+r_path=/proj/uppmax2025-2-505/mame0175/thesis_PROJ/R/lib
 mkdir -p "$r_path"
 export R_LIBS_USER="$r_path"
 
+metric="${1}"
 inp_path="stat_analysis/data.csv"
-out_path="results/evaluations/coefficients"
+out_path="results/evaluations/coefficients/${metric}.txt"
 mkdir -p "$out_path"
 
-Rscript scripts/R/stat_coefficients.r \
+Rscript scripts/Rscript/stat_coefficients.r \
     "$inp_path" \
-    "$out_path"
+    "$out_path" \
+    "$metric"

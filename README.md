@@ -21,8 +21,8 @@ ___
 conda create -n venv python==3.11 
 conda activate venv 
 pip install --upgrade pip 
-pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
-conda install -c conda-forge r-base r-lme4
+pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
+conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver
 ```
 ```py
 import nltk

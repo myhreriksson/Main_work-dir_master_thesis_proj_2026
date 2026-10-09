@@ -1,15 +1,15 @@
 import csv
 import os
-import pandas as pd
 import re
-
-# bleu,comet,ter ~ data_size * model * domain + (1|sentence)
 
 inp_path = 'stat_analysis/files'
 out_path = 'stat_analysis'
 
 data = []
 trans = []
+bleu = []
+comet = []
+ter = []
 evals = []
 
 def get_lines(lst, file, *meta):
@@ -18,9 +18,6 @@ def get_lines(lst, file, *meta):
         for line in lines:
             lst.append((line, meta))
 
-def combine_evals(sacrebleu, comet): # vänta tills bleu & comet per sentence är färdiga.
-    pass
-
 for file in sorted(os.listdir(inp_path)):
     if file.startswith('translation'):
         trans_file = os.path.join(inp_path, file)
@@ -28,11 +25,16 @@ for file in sorted(os.listdir(inp_path)):
         model = file.split('-')[2]
         size = file.split('-')[3]
         get_lines(trans, trans_file, domain, model, size)
-
     elif file.startswith('sent_evals'):
-        evals_file = os.path.join(inp_path, file) # vänta tills bleu & comet per sentence är färdiga.
+        evals_file = os.path.join(inp_path, file)
         metric = re.split('-.', file)[-2]
-        get_lines(evals, evals_file, metric)
+        get_lines(metric, evals_file)
+
+for b_line, c_line, t_line in zip(bleu, comet, ter):
+    bleu_score = f'{b_line.split(' ')[2]:.1f}'
+    comet_score = f'{c_line.split(' ')[-1]:.1f}'
+    ter_score = f'{t_line.split(' ')[-1]:.1f}'
+    evals.append((bleu_score, comet_score, ter_score))
 
 for t, e in zip(trans, evals):
     dict = {

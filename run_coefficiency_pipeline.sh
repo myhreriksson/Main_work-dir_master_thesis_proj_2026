@@ -16,4 +16,6 @@ bash scripts/shell/get_copies.sh bible nllb sacrebleu unbalanced
 bash scripts/shell/get_copies.sh bible nllb comet unbalanced
 
 python scripts/python/make_csv_data.py
-sbatch scripts/shell/get_coefficients.sh
+sbatch scripts/shell/get_coefficients.sh BLEU
+sbatch scripts/shell/get_coefficients.sh COMET
+sbatch scripts/shell/get_coefficients.sh TER
