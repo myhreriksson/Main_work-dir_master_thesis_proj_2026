@@ -21,7 +21,8 @@ ___
 conda create -n venv python==3.11 
 conda activate venv 
 pip install --upgrade pip 
-pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
+pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
+conda install -c conda-forge r-base r-lme4
 ```
 ```py
 import nltk
@@ -62,13 +63,19 @@ ___
 - Compare the evaluation scores between baselines and tuned model translations.
 - Use comparison to compute and store perplexity in appropriate text files.
 ```sh
-bash run_significance_pipeline.sh
+bash run_perplexity_pipeline.sh
+```
+___
+### Compute performance coefficients
+- Compute statistical contribution of data size, model, and domain, to the predicted BLEU, COMET, and TER results.
+```sh
+bash run_coefficiency_pipeline.sh
 ```
 ___
 ### Optional commands
 - Count word tokens:
-- Count model parameters:
 - Plot evaluation scores:
+- Cycle through archaic sentence pairs:
 ```sh
 python python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
 bash shell/get_plot.sh [nmt] [domain] OR [llm]
