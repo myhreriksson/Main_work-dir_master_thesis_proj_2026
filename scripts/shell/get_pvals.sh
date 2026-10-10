@@ -28,13 +28,20 @@ compare() {
     local out_dir="${out_path}/${comp_type}"
     mkdir -p "$out_dir"
     local out_file="${out_dir}/paired_bs-${size}.txt"
-    if [[ "$config_A" == "base" ]]; then
-        local tgt_A="${tgt_path}/${config_A}/${domain}/${domain}_Translation_${model_A}_EN-DE.txt"
-        local tgt_B="${tgt_path}/${config_B}/${domain}/${domain}_Translation_${model_B}_EN-DE.txt"
+    
+    if [[ "$config_A" != "base" && "$domain" == "game" ]]; then
+        domain_balance_A="${domain}/${balance}"
     else
-        local tgt_A="${tgt_path}/${config_A}/${domain}/${balance}/${domain}_Translation_${model_A}_EN-DE.txt"
-        local tgt_B="${tgt_path}/${config_B}/${domain}/${balance}/${domain}_Translation_${model_B}_EN-DE.txt"
+        local domain_balance_A="$domain"
     fi
+    if [[ "$config_B" != "base" && "$domain" == "game" ]]; then
+        domain_balance_B="${domain}/${balance}"
+    else
+        local domain_balance_B="$domain"
+    fi
+
+    local tgt_A="${tgt_path}/${config_A}/${domain_balance_A}/${domain}_Translation_${model_A}_EN-DE.txt"
+    local tgt_B="${tgt_path}/${config_B}/${domain_balance_B}/${domain}_Translation_${model_B}_EN-DE.txt"    
     local src="${src_path}/${domain}_EN.txt"
     local ref="${ref_path}/${domain}_DE.txt"
 

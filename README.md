@@ -75,9 +75,7 @@ ___
 ### Optional commands
 - Count word tokens:
 - Plot evaluation scores:
-- Cycle through archaic sentence pairs:
 ```sh
-python python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
-bash shell/get_plot.sh [nmt] [domain] OR [llm]
-bash shell/get_archaic_sents.sh [limit] [domain] + [config] [line] + [size] + [balance]
+python scripts/python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
+bash scripts/shell/get_plot.sh [nmt] [domain] OR [llm]
 ```

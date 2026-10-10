@@ -16,10 +16,15 @@ balance="${4}"
 evaluate() {
     local config="${1}"
     local sents="${2}"
+    if [[ "$balance" && "$domain" == "game" ]]; then
+        domain_balance="${domain}/${balance}"
+    else
+        domain_balance="${domain}"
+    fi
     local src="data/_test-n-finetune_/${domain}_eng/${domain}_EN.txt"
-    local tgt="results/translations/${config}/${domain}/${domain}_Translation_${model}_EN-DE.txt"
+    local tgt="results/translations/${config}/${domain_balance}/${domain}_Translation_${model}_EN-DE.txt"
     local ref="data/_test-n-finetune_/${domain}_deu/${domain}_DE.txt"
-    local out_path="results/evaluations/${config}/${domain}/${balance}"
+    local out_path="results/evaluations/${config}/${domain_balance}"
     mkdir -p "$out_path"
 
     # corpus-level

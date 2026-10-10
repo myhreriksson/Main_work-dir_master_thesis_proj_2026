@@ -63,5 +63,5 @@ for start_loc in tqdm(range(0, seq_len, stride)):
 
 avg_nll = nll_sum / n_tokens
 ppl = torch.exp(avg_nll)
-with open(os.path.join(arg.output, f'ppl_{LANG}.txt'), 'w', encoding='utf-8') as f:
+with open(os.path.join(arg.output, f'ppl_{LANG}_{arg.domain}.txt'), 'w', encoding='utf-8') as f:
     f.write(f'PPL: {ppl.item():.4f}')

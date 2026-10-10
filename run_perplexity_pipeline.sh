@@ -16,4 +16,3 @@ sbatch scripts/shell/get_ppl.sh tuned prose deu '' game
 # Get PPL fine-tuned on balanced bible
 sbatch scripts/shell/get_ppl.sh tuned bible eng balanced_ game
 sbatch scripts/shell/get_ppl.sh tuned bible deu balanced_ game
-

@@ -14,10 +14,10 @@ export R_LIBS_USER="$r_path"
 
 metric="${1}"
 inp_path="stat_analysis/data.csv"
-out_path="results/evaluations/coefficients/${metric}.txt"
+out_path="results/evaluations/lmm_coefficients/${metric^^}.txt"
 mkdir -p "$out_path"
 
-Rscript scripts/Rscript/stat_coefficients.r \
+Rscript scripts/Rscript/lmm_coefficients.r \
     "$inp_path" \
     "$out_path" \
     "$metric"

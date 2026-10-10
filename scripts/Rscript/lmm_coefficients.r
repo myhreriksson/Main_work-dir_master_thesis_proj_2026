@@ -3,7 +3,7 @@ library(lme4)
 args <- commandArgs(trailingOnly = TRUE)
 inp_path <- args[1]
 out_path <- args[2]
-metric <- tolower(args[3])
+metric <- args[3]
 
 csv_data <- read.csv(inp_path)
 csv_data_model <- lmer(metric ~ data_size * model * domain + (1 | sentence), # nolint
