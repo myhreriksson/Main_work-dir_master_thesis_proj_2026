@@ -74,12 +74,12 @@ bash run_coefficiency_pipeline.sh
 ```
 ___
 ### Optional commands
-Size options include *3k*, *6k*, *9k*, *12k*, *15k* and *max*. Possible domains are *bible*, *game*. Config may refer to to *base* or *tuned*.
+Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses special sizes for text-similarity task). Possible domains are *bible* and *game*. Config may refer to to *base* or *tuned*. Balance is simply true or false.
 - Count word tokens:
 - Plot evaluation scores:
 - Get Holm corrections:
 ```sh
-python scripts/python/count_toks.py [size] [domain] [min_word_count]
+python scripts/python/count_toks.py --size --domain --balance false --min_sen_len 0
 python scripts/python/holm_correction.py [model] OR [config]
 bash scripts/shell/get_plot.sh 'nmt' [domain] OR 'llm'
 ```
