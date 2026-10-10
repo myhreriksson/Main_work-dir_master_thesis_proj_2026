@@ -29,8 +29,8 @@ evaluate() {
 
     # corpus-level
     if [[ ! "$sents" ]]; then
-        { sacrebleu "$tgt" \
-            -i "$ref" \
+        { sacrebleu "$ref" \
+            -i "$tgt" \
             -m bleu ter \
             -l en-de
         } > "${out_path}/${domain}_sacrebleu_${model}.json"
@@ -56,15 +56,15 @@ evaluate() {
 
     # sentence-level
     if [[ "$sents" ]]; then
-        { sacrebleu "$tgt" \
-            -i "$ref" \
+        { sacrebleu "$ref" \
+            -i "$tgt" \
             -m bleu \
             -l en-de \
             --sentence-level 
         } > "${out_path}/${domain}_bleu_per_sent_${model}.txt"
 
-        { sacrebleu "$tgt" \
-            -i "$ref" \
+        { sacrebleu "$ref" \
+            -i "$tgt" \
             -m ter \
             -l en-de \
             --sentence-level 

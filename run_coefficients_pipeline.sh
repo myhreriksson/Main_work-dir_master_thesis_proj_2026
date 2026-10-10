@@ -26,11 +26,12 @@ bash scripts/shell/get_copies.sh bible nllb ter
 
 # Uses copies to create uniform CSV contianing all results
 python scripts/python/make_csv_data.py
+rm -r files/
 
-# # Compute coefficients for all metrics
-# sbatch scripts/shell/get_coefficients.sh bleu
-# sbatch scripts/shell/get_coefficients.sh comet
-# sbatch scripts/shell/get_coefficients.sh ter
+# Compute coefficients for all metrics
+sbatch scripts/shell/get_coefficients.sh bleu
+sbatch scripts/shell/get_coefficients.sh comet
+sbatch scripts/shell/get_coefficients.sh ter
 
 # # Select good and bad performing sentence pairs for each metric (for qualitative analysis)
 # python scripts/python/sent_selector.py bleu

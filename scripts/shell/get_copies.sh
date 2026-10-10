@@ -12,7 +12,7 @@ copy() {
         model_domain="game"
     fi
     local size="${1}"
-    local tgt_dir="stat_analysis/files/"
+    local tgt_dir="files/"
     local trans_path="results/translations/tuned/${size}/${domain}/${balance}"
     local evals_path="results/evaluations/tuned/${size}/${domain}/${balance}"
     local trans_file="${domain}_Translation_${model}_EN-DE.txt"

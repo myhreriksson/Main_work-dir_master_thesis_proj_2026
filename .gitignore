@@ -2,7 +2,6 @@ __pycache__/
 .vscode/
 miniconda3/
 R/
-stat_analysis/files/
 models/
 results/
 slurm*
