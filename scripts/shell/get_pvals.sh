@@ -13,7 +13,7 @@ model_A="${2}"
 balance="${3}"
 comparison="${4}"
 
-out_path="results/evaluations/significance/${domain}/${balance}/"
+out_path="results/significance/${domain}/${balance}/"
 data_path='data/_test-n-finetune_/'
 tgt_path='results/translations/'
 src_path="${data_path}${domain}_eng/"

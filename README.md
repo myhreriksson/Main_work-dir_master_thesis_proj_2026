@@ -24,6 +24,7 @@ pip install --upgrade pip
 pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
 conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver
 ```
+
 ```py
 import nltk
 nltk.download('punkt_tab')
@@ -73,9 +74,12 @@ bash run_coefficiency_pipeline.sh
 ```
 ___
 ### Optional commands
+Size options include *3k*, *6k*, *9k*, *12k*, *15k* and *max*. Possible domains are *bible*, *game*. Config may refer to to *base* or *tuned*.
 - Count word tokens:
 - Plot evaluation scores:
+- Get Holm corrections:
 ```sh
-python scripts/python/count_toks.py [size] [domain] [min_word_count (4 or 5)]
-bash scripts/shell/get_plot.sh [nmt] [domain] OR [llm]
+python scripts/python/count_toks.py [size] [domain] [min_word_count]
+python scripts/python/holm_correction.py [model] OR [config]
+bash scripts/shell/get_plot.sh 'nmt' [domain] OR 'llm'
 ```

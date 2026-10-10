@@ -18,13 +18,13 @@ model_path="models/${config}/"
 
 # fine-tuned
 if [[ "$config" == "tuned" ]]; then
-    output_path="results/evaluations/perplexity/${config}/${model_domain}/"
+    output_path="results/perplexity/${config}/${model_domain}/"
     mkdir -p "$output_path"
     model="${model_path}max/qwen/${model_domain}/trained_on_${lang}/"
 
 # baselines
 elif [[ "$config" == "base" ]]; then
-    output_path="results/evaluations/perplexity/${config}/"
+    output_path="results/perplexity/${config}/"
     mkdir -p "$output_path"
     model="${model_path}qwen/"
 fi
