@@ -28,15 +28,15 @@ tuned_2B=$(bash scripts/shell/test.sh game bart tuned balanced "$post_baseline")
 post_finetuned_B="$tuned_1B:$tuned_2B" # collective conditional balanced
 
 #----------Significance testing WITHIN models (compares change from baseline per model)
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game nllb unbalanced config 
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game bart unbalanced config 
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible nllb '' config 
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible bart '' config
-sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game nllb balanced config 
-sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game bart balanced config 
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game nllb unbalanced inter
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game bart unbalanced inter 
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible nllb '' inter
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible bart '' inter
+sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game nllb balanced inter 
+sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game bart balanced inter 
 
 #----------Significance testing ACROSS models (compares change between models per config) 
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game bart unbalanced model 
-sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible bart '' model 
-sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game bart balanced model 
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh game bart unbalanced cross
+sbatch --dependency=afterok:$post_finetuned_U scripts/shell/get_pvals.sh bible bart '' cross
+sbatch --dependency=afterok:$post_finetuned_B scripts/shell/get_pvals.sh game bart balanced cross 
 # OBS! since comparison between models is the same regardless of model input, bart was arbitrarily selected

@@ -1,7 +1,7 @@
 import argparse
 import json
 import os
-import scripts.python.plot_scores as ps
+import plot_scores as ps
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()

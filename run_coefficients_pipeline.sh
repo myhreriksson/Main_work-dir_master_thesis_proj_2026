@@ -32,8 +32,3 @@ rm -r files/
 sbatch scripts/shell/get_coefficients.sh bleu
 sbatch scripts/shell/get_coefficients.sh comet
 sbatch scripts/shell/get_coefficients.sh ter
-
-# # Select good and bad performing sentence pairs for each metric (for qualitative analysis)
-# python scripts/python/sent_selector.py bleu
-# python scripts/python/sent_selector.py comet
-# python scripts/python/sent_selector.py ter

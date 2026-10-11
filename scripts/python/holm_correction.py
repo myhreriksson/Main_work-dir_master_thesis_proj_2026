@@ -1,9 +1,26 @@
+import argparse
 import os
-import sys
 
-family = sys.argv[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('-f', '--family')
+parser.add_argument('-p', '--path')
+arg = parser.parse_args()
 
-base_path = 'results/significance/'
+balance = 'balanced', 'unbalanced'
 
-bib_path = os.path.join(base_path ,'bible/')
-gam_path = os.path.join(base_path ,'game/')
+def get_pvals(domain_path, family, *model):
+    if family == 'inter':
+        family_path = os.path.join(domain_path, f'comps_within_{model}')
+    elif family == 'cross':
+        family_path = os.path.join(domain_path, f'comps_across_models')
+    for file in os.listdir(family_path):
+        with open(file, 'r', encoding='utf-8') as f:
+            return f.readlines()
+
+bib_path = os.path.join(arg.path, 'bible')
+get_pvals(bib_path, 'inter', 'bart')
+get_pvals(bib_path, 'inter', 'nllb')
+
+for b in balance:
+    gam_path = os.path.join(arg.path, b)
+    get_pvals(bib_path, 'cross')

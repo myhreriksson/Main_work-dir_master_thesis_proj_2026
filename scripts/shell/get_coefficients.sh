@@ -13,9 +13,9 @@ mkdir -p "$r_path"
 export R_LIBS_USER="$r_path"
 
 metric="${1}"
-inp_path="stat_analysis/data.csv"
+inp_path="results/coefficients/lmm_data.csv"
 out_path="results/coefficients/"
-out_file="${metric^^}.txt"
+out_file="output_${metric^^}.txt"
 mkdir -p "$out_path"
 
 Rscript scripts/Rscript/lmm_coefficients.r \

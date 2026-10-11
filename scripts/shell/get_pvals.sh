@@ -21,27 +21,25 @@ ref_path="${data_path}${domain}_deu/"
 
 compare() {
     local model_B="${1}"
-    local config_A="${2}"
-    local config_B="${3}"
+    local type_A="${2}"
+    local type_B="${3}"
     local comp_type="${4}"
-    local size="${config_B#*/}"
+    local size="${type_B#*/}"
     local out_dir="${out_path}/${comp_type}"
     mkdir -p "$out_dir"
-    local out_file="${out_dir}/paired_bs-${size}.txt"
-    
-    if [[ "$config_A" != "base" && "$domain" == "game" ]]; then
+    local out_file="${out_dir}/paired_bs-${size}.json"
+    if [[ "$type_A" != "base" && "$domain" == "game" ]]; then
         domain_balance_A="${domain}/${balance}"
     else
         local domain_balance_A="$domain"
     fi
-    if [[ "$config_B" != "base" && "$domain" == "game" ]]; then
+    if [[ "$type_B" != "base" && "$domain" == "game" ]]; then
         domain_balance_B="${domain}/${balance}"
     else
         local domain_balance_B="$domain"
     fi
-
-    local tgt_A="${tgt_path}/${config_A}/${domain_balance_A}/${domain}_Translation_${model_A}_EN-DE.txt"
-    local tgt_B="${tgt_path}/${config_B}/${domain_balance_B}/${domain}_Translation_${model_B}_EN-DE.txt"    
+    local tgt_A="${tgt_path}/${type_A}/${domain_balance_A}/${domain}_Translation_${model_A}_EN-DE.txt"
+    local tgt_B="${tgt_path}/${type_B}/${domain_balance_B}/${domain}_Translation_${model_B}_EN-DE.txt"    
     local src="${src_path}/${domain}_EN.txt"
     local ref="${ref_path}/${domain}_DE.txt"
 
@@ -50,7 +48,7 @@ compare() {
         -m bleu ter \
         --paired-bs \
         --paired-bs-n 5000
-    } > "${out_dir}/${domain}_bleu_${size}.json"
+    } > "${out_dir}/${domain}_sacrebleu_${size}.json"
 
     { comet-compare \
         -s $src \
@@ -59,17 +57,17 @@ compare() {
     } > "${out_dir}/${domain}_comet_${size}.txt"
         
     python scripts/python/write_results.py \
-        "${out_dir}/${domain}_bleu_${size}.json" \
+        "${out_dir}/${domain}_sacrebleu_${size}.json" \
         "${out_dir}/${domain}_comet_${size}.txt" \
         "$out_file" \
         bootstrap
     rm \
-        "${out_dir}/${domain}_bleu_${size}.json" \
+        "${out_dir}/${domain}_sacrebleu_${size}.json" \
         "${out_dir}/${domain}_comet_${size}.txt"
 }
 
 # significance testing within same model, comparing all configs with baseline
-if [[ "$comparison" == "config" ]]; then
+if [[ "$comparison" == "inter" ]]; then
     model_B="$model_A" 
     for i in $(seq 3 3 15); do
         compare \
@@ -83,7 +81,7 @@ if [[ "$comparison" == "config" ]]; then
         "base" \
         "tuned/max" \
         "comps_within_${model_B}" 
-elif [[ "$comparison" == "model" ]]; then
+elif [[ "$comparison" == "cross" ]]; then
     model_B='nllb'
     for i in $(seq 3 3 15); do
         compare \

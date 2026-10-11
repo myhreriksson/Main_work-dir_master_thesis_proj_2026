@@ -1,5 +1,11 @@
-import sys
+import argparse
+import heapq
+import pandas as pd
 
-metric = sys.argv[1]
+parser = argparse.ArgumentParser()
+parser.add_argument('-m', '--metric')
+arg = parser.parse_args()
 
-csv_file = 'stat_analysis/data.csv'
+csv_file = 'results/coefficients/lmm_data.csv'
+
+df = pd.read_csv(csv_file)

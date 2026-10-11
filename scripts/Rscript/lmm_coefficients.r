@@ -8,10 +8,14 @@ metric <- args[4]
 
 csv_data <- read.csv(inp_path)
 csv_data_model <- lmer(
-    as.formula(paste(metric, "~ train_data_size * model_design * train_domain + (1 | sentence)")), # nolint
-                       data = csv_data)
+  as.formula(
+    paste(
+      metric, "~ train_data_size * model_design * train_domain + (1 | sentence)"
+    )
+  ), data = csv_data
+)
 
 capture.output(
-  print(csv_data_model),
+  print(summary(csv_data_model)),
   file = file.path(out_path, out_file)
 )

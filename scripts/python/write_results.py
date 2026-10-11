@@ -1,7 +1,6 @@
 import json
 import sys
 
-# NOTE: these functions are purely for aesthetic reasons; nicer to read results!
 def get_significance():
     alpha = 0.05
     txt_data = txt_file.read()
@@ -11,35 +10,29 @@ def get_significance():
     ter = json_data[1]['TER']
 
     if bleu['p_value'] < alpha:
-        p_val_bleu = f'< alpha={alpha}'
+        p_val_bleu = f'< {alpha}'
     else:
-        p_val_bleu = ''
+        p_val_bleu = f'> {alpha}'
     if ter['p_value'] < alpha:
-        p_val_ter = f'< alpha={alpha}'
+        p_val_ter = f'< {alpha}'
     else:
-        p_val_ter = ''
+        p_val_ter = f'> {alpha}'
     if comet < alpha:
-        p_val_comet = f'< alpha={alpha}'
+        p_val_comet = f'< {alpha}'
     else:
-        p_val_comet = ''
-    with open(sys.argv[3], 'w', encoding='utf-8') as f:
-        f.write(f'''\
-        Statistical significance for pairwise t-test bootstrapping.
-        
-        Metric: BLEU
-        p-value: {bleu['p_value']:.4f} {p_val_bleu}
-
-        Metric: TER
-        p-value: {ter['p_value']:.4f} {p_val_ter}
-
-        Metric: COMET
-        p-value: {comet} {p_val_comet}
-        ''')
+        p_val_comet = f'> {alpha}'
+    dict = {
+        'BLEU p-value': f'{float(p_val_bleu):.10f}',
+        'COMET p-value': f'{float(p_val_comet):.10f}',
+        'TER p-value': f'{float(p_val_ter):.10f}'
+    }
+    with open(sys.argv[3], 'w') as json_file:
+        json.dump(dict, json_file, indent=4)
 
 def get_scores(): 
     txt_data = txt_file.read()
     json_data = json.load(json_file)
-    comet = txt_data.split()[-1]
+    comet = float(txt_data.split()[-1]) * 100
     bleu = json_data[0]
     ter = json_data[1]
     ver_score = bleu['verbose_score']
@@ -81,5 +74,5 @@ if __name__=='__main__':
         ):
         if sys.argv[4] == 'score':
             get_scores()
-        elif sys.argv[4] == 'bootstrap':
+        elif sys.argv[4] == 'significance':
             get_significance()
