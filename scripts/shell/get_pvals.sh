@@ -60,7 +60,7 @@ compare() {
         "${out_dir}/${domain}_sacrebleu_${size}.json" \
         "${out_dir}/${domain}_comet_${size}.txt" \
         "$out_file" \
-        bootstrap
+        significance
     rm \
         "${out_dir}/${domain}_sacrebleu_${size}.json" \
         "${out_dir}/${domain}_comet_${size}.txt"
