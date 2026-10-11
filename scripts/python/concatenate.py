@@ -18,7 +18,12 @@ elif arg.lang == 'deu':
 
 for file in os.listdir(arg.inp_path):
     if arg.domain == 'prose':
-        # not a great solution
+        '''
+        not a great solution tbh, but i chose the maximum sent length for
+        the smallest books, and adapted the rest. the goal was to make the
+        english and german prose sets comparable in token size to the game
+        datasets.
+        '''
         if re.search(r'.*Kliphausen.*', file):
             limit = 59000
         elif re.search(r'.*Grimmelshausen.*', file):

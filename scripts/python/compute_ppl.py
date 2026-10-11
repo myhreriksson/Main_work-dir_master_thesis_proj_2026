@@ -11,36 +11,35 @@ parser.add_argument('-l', '--lang')
 parser.add_argument('-d', '--domain')
 arg = parser.parse_args()
 
-# part 1: load model & tokenizer
+# load model & tokenizer
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possible
 
-tokenizer = AutoTokenizer.from_pretrained(arg.model)
-model = AutoModelForCausalLM.from_pretrained(arg.model, 
+tokenizer = AutoTokenizer.from_pretrained(arg.model) # load tokenizer
+model = AutoModelForCausalLM.from_pretrained(arg.model, # load model
                                              device_map=device, 
                                              attn_implementation='sdpa',
                                              dtype=torch.float16)
 
-# part 2: load data
 if arg.lang == 'eng':
     LANG = 'EN'
 elif arg.lang == 'deu':
     LANG = 'DE'
-test_file = os.path.join(f'data/_test-n-finetune_/{arg.domain}_{arg.lang}/{arg.domain}_{LANG}.txt')
 
+# load text data
+test_file = os.path.join(f'data/_test-n-finetune_/{arg.domain}_{arg.lang}/{arg.domain}_{LANG}.txt')
 with open(test_file, 'r', encoding='utf-8') as f:
     txt = f.read()
 
 encodings = tokenizer(txt, return_tensors='pt')
 
-# part 3: compute perplexity
 stride = 512
 seq_len = encodings.input_ids.size(1)
 max_len = stride * 8
 
-nll_sum = 0.0
+nll_sum = 0.0 # nll == negative loss-likelihood
 n_tokens = 0
 prev_end_loc = 0
-for start_loc in tqdm(range(0, seq_len, stride)):
+for start_loc in tqdm(range(0, seq_len, stride)): # nice load bars
     end_loc = min(start_loc + max_len, seq_len)
     tgt_len = end_loc - prev_end_loc
     inp_ids = encodings.input_ids[:, start_loc:end_loc].to(device)

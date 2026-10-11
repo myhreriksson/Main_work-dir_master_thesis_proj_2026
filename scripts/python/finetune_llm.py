@@ -21,19 +21,26 @@ parser.add_argument('--database')
 parser.add_argument('--load', default=False)
 arg = parser.parse_args()
 
-#-------------------------------------------------------------------------------#
-# part 1: define functions
+# class used for pruning
 class PruningCallback(TrainerCallback):
+    '''
+    if, during HPO fine-tuning, an epoch displays really bad performance,
+    terminate fine-tuning trial and proceed to next parameter configuration.
+    '''
     def __init__(self, trial):
         self.trial = trial
 
     def on_evaluate(self, args, state, control, metrics, **kwargs):
-        if 'eval_loss' in metrics:
+        if 'eval_loss' in metrics: # use evaluation loss as pruning metric
             self.trial.report(metrics['eval_loss'], state.epoch)
             if self.trial.should_prune():
                 raise optuna.TrialPruned()
 
 def objective(trial):
+    '''
+    main HPO function. the following 9 vars refer to training hyper-params,
+    which are tested in varying combinations during optimization.
+    '''
     r = trial.suggest_categorical('r', [4, 8, 16, 32])
     alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
     dropout = trial.suggest_float('dropout', 0.0, 0.3)
@@ -50,10 +57,10 @@ def objective(trial):
         r=r,
         lora_alpha=alpha,
         lora_dropout=dropout,
-        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj',
+        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', # lora recommended to use all modules
                         'up_proj', 'down_proj', 'gate_proj']
     )
-    model = get_peft_model(model, lora_config) # don't move to device for parallel data training
+    model = get_peft_model(model, lora_config) # DON'T move to device
 
     training_args = SFTConfig(
         output_dir=arg.output,
@@ -83,8 +90,6 @@ def objective(trial):
     metrics = trainer.evaluate()
     return metrics['eval_loss']
 
-#-------------------------------------------------------------------------------#
-# part 2: load data
 if arg.domain.startswith('balanced_'):
     domain = arg.domain.split('_')[1]
     prefix = f'{arg.domain.split("_")[0]}_{arg.lang}'
@@ -92,6 +97,8 @@ else:
     domain = arg.domain
     prefix = arg.lang
 file_path = os.path.join(arg.input, f'{prefix}_{domain}')
+
+# load data
 data_files = {
     'train':f'{file_path}_train.json',
     'test':f'{file_path}_test.json',
@@ -99,20 +106,17 @@ data_files = {
 }
 dataset = load_dataset('json', data_files=data_files)
 
-#-------------------------------------------------------------------------------#
-# part 3: tokenize data
-tokenizer = AutoTokenizer.from_pretrained(arg.model)
+tokenizer = AutoTokenizer.from_pretrained(arg.model) # load tokenizer
 tokenizer.pad_token = tokenizer.eos_token
 
-#-------------------------------------------------------------------------------#
-# part 4: parameter optimization
+# sql database storing hyper-parameter combinations. load best one for final fine-tuning
 storage = RDBStorage(f'sqlite:///{arg.database}/optimized_llm_hparams.db')
 try:
     optuna.delete_study( # functions as overwriting the study every time code is run
         study_name='optimizing_hyperparams',
         storage=storage
     )
-except KeyError:
+except KeyError: # ignores if not existing
     pass
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
@@ -124,12 +128,12 @@ study = optuna.create_study(
         n_warmup_steps=1
     )
 )
-study.optimize(objective, n_trials=20)
+study.optimize(objective, n_trials=20) # try setting to higher if more resource available
 best_hparams = study.best_params
 
-#-------------------------------------------------------------------------------#
-# part 5: finetune model
-model = AutoModelForCausalLM.from_pretrained(arg.model).to('cuda')
+# finetune model
+model = AutoModelForCausalLM.from_pretrained(arg.model) # load model
+# define lora configurations (with best-performing hparams)
 lora_config = LoraConfig(
     task_type=TaskType.CAUSAL_LM,
     r=best_hparams['r'], 
@@ -138,10 +142,10 @@ lora_config = LoraConfig(
     target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
                     'up_proj', 'gate_proj', 'down_proj'], 
 )
-model = get_peft_model(model, lora_config)
+model = get_peft_model(model, lora_config).to('cuda') # load model unto GPU with lora config
 model.print_trainable_parameters()
 
-# 5.1: define training arguments
+# define training args (with best-performing hparams)
 training_args = SFTConfig(
     output_dir=arg.output,
     max_length=512,
@@ -162,7 +166,7 @@ training_args = SFTConfig(
     seed=arg.seed
 )
 
-# 5.2: load trainer
+# load trainer
 trainer = SFTTrainer(
     model=model,
     args=training_args,
@@ -171,13 +175,12 @@ trainer = SFTTrainer(
     processing_class=tokenizer
 )
 
-# 5.3: run inference and save best model
+# run inference and save best model
 if __name__=='__main__':
     trainer.train()
     model.save_pretrained(arg.output)
     tokenizer.save_pretrained(arg.output)
 
-#-------------------------------------------------------------------------------#
-# part 6: save best epoch
+# save best epoch
     with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
         json.dump(trainer.state.log_history, f)

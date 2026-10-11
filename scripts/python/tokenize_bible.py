@@ -10,6 +10,12 @@ parser.add_argument('-n', '--name')
 parser.add_argument('-e', '--extension')
 arg = parser.parse_args()
 
+''' 
+the pdf_vers and txt_vers functions in this script are probanly not very generalizable.
+they were written with the very specific versions of the bible data in mind, and therefore 
+are not greatly written functions. bear this in mind!
+'''
+
 # some numbers are wrong, but sentence alignment is correct. chose to ignore it for my mental health
 def pdf_vers():
     with open(out_path, 'w', encoding='utf-8') as f:
@@ -20,10 +26,10 @@ def pdf_vers():
         pattern_3 = r'chapter\s(\d+)'
         chapter = ''
         verses = []
-        for p in reader.pages[37:]:
+        for p in reader.pages[37:]: # skips the first 37 pages of preface and formal stuff
             page = p.extract_text()
             lines = re.split(pattern_1, page, flags=re.MULTILINE)
-            for i, line in enumerate(lines):
+            for i, line in enumerate(lines): # not sure if im using 'i' here...
                 line = re.sub('\n', ' ', line.strip())
                 line = re.sub(pattern_2, '', line, flags=re.IGNORECASE)
                 if re.match(r'^\d', line):
@@ -53,6 +59,8 @@ def txt_vers():
         lines = i_f.readlines()
         verse = ''
         for line in lines:
+            # regex: neg look-behind of digit AND pos look-ahead of chapter:verse plus space
+            # i.e.: split when no digits left of segment and there is (chap:verse space) right of segment
             for segment in re.split(r'(?<!\d)(?=\d+:\d+\s)', line):
                 if re.search(r'^\d+:\d+', segment):
                     if verse:

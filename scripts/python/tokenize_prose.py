@@ -1,5 +1,6 @@
 import argparse
-from gutenberg_cleaner import (simple_cleaner, super_cleaner)
+from gutenberg_cleaner import (simple_cleaner, # absolute GOAT
+                               super_cleaner)
 from nltk.tokenize.punkt import PunktTokenizer
 import os
 import re
@@ -13,12 +14,12 @@ arg = parser.parse_args()
 
 if arg.lang == 'en':
     LANG = 'english'
-    ABBR = {'mr','mrs','ms','dr','prof','st','rev'}
+    ABBR = {'mr','mrs','ms','dr','prof','st','rev'} # common eng abbreviations i found in data
 elif arg.lang == 'de':
     LANG = 'german'
-    ABBR = {'hr','fr','dr','prof','st','hn'}
+    ABBR = {'hr','fr','dr','prof','st','hn'} # common deu abbreviations i found in data
 
-tokenizer = PunktTokenizer(LANG)
+tokenizer = PunktTokenizer(LANG) # load tokenizer
 tokenizer._params.abbrev_types.update(ABBR)
 
 inp_path = os.path.join(arg.input, f'{arg.name}_raw.txt')
@@ -34,7 +35,7 @@ with (
     pattern_2 = r'\s*\n\s*'
     pattern_3 = r'_+'
 
-    # make special case for Kliphausen since it's not a Gutenberg proj text
+    # make special case for kliphausen since it's not a gutenberg proj text
     if re.search(r'.*Kliphausen.*', arg.name):
         # filter patterns
         txt = re.sub(pattern_1, '', txt)

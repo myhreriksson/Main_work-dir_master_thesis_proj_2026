@@ -7,6 +7,7 @@ out_file <- args[3]
 metric <- args[4]
 
 csv_data <- read.csv(inp_path)
+# huge cred to bodo winters, the GOAT
 csv_data_model <- lmer(
   as.formula(
     paste(

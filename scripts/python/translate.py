@@ -1,7 +1,8 @@
 import argparse
 import os
-import torch # remember to move to device!
-from transformers import (AutoTokenizer, AutoModelForSeq2SeqLM)
+import torch
+from transformers import (AutoTokenizer, 
+                          AutoModelForSeq2SeqLM)
 
 parser = argparse.ArgumentParser()
 parser.add_argument('-m', '--model')
@@ -17,7 +18,6 @@ parser.add_argument('--batch_size', default=16, type=int)
 parser.add_argument('--balance')
 arg = parser.parse_args()
 
-# part 1: load model & tokenizer
 device = 'cuda' if torch.cuda.is_available() else 'cpu' # device to GPU if possible
 
 if arg.domain == 'game': # when translating game,
@@ -25,6 +25,7 @@ if arg.domain == 'game': # when translating game,
 elif arg.domain == 'bible': # when translating bible,
     model_domain = 'game' # use model trained on game data
 
+# convoluted and unnecessarily complex conditionals:
 if arg.config == 'tuned':
     if model_domain == 'bible':
         if arg.balance == 'balanced':
@@ -38,13 +39,13 @@ if arg.config == 'tuned':
 else:
     model = arg.model
     out_path = arg.output
+
 os.makedirs(out_path, exist_ok=True)
 
-tokenizer = AutoTokenizer.from_pretrained(model, src_lang=arg.src_lang)
-model = AutoModelForSeq2SeqLM.from_pretrained(model, dtype=torch.float16).to(device)
-forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang)
+tokenizer = AutoTokenizer.from_pretrained(model, src_lang=arg.src_lang) # load tokenizer
+model = AutoModelForSeq2SeqLM.from_pretrained(model, dtype=torch.float16).to(device) # load moder
+forced_bos_token_id = tokenizer.convert_tokens_to_ids(arg.tgt_lang) # conert token ids
 
-# part 2: execute translation
 def main():
     for inp_file in os.listdir(arg.input):
         if os.path.isdir(os.path.join(arg.input, inp_file)):
@@ -60,8 +61,7 @@ def main():
 
             for chunk in range(0, len(lines), arg.batch_size):
                 batch = [line.strip() for line in lines[chunk:chunk + arg.batch_size]]
-
-                # 2.1: define input parameters
+                # define input parameters
                 inputs = tokenizer(
                     batch,
                     return_tensors='pt',
@@ -69,8 +69,7 @@ def main():
                     truncation=True,
                     max_length=128
                 ).to(device)
-
-                # 2.2: generate translations (model inference)
+                # generate translations (model inference)
                 with torch.inference_mode():
                     translated_tokens = model.generate(
                         **inputs,
@@ -78,14 +77,12 @@ def main():
                         num_beams=arg.beam_size,
                         max_length=128
                     )
-
-                # 2.3: decode generated translations
+                # decode generated translations
                 translations = tokenizer.batch_decode(
                     translated_tokens,
                     skip_special_tokens=True
                 )
-
-                # 2.4: write translations to output file
+                # write translations to output file
                 for trans in translations:
                     o_f.write(trans.strip() + '\n')
             print(f'Translation successfully executed and saved!')

@@ -26,20 +26,22 @@ parser.add_argument('--seed', type=int, default=100)
 parser.add_argument('--database')
 arg = parser.parse_args()
 
-#-------------------------------------------------------------------------------#
-# part 0: load evaluation metrics
+# load evaluation metric models
 bleu = evaluate.load('sacrebleu')
 ter = evaluate.load('ter')
-comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da')).to('cuda')
+comet_model = load_from_checkpoint(download_model('Unbabel/wmt22-comet-da')).to('cuda') # use GPU
 
-#-------------------------------------------------------------------------------#
-# part 1: define functions
+# class used for pruning
 class PruningCallback(TrainerCallback):
+    '''
+    if, during HPO fine-tuning, an epoch displays really bad performance,
+    terminate fine-tuning trial and proceed to next parameter configuration.
+    '''
     def __init__(self, trial):
         self.trial = trial
         
     def on_evaluate(self, args, state, control, metrics, **kwargs):
-        if 'eval_bleu' in metrics:
+        if 'eval_bleu' in metrics: # use bleu as pruning metric (comet is too heavy)
             self.trial.report(metrics['eval_bleu'], state.epoch)
             if self.trial.should_prune():
                 raise optuna.TrialPruned()
@@ -72,6 +74,9 @@ def decode(eval_preds):
     return decoded_preds, decoded_labels
 
 def get_sacrebleu(eval_preds):
+    '''
+    is used both during HPO fine-tuning and during final fine-tuning.
+    '''
     preds, labels = decode(eval_preds)
     bleu_score = bleu.compute(
         predictions=preds, 
@@ -88,6 +93,11 @@ def get_sacrebleu(eval_preds):
     return result
 
 def get_comet(eval_preds):
+    '''
+    is only used during final fine-tuning. this is because comet
+    is too resource-hungry to run for several epochs for 20 trials.
+    this would make HPO take up to 48h+...
+    '''
     preds, labels = decode(eval_preds)
     comet_data = [
         {'src': src, 'mt':mt, 'ref':ref[0]}
@@ -113,6 +123,10 @@ def compute_metrics(eval_preds):
     return combine_metrics(sacrebleu, comet)
 
 def objective(trial):
+    '''
+    main HPO function. the following 9 vars refer to training hyper-params,
+    which are tested in varying combinations during optimization.
+    '''
     r = trial.suggest_categorical('r', [4, 8, 16, 32])
     alpha = trial.suggest_categorical('alpha', [8, 16, 32, 64])
     dropout = trial.suggest_float('dropout', 0.0, 0.3)
@@ -130,10 +144,10 @@ def objective(trial):
         r=r,
         lora_alpha=alpha,
         lora_dropout=dropout,
-        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
+        target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', # i used all modules, lora recommended it
                         'up_proj', 'down_proj', 'gate_proj'], 
     )
-    model = get_peft_model(model, lora_config)
+    model = get_peft_model(model, lora_config) # DON'T move to device
 
     training_args = Seq2SeqTrainingArguments(
         output_dir=arg.output,
@@ -150,7 +164,7 @@ def objective(trial):
         metric_for_best_model='bleu',
         greater_is_better=True,
         predict_with_generate=True,
-        seed=arg.seed
+        seed=arg.seed # use the same random seed for entire script for reproducibility
     )
     trainer = Seq2SeqTrainer(
         model=model,
@@ -164,10 +178,9 @@ def objective(trial):
     )
     trainer.train()
     metrics = trainer.evaluate()
-    return float(metrics['eval_bleu'])
+    return float(metrics['eval_bleu']) # optimize using bleu, even if comet would have been preferred
 
-#-------------------------------------------------------------------------------#
-# part 2: load data
+# load data
 file_path = os.path.join(arg.path, arg.style)
 data_files = {
     'train':f'{file_path}_train.json',
@@ -176,22 +189,19 @@ data_files = {
 }
 dataset = load_dataset('json', data_files=data_files)
 
-#-------------------------------------------------------------------------------#
-# part 3: tokenize data
-tokenizer = AutoTokenizer.from_pretrained(arg.model)
-tokenizer.src_lang = arg.src_lang
-tokenizer.tgt_lang = arg.tgt_lang
+tokenizer = AutoTokenizer.from_pretrained(arg.model) # load tokenizer
+tokenizer.src_lang = arg.src_lang # english
+tokenizer.tgt_lang = arg.tgt_lang # german
 tokenized = dataset.map(preprocess, batched=True)
 
-#-------------------------------------------------------------------------------#
-# part 4: parameter optimization
-storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db')
+# sql database storing hyper-parameter combinations. load best one for final fine-tuning
+storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db') 
 try:
     optuna.delete_study( # functions as overwriting the study every time code is run
         study_name='optimizing_hyperparams',
         storage=storage
     )
-except KeyError:
+except KeyError: # ignores if not existing
     pass
 study = optuna.create_study(
     study_name='optimizing_hyperparams',
@@ -203,13 +213,12 @@ study = optuna.create_study(
         n_warmup_steps=1
     )
 )
-study.optimize(objective, n_trials=20) # might set to 50 if runs smoothly
+study.optimize(objective, n_trials=20) # try setting to higher if more resource available
 best_hparams = study.best_params
 
-#-------------------------------------------------------------------------------#
-# part 5: finetune model
-model = AutoModelForSeq2SeqLM.from_pretrained(arg.model)
+model = AutoModelForSeq2SeqLM.from_pretrained(arg.model) # load model
 data_collator = DataCollatorForSeq2Seq(tokenizer=tokenizer, model=model)
+# define lora configurations (with best-performing hparams)
 lora_config = LoraConfig(
     task_type=TaskType.SEQ_2_SEQ_LM,
     r=best_hparams['r'],
@@ -218,10 +227,10 @@ lora_config = LoraConfig(
     target_modules=['q_proj', 'k_proj', 'v_proj', 'o_proj', 
                     'up_proj', 'down_proj', 'gate_proj'], 
 )
-model = get_peft_model(model, lora_config).to('cuda')
+model = get_peft_model(model, lora_config).to('cuda') # load model unto GPU with lora config
 model.print_trainable_parameters()
 
-# 5.1: define training arguments
+# define training args (with best-performing hparams)
 training_args = Seq2SeqTrainingArguments(
     output_dir=arg.output,
     generation_max_length=512,
@@ -243,7 +252,7 @@ training_args = Seq2SeqTrainingArguments(
     seed=arg.seed,
 )
 
-# 5.2: load trainer
+# load trainer
 trainer = Seq2SeqTrainer(
     model=model,
     args=training_args,
@@ -254,13 +263,13 @@ trainer = Seq2SeqTrainer(
     compute_metrics=compute_metrics
 )
 
-# 5.3: run inference and save best model
+# run inference and save best model
 if __name__=='__main__':
     trainer.train()
     model.save_pretrained(arg.output)
     tokenizer.save_pretrained(arg.output)
 
-#-------------------------------------------------------------------------------#
-# part 6: save best epoch
+
+# save best epoch
     with open(os.path.join(arg.output, 'training_log.json'), 'w') as f:
         json.dump(trainer.state.log_history, f)

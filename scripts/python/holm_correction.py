@@ -1,4 +1,5 @@
 import argparse
+import json
 import os
 
 parser = argparse.ArgumentParser()
@@ -14,8 +15,9 @@ def get_pvals(domain_path, family, *model):
     elif family == 'cross':
         family_path = os.path.join(domain_path, f'comps_across_models')
     for file in os.listdir(family_path):
-        with open(file, 'r', encoding='utf-8') as f:
-            return f.readlines()
+        with open(file, 'r', encoding='utf-8') as json_file:
+            dict = json.load(json_file)
+            
 
 bib_path = os.path.join(arg.path, 'bible')
 get_pvals(bib_path, 'inter', 'bart')

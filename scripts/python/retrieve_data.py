@@ -10,12 +10,12 @@ parser.add_argument('-e', '--extension')
 arg = parser.parse_args()
 
 def get_txt():
-    with open(path, 'w', encoding='utf-8') as f:
+    with open(path, 'w', encoding='utf-8') as f: # opens as "write"
         f.write(response.text)
         print('Data successfully extracted.')
 
 def get_pdf():
-    with open(path, 'wb') as f:
+    with open(path, 'wb') as f: # opens as "write byte", hence different functions
         f.write(response.content)
         print('Data successfully extracted.')
 

@@ -1,7 +1,7 @@
 import argparse
 import json
 import os
-import plot_scores as ps
+import plot_scores as ps # reuse some functions from plot_scores.py
 import matplotlib.pyplot as plt
 
 parser = argparse.ArgumentParser()
@@ -10,6 +10,11 @@ parser.add_argument('-o', '--output')
 arg = parser.parse_args()
 
 domains = 'bible', 'balanced_bible', 'prose'
+
+'''
+this script reuses the design and structure from plot_scores.py, as well as reuses
+some of the functions defined there. therefore, i'll refrain from commenting much here
+'''
 
 def get_dataset(model, lang):
     dataset = {}
@@ -37,7 +42,7 @@ def get_evals(dataset):
         all_dat[domain] = train_steps, train_loss, eval_steps, eval_loss
     return all_dat
 
-colors = { # the RGB GUI is a pretty neat feature in VSCode
+colors = { # the RGB GUI is a pretty neat feature in VSCode (would not have known otherwise)
     't_bible': "#EE4848",
     'v_bible': "#F91900",
     't_balanced_bible': "#0060DD",

@@ -5,18 +5,28 @@ import re
 inp_path = 'files/'
 out_path = 'results/coefficients/'
 
-data = []
-trans = []
+data = [] # final data list
+trans = [] # translations
 bleu = []
 comet = []
 ter = []
-evals = []
+evals = [] # tuples of (bleu, comet, ter)
 
 def get_lines(lst, file, *meta):
     with open(file, 'r', encoding='utf-8') as f:
         lines = f.readlines()
         for line in lines:
             lst.append((line.strip(), meta))
+
+'''
+the following loop assumes the naming convention in get_csv.sh has been
+followed. otherwise, it will crash horribly. additionally, this entire
+script uses line positions and not indices or metadata for assigning 
+scores to their respective sentences. this therefore assumes that naming
+conventions in get_csv.sh REALLY were true, as well as sent-level scoring
+for sacrebleu and unbabel's comet stored their scores correctly 
+(this has been verified).
+'''
 
 for file in sorted(os.listdir(inp_path)):
     
@@ -36,6 +46,7 @@ for file in sorted(os.listdir(inp_path)):
         if metric == 'comet':
             comet.pop()
 
+# make sure each metric and sentences align length-wise
 assert len(trans) == len(bleu) == len(comet) == len(ter)
 
 for b_line, c_line, t_line in zip(bleu, comet, ter):

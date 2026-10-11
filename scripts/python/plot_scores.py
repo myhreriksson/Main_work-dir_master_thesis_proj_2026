@@ -10,11 +10,12 @@ parser.add_argument('-d', '--domain')
 parser.add_argument('-o', '--output')
 arg = parser.parse_args()
 
+# metric codes
 b = 'bleu'
 c = 'comet'
 t = 'ter'
 
-def get_n(x):
+def get_n(x): # for function \lambda; avoids None when nothing
     try:
         return int(x)
     except Exception:
@@ -23,6 +24,7 @@ def get_n(x):
 def get_dataset(model):
     dataset = {}
     for size in sorted(os.listdir(arg.path)):
+        # finetuning metadata is stored in training logs
         path = os.path.join(arg.path, size, model, arg.domain, 'training_log.json')
         with open(path, 'r', encoding='utf-8') as f:
             train_log = json.load(f)
@@ -42,9 +44,11 @@ def get_evals(dataset, metric):
     return all_dat
 
 def get_plot(all_dat, axis, metric):
+    # makes a plot using all configs as different series/traces
+    # each series uses its own validations as data points
     for size, (eval_steps, eval_metric) in sorted(
         all_dat.items(), 
-        key=lambda x: get_n(x[0].rstrip('k'))
+        key=lambda x: get_n(x[0].rstrip('k')) # if None, add 0
         ):
         axis.plot(
             eval_steps,
@@ -54,6 +58,7 @@ def get_plot(all_dat, axis, metric):
         )
 
 def get_axis(i, title, metric, xlabel):
+    # used for making subplots
     axes[i].set_title(title, fontsize=20)
     axes[i].set_xlabel(xlabel, fontsize=19)
     axes[i].set_ylabel(metric.upper(), fontsize=19)
@@ -61,6 +66,9 @@ def get_axis(i, title, metric, xlabel):
     axes[i].tick_params(axis='both', labelsize=19)
 
 if __name__=='__main__':
+    '''
+    makes one plot with six subplots; 2 columns (for both mods), and 3 rows (for each metric)
+    '''
     bart_dataset = get_dataset('bart')
     nllb_dataset = get_dataset('nllb')
 

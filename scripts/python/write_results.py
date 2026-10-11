@@ -1,43 +1,32 @@
 import json
 import sys
 
-def get_significance():
+def get_significance(): # used in get_pvals.sh
     alpha = 0.05
     txt_data = txt_file.read()
     json_data = json.load(json_file)
     comet = float(txt_data.split('p_value:')[1].split()[0])
     bleu = json_data[1]['BLEU']
     ter = json_data[1]['TER']
-
-    if bleu['p_value'] < alpha:
-        p_val_bleu = f'< {alpha}'
-    else:
-        p_val_bleu = f'> {alpha}'
-    if ter['p_value'] < alpha:
-        p_val_ter = f'< {alpha}'
-    else:
-        p_val_ter = f'> {alpha}'
-    if comet < alpha:
-        p_val_comet = f'< {alpha}'
-    else:
-        p_val_comet = f'> {alpha}'
+    # arbitrarily chose 10 decimal digits. will be fixed post holm correction later
     dict = {
-        'BLEU p-value': f'{float(p_val_bleu):.10f}',
-        'COMET p-value': f'{float(p_val_comet):.10f}',
-        'TER p-value': f'{float(p_val_ter):.10f}'
+        'BLEU p-value': f'{float(bleu["p_value"]):.10f}',
+        'COMET p-value': f'{float(comet):.10f}',
+        'TER p-value': f'{float(ter["p_value"]):.10f}'
     }
-    with open(sys.argv[3], 'w') as json_file:
-        json.dump(dict, json_file, indent=4)
+    with open(sys.argv[3], 'w') as f:
+        json.dump(dict, f, indent=4)
 
-def get_scores(): 
+def get_scores(): # used in get_evals.sh
     txt_data = txt_file.read()
     json_data = json.load(json_file)
-    comet = float(txt_data.split()[-1]) * 100
+    comet = float(txt_data.split()[-1]) * 100 # multiply by 100 for readability (optional)
     bleu = json_data[0]
     ter = json_data[1]
     ver_score = bleu['verbose_score']
     extra = ver_score.split('(')[1].split()
     with open(sys.argv[3], 'w', encoding='utf-8') as f:
+        # the following formatting is for readability; chose to ignore unnecessary metadata
         f.write(f'''\
         Evaluation scores for {sys.argv[1].split('/')[2]}
     
