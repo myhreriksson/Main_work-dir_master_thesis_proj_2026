@@ -1,7 +1,10 @@
 family="${1}"
 
-path="results/significance/"
+inp_path="results/significance/"
+out_path="${inp_path}holm_corrected/"
+mkdir -p "$out_path"
 
 python scripts/python/holm_correction.py \
     -f "$family" \
-    -p "$path"
+    -i "$inp_path" \
+    -o "$out_path"

@@ -92,5 +92,5 @@ Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses 
 python scripts/python/count_toks.py --size --domain --balance false --min_sen_len 0
 python scripts/python/holm_correction.py --type
 python scripts/python/sent_selector.py --metric
-bash scripts/shell/get_plot.sh
+bash scripts/shell/get_plots.sh
 ```

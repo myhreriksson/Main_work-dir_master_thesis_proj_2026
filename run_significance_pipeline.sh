@@ -13,3 +13,4 @@ sbatch scripts/shell/get_pvals.sh bible bart '' cross
 sbatch scripts/shell/get_pvals.sh game bart balanced cross 
 # OBS! since comparison between models is the same regardless of model input, bart was arbitrarily selected
 bash scripts/shell/get_holm.sh cross
+bash scripts/shell/get_holm.sh inter

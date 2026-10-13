@@ -1,7 +1,6 @@
 import argparse
 import json
 import matplotlib.pyplot as plt
-from matplotlib.ticker import FormatStrFormatter
 import os
 
 parser = argparse.ArgumentParser()
@@ -54,16 +53,16 @@ def get_plot(all_dat, axis, metric):
             eval_steps,
             eval_metric,
             label=f'Validation {metric.upper()} for {size}',
-            linewidth=2.5
+            linewidth=3
         )
 
 def get_axis(i, title, metric, xlabel):
     # used for making subplots
-    axes[i].set_title(title, fontsize=20)
-    axes[i].set_xlabel(xlabel, fontsize=19)
-    axes[i].set_ylabel(metric.upper(), fontsize=19)
+    axes[i].set_title(title, fontsize=24)
+    axes[i].set_xlabel(xlabel, fontsize=24)
+    axes[i].set_ylabel(metric.upper(), fontsize=24)
     axes[i].grid(True)
-    axes[i].tick_params(axis='both', labelsize=19)
+    axes[i].tick_params(axis='both', labelsize=24)
 
 if __name__=='__main__':
     '''
@@ -90,7 +89,7 @@ if __name__=='__main__':
 
     bart_plot_2 = get_plot(all_bart_dat_c, axes[2], c)
     bart_c_plot = get_axis(2, '', c, '')
-    axes[2].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    axes[2].yaxis.set_major_formatter(lambda x, _: f'{x * 100:.1f}')
     nllb_plot_3 = get_plot(all_nllb_dat_c, axes[3], c)
     nllb_c_plot = get_axis(3, '', '', '')
 
@@ -107,9 +106,9 @@ if __name__=='__main__':
         ['Total', 'Cfig. 1', 'Cfig. 2', 'Cfig. 3', 'Cfig. 4', 'Cfig. 5'], 
         loc='lower center', 
         ncol=6,
-        fontsize=19,
+        fontsize=21.5,
         frameon=False,
-        bbox_to_anchor=(.5, -.004)
+        bbox_to_anchor=(.5, -.015)
     )
 
     plt.tight_layout()

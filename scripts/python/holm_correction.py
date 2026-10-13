@@ -6,7 +6,8 @@ from statsmodels.stats.multitest import multipletests
 # define args
 parser = argparse.ArgumentParser()
 parser.add_argument('-f', '--family')
-parser.add_argument('-p', '--path')
+parser.add_argument('-i', '--inp_path')
+parser.add_argument('-o', '--out_path')
 arg = parser.parse_args()
 
 '''
@@ -66,21 +67,27 @@ def get_raw(family):
                     float(key_val.get('TER p-value'))
                 ])
             elif arg.family == 'inter':
-                for f in file:
-                    print(f)
+                for nest in file: # added an extra loop for inter-model comps
+                    key_val = next(iter(nest.values())) # get dict of key:value pairs
+                    refs.append(key_val) # save a reference of the key:value pairs
+                    p_vals.extend([ # extend list of values to empty list
+                        float(key_val.get('BLEU p-value')),
+                        float(key_val.get('COMET p-value')),
+                        float(key_val.get('TER p-value'))
+                    ])
     return refs, p_vals
 
-cross_pvals = [] # all pvals for the cross-model family
+cross_pvals = [] # all pvals for the cross-model family 
 inter_pvals = [] # all pvals  for the inter-model family
 
-bib_path = os.path.join(arg.path, 'bible') # path for all bible pvals
+bib_path = os.path.join(arg.inp_path, 'bible') # path for all bible pvals
 bib_cross = get_pvals(bib_path, 'cross') # get bible pvals from cross-model comps
 bib_inter = (get_pvals(bib_path, 'inter', 'bart'), # get bible pvals from inter-model (bart) comps
              get_pvals(bib_path, 'inter', 'nllb')) # get bible pvals from inter-model (nllb) comps
 cross_pvals.append(bib_cross) # append list of bible pvals from cross-model comps 
 inter_pvals.append(bib_inter) # append tuple of lists of bible pvals from inter-model comps (both bart and nllb)
 for b in balance: # loop over balanced and unbalanced subdirs
-    gam_path = os.path.join(arg.path, 'game', b) # path for all game pvals
+    gam_path = os.path.join(arg.inp_path, 'game', b) # path for all game pvals
     gam_cross = get_pvals(gam_path, 'cross') # get game pvals from cross-model comps
     gam_inter = (get_pvals(gam_path, 'inter', 'bart'), # get game pvals from inter-model (bart) comps
                  get_pvals(gam_path, 'inter', 'nllb')) # get game pvals from inter-model (nllb) comps
@@ -98,5 +105,5 @@ for key_val_pair in refs:
     for key in keys:
         key_val_pair[key] = f'{next(iter(corrs)):.8f}' # replace old raw vals with corrected; iterate through list!
 
-with open('dummy.json', 'w', encoding='utf-8') as f:
+with open(os.path.join(arg.out_path ,f'{arg.family}-model_pvals.json'), 'w', encoding='utf-8') as f:
     json.dump(family_values, f, indent=2)
