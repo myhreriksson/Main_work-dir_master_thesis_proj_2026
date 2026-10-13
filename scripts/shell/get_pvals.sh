@@ -50,20 +50,23 @@ compare() {
         --paired-bs-n 5000
     } > "${out_dir}/${domain}_sacrebleu_${size}.json"
 
-    { comet-compare \
+    # not sure if only_system and to_json work together for comparisons.
+    comet-compare \
         -s $src \
         -t "$tgt_A" "$tgt_B" \
-        -r $ref 
-    } > "${out_dir}/${domain}_comet_${size}.txt"
+        -r $ref \
+        --only_system \
+        --to_json \
+        "${out_dir}/${domain}_comet_${size}.json"
         
     python scripts/python/write_results.py \
         "${out_dir}/${domain}_sacrebleu_${size}.json" \
-        "${out_dir}/${domain}_comet_${size}.txt" \
+        "${out_dir}/${domain}_comet_${size}.json" \
         "$out_file" \
         significance
     rm \
         "${out_dir}/${domain}_sacrebleu_${size}.json" \
-        "${out_dir}/${domain}_comet_${size}.txt"
+        "${out_dir}/${domain}_comet_${size}.json"
 }
 
 # significance testing within same model, comparing all configs with baseline

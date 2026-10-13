@@ -1,28 +1,35 @@
 import json
 import sys
 
+def comet_extension(extension):
+    if extension == 'txt':
+        data = comet_file.read()
+    elif extension == 'json':
+        data = json.load(comet_file)
+    return data
+
 def get_significance(): # used in get_pvals.sh
-    alpha = 0.05
-    txt_data = txt_file.read()
-    json_data = json.load(json_file)
-    comet = float(txt_data.split('p_value:')[1].split()[0])
-    bleu = json_data[1]['BLEU']
-    ter = json_data[1]['TER']
-    # arbitrarily chose 10 decimal digits. will be fixed post holm correction later
+    comet_data = comet_extension('json')
+    sacre_data = json.load(sacre_file)
+    # had to manually look and find the nesting in sacrebleu and comet
+    comet = comet_data['statistical_results'][0]['paired_t-test']
+    bleu = sacre_data[1]['BLEU']
+    ter = sacre_data[1]['TER']
+    # arbitrarily chose 15 decimal digits. will be fixed post holm correction later
     dict = {
         'BLEU p-value': f'{float(bleu["p_value"]):.10f}',
-        'COMET p-value': f'{float(comet):.10f}',
+        'COMET p-value': f'{float(comet["p_value"]):.10f}',
         'TER p-value': f'{float(ter["p_value"]):.10f}'
     }
     with open(sys.argv[3], 'w') as f:
         json.dump(dict, f, indent=4)
 
 def get_scores(): # used in get_evals.sh
-    txt_data = txt_file.read()
-    json_data = json.load(json_file)
-    comet = float(txt_data.split()[-1]) * 100 # multiply by 100 for readability (optional)
-    bleu = json_data[0]
-    ter = json_data[1]
+    comet_data = comet_extension('txt')
+    sacre_data = json.load(sacre_file)
+    comet = float(comet_data.split()[-1]) * 100 # multiply by 100 for readability (optional)
+    bleu = sacre_data[0]
+    ter = sacre_data[1]
     ver_score = bleu['verbose_score']
     extra = ver_score.split('(')[1].split()
     with open(sys.argv[3], 'w', encoding='utf-8') as f:
@@ -53,13 +60,13 @@ def get_scores(): # used in get_evals.sh
         - Punctuation: {ter['punct']}
     
         Metric: COMET
-        Score: {comet}
+        Score: {float(comet) * 100} 
         ''')
 
 if __name__=='__main__':
     with (
-        open(sys.argv[1]) as json_file,
-        open(sys.argv[2], 'r', encoding='utf-8') as txt_file
+        open(sys.argv[1], 'r', encoding='utf-8') as sacre_file,
+        open(sys.argv[2], 'r', encoding='utf-8') as comet_file
         ):
         if sys.argv[4] == 'score':
             get_scores()

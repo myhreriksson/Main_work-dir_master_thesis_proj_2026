@@ -1,6 +1,6 @@
 family="${1}"
 
-path="results/significance/${domain_balance}/"
+path="results/significance/"
 
 python scripts/python/holm_correction.py \
     -f "$family" \

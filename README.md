@@ -21,10 +21,14 @@ ___
 conda create -n venv python==3.11 
 conda activate venv 
 pip install --upgrade pip 
-pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 torch==2.6.0 trl unbabel-comet==2.2.7
+pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 statsmodels torch==2.6.0 trl unbabel-comet==2.2.7
 conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver
 ```
-
+Open an R session and make sure the R libraries are accessed from the correct conda directory.
+```r
+.libPaths()
+```
+Open a python session and download the following from nltk.
 ```py
 import nltk
 nltk.download('punkt_tab')
@@ -55,9 +59,14 @@ When translating non-fine-tuned baselines, the domain name refers to the *test* 
 In contrast, when translating using fine-tuned models, the domain name refers to the domain used during *training*.
 - Model inference: perform translations from English to German.
 - Compute and store BLEU, TER, COMET scores in appropriate text files.
-- Compute and store sacrebleu's and COMET's pairwise t-test bootstrapping p-values.
 ```sh
 bash run_translation_pipeline.sh
+```
+___
+### Compute statistical significance
+Post-translation, use sacreBLEU's paired bootstrapping and Unbabel's comet-compare (which performs both paired t-tests and paired bootstrapping) to compute significance change across two hypothesis families (inter- and cross-model change). 
+```sh
+bash run_significance_pipeline.sh
 ```
 ___
 ### Compute perplexity

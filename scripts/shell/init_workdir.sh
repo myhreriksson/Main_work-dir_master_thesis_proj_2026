@@ -4,6 +4,7 @@ mkdir -p \
     models/tuned \
     scripts/python \
     scripts/shell \
+    scripts/Rscript \
     results/evaluations \
     results/translations \
     data/_test-n-finetune_/bible_deu \

@@ -1,0 +1,272 @@
+[
+  [
+    [
+      {
+        "BART BIBLE paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART BIBLE paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART BIBLE paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART BIBLE paired_bs-6k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART BIBLE paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART BIBLE paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      }
+    ],
+    [
+      {
+        "NLLB BIBLE paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB BIBLE paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB BIBLE paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB BIBLE paired_bs-6k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB BIBLE paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB BIBLE paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "BART GAME BALANCED paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000481",
+          "TER p-value": "0.0605878824"
+        }
+      },
+      {
+        "BART GAME BALANCED paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME BALANCED paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME BALANCED paired_bs-6k.json": {
+          "BLEU p-value": "0.0011997600",
+          "COMET p-value": "0.0000000179",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME BALANCED paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.3473257422",
+          "TER p-value": "0.0829834033"
+        }
+      },
+      {
+        "BART GAME BALANCED paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0887318030",
+          "TER p-value": "0.0755848830"
+        }
+      }
+    ],
+    [
+      {
+        "NLLB GAME BALANCED paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME BALANCED paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME BALANCED paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0019996001"
+        }
+      },
+      {
+        "NLLB GAME BALANCED paired_bs-6k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME BALANCED paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME BALANCED paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      }
+    ]
+  ],
+  [
+    [
+      {
+        "BART GAME UNBALANCED paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME UNBALANCED paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000010",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME UNBALANCED paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000101624",
+          "TER p-value": "0.0041991602"
+        }
+      },
+      {
+        "BART GAME UNBALANCED paired_bs-6k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.5508644581",
+          "TER p-value": "0.0077984403"
+        }
+      },
+      {
+        "BART GAME UNBALANCED paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "BART GAME UNBALANCED paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      }
+    ],
+    [
+      {
+        "NLLB GAME UNBALANCED paired_bs-12k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME UNBALANCED paired_bs-15k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME UNBALANCED paired_bs-3k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0021995601"
+        }
+      },
+      {
+        "NLLB GAME UNBALANCED paired_bs-6k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME UNBALANCED paired_bs-9k.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      },
+      {
+        "NLLB GAME UNBALANCED paired_bs-max.json": {
+          "BLEU p-value": "0.0001999600",
+          "COMET p-value": "0.0000000000",
+          "TER p-value": "0.0001999600"
+        }
+      }
+    ]
+  ]
+]
