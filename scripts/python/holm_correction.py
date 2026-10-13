@@ -100,10 +100,13 @@ keys = 'BLEU p-value', 'COMET p-value', 'TER p-value'
 refs, p_vals = get_raw(family_values)
 corrected = multipletests(p_vals, method='holm')[1] # takes list; returns list
 
+with open(os.path.join(arg.out_path, f'raw_{arg.family}-model_pvals.json'), 'w', encoding='utf-8') as raw_f:
+    json.dump(family_values, raw_f, indent=2)
+
 corrs = iter(corrected) # make list iterable
 for key_val_pair in refs:
     for key in keys:
         key_val_pair[key] = f'{next(iter(corrs)):.8f}' # replace old raw vals with corrected; iterate through list!
 
-with open(os.path.join(arg.out_path ,f'{arg.family}-model_pvals.json'), 'w', encoding='utf-8') as f:
-    json.dump(family_values, f, indent=2)
+with open(os.path.join(arg.out_path, f'corrected_{arg.family}-model_pvals.json'), 'w', encoding='utf-8') as holm_f:
+    json.dump(family_values, holm_f, indent=2)
