@@ -20,6 +20,7 @@ parser.add_argument('-s', '--style')
 parser.add_argument('-p', '--path')
 parser.add_argument('-m', '--model')
 parser.add_argument('-o', '--output')
+parser.add_argument('--load')
 parser.add_argument('--tgt_lang')
 parser.add_argument('--src_lang')
 parser.add_argument('--seed', type=int, default=100)
@@ -195,25 +196,35 @@ tokenizer.tgt_lang = arg.tgt_lang # german
 tokenized = dataset.map(preprocess, batched=True)
 
 # sql database storing hyper-parameter combinations. load best one for final fine-tuning
-storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db') 
-try:
-    optuna.delete_study( # functions as overwriting the study every time code is run
+storage = RDBStorage(f'sqlite:///{arg.database}/optimized_nmt_hparams.db')
+if arg.load == 'load':
+    study = optuna.load_study(
         study_name='optimizing_hyperparams',
-        storage=storage
+        storage=storage,
+        pruner=optuna.pruners.MedianPruner(
+            n_startup_trials=5,
+            n_warmup_steps=1
+        )
     )
-except KeyError: # ignores if not existing
-    pass
-study = optuna.create_study(
-    study_name='optimizing_hyperparams',
-    direction='maximize',
-    storage=storage,
-    load_if_exists=False,
-    pruner=optuna.pruners.MedianPruner(
-        n_startup_trials=5,
-        n_warmup_steps=1
+elif arg.load == 'fresh':
+    try:
+        optuna.delete_study( # functions as overwriting the study every time code is run
+            study_name='optimizing_hyperparams',
+            storage=storage
+        )
+    except KeyError: # ignores if not existing
+        pass
+    study = optuna.create_study(
+        study_name='optimizing_hyperparams',
+        direction='maximize',
+        storage=storage,
+        load_if_exists=False,
+        pruner=optuna.pruners.MedianPruner(
+            n_startup_trials=5,
+            n_warmup_steps=1
+        )
     )
-)
-study.optimize(objective, n_trials=20) # try setting to higher if more resource available
+    study.optimize(objective, n_trials=20) # try setting to higher if more resource available
 best_hparams = study.best_params
 
 model = AutoModelForSeq2SeqLM.from_pretrained(arg.model) # load model

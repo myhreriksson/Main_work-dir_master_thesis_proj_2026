@@ -6,7 +6,7 @@ ___
 - Retrieve models.
 - Downloads and installs miniconda3.
 ```sh
-bash shell/init_workdir.sh
+bash scripts/shell/init_workdir.sh
 ```
 Once the installation of miniconda3 is complete, retrieve the game data from the preprocessing_game-data repo:
 ```sh
@@ -17,16 +17,19 @@ rm -fr tmp
 ```
 ___
 ### Venv Setup
+Prepare virtual environment.
 ```sh
-conda create -n venv python==3.11 
-conda activate venv 
+conda create -n thesis_venv python==3.11 
+conda activate thesis_venv 
 pip install --upgrade pip 
 pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 statsmodels torch==2.6.0 trl unbabel-comet==2.2.7
 conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver
 ```
-Open an R session and make sure the R libraries are accessed from the correct conda directory.
-```r
-.libPaths()
+Retrieve models; 2 NMTs and 1 LLM of similar sizes.
+```sh
+hf download facebook/nllb-200-distilled-600M --local-dir models/base/nllb
+hf download facebook/mbart-large-50-many-to-many-mmt --local-dir models/base/bart
+hf download qwen/qwen3-0.6b --local-dir models/base/qwen
 ```
 Open a python session and download the following from nltk.
 ```py
@@ -49,9 +52,10 @@ bash run_preprocessing_pipeline.sh
 ```
 ___
 ### Finetune NMT models
+Load may refer to *load* or *fresh*; the former loads pre-existing database and skips the HPO step. The latter removes existing databases and reruns 20 HPO trials from scratch.
 - Finetune model on specified data; *bible* for tuning on bible data & *game* for tuning on game data.
 ```sh
-bash run_finetuning_pipeline.sh
+bash run_finetuning_pipeline.sh [load]
 ```
 ___
 ### Translate and evaluate
@@ -83,14 +87,12 @@ bash run_coefficiency_pipeline.sh
 ```
 ___
 ### Optional commands
-Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses special sizes for text-similarity task). Possible domains are *bible* and *game*. Config may refer to to *base* or *tuned*. Balance is simply true or false. Metric options include *bleu*, *comet*, and *ter*. Type may refer to *cross*(model) or *inter*(config).
+Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses special sizes for text-similarity task). Possible domains are *bible* and *game*. Config may refer to to *base* or *tuned*. Balance is simply true or false. Metric options include *bleu*, *comet*, and *ter*. 
 - Count word tokens:
-- Get Holm corrections:
 - Select sentences for qualitative analysis:
 - Plot evaluation scores:
 ```sh
 python scripts/python/count_toks.py --size --domain --balance false --min_sen_len 0
-python scripts/python/holm_correction.py --type
 python scripts/python/sent_selector.py --metric
 bash scripts/shell/get_plots.sh
 ```

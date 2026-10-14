@@ -21,5 +21,5 @@ elif arg.degree == 'bad':
 
 print(f'\nPress "ENTER" to cycle through sentences.')
 for sent, score in zip(sents, scores):
-    
+    input()
     print(f'{score} | {sent}', end='', flush=True)

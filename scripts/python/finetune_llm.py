@@ -16,6 +16,7 @@ parser.add_argument('-i', '--input')
 parser.add_argument('-o', '--output')
 parser.add_argument('-d', '--domain')
 parser.add_argument('-l', '--lang')
+parser.add_argument('--load')
 parser.add_argument('--seed', type=int, default=100)
 parser.add_argument('--database')
 parser.add_argument('--load', default=False)
@@ -111,24 +112,34 @@ tokenizer.pad_token = tokenizer.eos_token
 
 # sql database storing hyper-parameter combinations. load best one for final fine-tuning
 storage = RDBStorage(f'sqlite:///{arg.database}/optimized_llm_hparams.db')
-try:
-    optuna.delete_study( # functions as overwriting the study every time code is run
+if arg.load == 'load':
+    study = optuna.load_study(
         study_name='optimizing_hyperparams',
-        storage=storage
+        storage=storage,
+        pruner=optuna.pruners.MedianPruner(
+            n_startup_trials=5,
+            n_warmup_steps=1
+        )
     )
-except KeyError: # ignores if not existing
-    pass
-study = optuna.create_study(
-    study_name='optimizing_hyperparams',
-    direction='minimize',
-    storage=storage,
-    load_if_exists=False,
-    pruner=optuna.pruners.MedianPruner(
-        n_startup_trials=5,
-        n_warmup_steps=1
+elif arg.load == 'fresh':
+    try:
+        optuna.delete_study( # functions as overwriting the study every time code is run
+            study_name='optimizing_hyperparams',
+            storage=storage
+        )
+    except KeyError: # ignores if not existing
+        pass
+    study = optuna.create_study(
+        study_name='optimizing_hyperparams',
+        direction='minimize',
+        storage=storage,
+        load_if_exists=False,
+        pruner=optuna.pruners.MedianPruner(
+            n_startup_trials=5,
+            n_warmup_steps=1
+        )
     )
-)
-study.optimize(objective, n_trials=20) # try setting to higher if more resource available
+    study.optimize(objective, n_trials=20) # try setting to higher if more resource available
 best_hparams = study.best_params
 
 # finetune model

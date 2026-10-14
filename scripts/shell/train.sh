@@ -8,12 +8,13 @@
 source /proj/uppmax2025-2-505/mame0175/thesis_PROJ/miniconda3/etc/profile.d/conda.sh
 conda activate thesis_venv
 
-task="${1}"
-model="${2}"
-domain="${3}"
-lang="${4}"
-balance="${5}"
-size="${6}"
+load="${1}"
+task="${2}"
+model="${3}"
+domain="${4}"
+lang="${5}"
+balance="${6}"
+size="${7}"
 
 domain="${balance}${domain}"
 data_path='data/_test-n-finetune_/'
@@ -38,6 +39,7 @@ if [[ "$task" == "nmt" ]]; then
         -o "$res_path" \
         -s "$domain" \
         -m "$model_path" \
+        --load "$load" \
         --seed 21 \
         --tgt_lang "$tgt" \
         --src_lang "$src" \
@@ -53,6 +55,7 @@ elif [[ "$task" == "llm" ]]; then
         -o "models/tuned/max/${model}/${domain}/trained_on_${lang}" \
         -d "$domain" \
         -l "$lang" \
+        --load "$load" \
         --seed 21 \
         --database "databases/llm_${lang}/${model}/${domain}"
 fi
