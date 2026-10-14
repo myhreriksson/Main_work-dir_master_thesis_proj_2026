@@ -9,7 +9,7 @@ metric <- args[4]
 
 csv_data <- read.csv(inp_path) # load csv data
 
-# all fixed terms and their effects
+# all fixed terms and their interactions
 full_preds <- "~ train_data_size * model_design * train_domain + (1 | sentence)"
 
 # exclude one fixed term

@@ -34,7 +34,8 @@ def get_scores(): # used in get_evals.sh
     extra = ver_score.split('(')[1].split()
     with open(sys.argv[3], 'w', encoding='utf-8') as f:
         # the following formatting is for readability; chose to ignore unnecessary metadata
-        f.write(f'''\
+        f.write(
+        f'''\
         Evaluation scores for {sys.argv[1].split('/')[2]}
     
         Metric: BLEU

@@ -87,12 +87,12 @@ bash run_coefficiency_pipeline.sh
 ```
 ___
 ### Optional commands
-Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses special sizes for text-similarity task). Possible domains are *bible* and *game*. Config may refer to to *base* or *tuned*. Balance is simply true or false. Metric options include *bleu*, *comet*, and *ter*. 
+Size options include *3k*, *6k*, *9k*, *12k*, *15k*, *max*, and *ppl* (ppl uses special sizes for text-similarity task). Possible domains are *bible* and *game*. Config may refer to to *base* or *tuned*. Balance is simply true or false. Metric options include *bleu*, *comet*, and *ter*, whilst degree may be *low* or *high*. Select determines whether sentence selection or numeric analysis should be performed. Lastly, baseline denotes integer value of baseline performance.
 - Count word tokens:
 - Select sentences for qualitative analysis:
 - Plot evaluation scores:
 ```sh
 python scripts/python/count_toks.py --size --domain --balance false --min_sen_len 0
-python scripts/python/sent_selector.py --metric
+python scripts/python/analyze.py --degree --metric --baseline --select false
 bash scripts/shell/get_plots.sh
 ```
