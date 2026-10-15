@@ -23,7 +23,7 @@ conda create -n thesis_venv python==3.11
 conda activate thesis_venv 
 pip install --upgrade pip 
 pip install accelerate datasets evaluate gutenberg_cleaner huggingface_hub jsonlite matplotlib nltk optuna pandas peft pypdf requests sacrebleu sentencepiece setuptools==80.9.0 statsmodels torch==2.6.0 trl unbabel-comet==2.2.7
-conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver
+conda install -c conda-forge r-base r-lme4 r-jsonlite r-languageserver r-performance r-emmeans
 ```
 Retrieve models; 2 NMTs and 1 LLM of similar sizes.
 ```sh

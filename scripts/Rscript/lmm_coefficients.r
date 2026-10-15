@@ -1,4 +1,5 @@
 library(lme4)
+library(emmeans)
 
 # define args
 args <- commandArgs(trailingOnly = TRUE)
@@ -36,13 +37,11 @@ size_impact <- anova(full, semi_design_domain) # impact of tuning data size
 domain_impact <- anova(full, semi_design_size) # impact of fine-tuning domain
 design_impact <- anova(full, semi_size_domain) # impact of model design
 
-# compute confidence intervals
-fix_ci <- confint(full, parm = "beta_", method = "Wald")
-fix_effx <- data.frame(
-  Estimate = fixef(full),
-  Lower_95_CI = fix_ci[, 1],
-  Upper_95_CI = fix_ci[, 2]
-)
+# compute R^2
+r2_val <- performance::r2(full)
+
+# compute estimated means
+emmean <- emmeans(full, ~ train_data_size * model_design)
 
 # store everything in a .txt
 capture.output({
@@ -52,6 +51,8 @@ capture.output({
   print(domain_impact)
   cat("\nModel Design Impact:\n")
   print(design_impact)
-  cat("\nFixed Effects with 95% CI:\n")
-  print(fix_effx)
+  cat("\nR-squared:\n")
+  print(r2_val)
+  cat("\nEstimated Means:\n")
+  print(emmean, infer = TRUE)
 }, file = file.path(out_path, out_file))
