@@ -36,6 +36,14 @@ size_impact <- anova(full, semi_design_domain) # impact of tuning data size
 domain_impact <- anova(full, semi_design_size) # impact of fine-tuning domain
 design_impact <- anova(full, semi_size_domain) # impact of model design
 
+# compute confidence intervals
+fix_ci <- confint(full, parm = "beta_", method = "Wald")
+fix_effx <- data.frame(
+  Estimate = fixef(full),
+  Lower_95_CI = fix_ci[, 1],
+  Upper_95_CI = fix_ci[, 2]
+)
+
 # store everything in a .txt
 capture.output({
   cat("Fine-Tuning Data Size Impact:\n")
@@ -44,4 +52,6 @@ capture.output({
   print(domain_impact)
   cat("\nModel Design Impact:\n")
   print(design_impact)
+  cat("\nFixed Effects with 95% CI:\n")
+  print(fix_effx)
 }, file = file.path(out_path, out_file))
