@@ -43,7 +43,7 @@ design_impact <- anova(full, semi_size_domain) # impact of model design
 r2_val <- performance::r2(full)
 
 # compute estimated means
-emmean <- emmeans(full, ~ train_data_size * model_design)
+emmean <- emmeans(full, ~ train_data_size * model_design * train_domain)
 
 # store everything in a .txt
 capture.output({
