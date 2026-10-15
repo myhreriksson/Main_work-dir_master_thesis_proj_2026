@@ -8,6 +8,8 @@ out_path <- args[2]
 out_file <- args[3]
 metric <- args[4]
 
+set.seed(21)
+
 csv_data <- read.csv(inp_path) # load csv data
 
 # all fixed terms and their interactions
